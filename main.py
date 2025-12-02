@@ -1,16 +1,126 @@
-# 这是一个示例 Python 脚本。
 
-# 按 ⌘R 执行或将其替换为您的代码。
-# 按 双击 ⇧ 在所有地方搜索类、文件、工具窗口、操作和设置。
+from fastapi import FastAPI, Request
+from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+import os
+import random
+
+from mianshi import get_random_question_logic
+from translate_baidu import baidu_ai_translate
+from wenzhang.wenzhang import SummarizeAgent
+from chat.chat import chat_text
+
+from pydantic import BaseModel # 1. 引入 Pydantic
+import json # 引入 json 用于解析 AI 返回的结果
+from typing import List, Dict
 
 
-def print_hi(name):
-    # 在下面的代码行中使用断点来调试脚本。
-    print(f'Hi, {name}')  # 按 F9 切换断点。
+app = FastAPI()
+
+# 配置 CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+class ArticleRequest(BaseModel):
+    article: str
+
+class ChatRequest(BaseModel):
+    question: str
+    scenario: str = "general"
+    history: List[Dict[str, str]] = [] 
+
+    
 
 
-# 按装订区域中的绿色按钮以运行脚本。
-if __name__ == '__main__':
-    print_hi('PyCharm')
+@app.get("/")
+def read_root():
+    file_path = os.path.join(os.path.dirname(__file__), "index.html")
+    return FileResponse(file_path)
 
-# 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
+
+
+@app.get("/mianshifont")
+def read_root():
+    file_path = os.path.join(os.path.dirname(__file__), "mianshi.html")
+    return FileResponse(file_path)
+
+@app.get("/mianshi")
+def interview_api(types: str = ""):
+
+    result_data = get_random_question_logic(types)
+    
+    return result_data
+
+@app.get("/translatefont")
+def translate_font():
+    file_path = os.path.join(os.path.dirname(__file__), "translate.html")
+    return FileResponse(file_path)
+@app.get("/translate")
+def translate_api(query_text: str = ""):
+    result_data = baidu_ai_translate(query_text = query_text)
+
+    return result_data
+
+@app.get("/zaiyaofont")
+def zaiyao_font():
+    file_path = os.path.join(os.path.dirname(__file__), "wenzhang/wenzhang.html")
+    return FileResponse(file_path)
+@app.post("/zaiyao")
+def zaiyao_api(item: ArticleRequest): # 3. 使用模型作为参数
+    SummarizeAgent_model = SummarizeAgent()
+    ai_response_str = SummarizeAgent_model.run(article=item.article)
+
+    
+    try:
+        # 尝试将 AI 返回的字符串转为字典
+        ai_data = json.loads(ai_response_str)
+        summary_content = ai_data.get("summary", ai_response_str)
+    except:
+        # 如果 AI 返回的不是标准 JSON，直接用原字符串
+        summary_content = ai_response_str
+
+    # 返回符合前端逻辑的结构
+    return {
+        "success": True,
+        "summary": summary_content
+    }
+
+@app.get("/chatfont")
+def chat_font():
+    file_path = os.path.join(os.path.dirname(__file__), "chat/chat.html")
+    return FileResponse(file_path)
+
+@app.post("/chat")
+def chat_api(item: ChatRequest): 
+    user_msg = item.question
+    user_scenario = item.scenario
+    user_history = item.history
+    chat_content = chat_text(question=user_msg, scenario=user_scenario, history=user_history)
+
+    
+
+    # try:
+    #     # 尝试将 AI 返回的字符串转为字典
+    #     ai_data = json.loads(ai_response_str)
+    #     chat_content = ai_data.get("chat", ai_response_str)
+    # except:
+    #     # 如果 AI 返回的不是标准 JSON，直接用原字符串
+    #     chat_content = ai_response_str
+
+    # 返回符合前端逻辑的结构
+    return chat_content
+
+
+@app.get("/listeningfont")
+def listening_font():
+    file_path = os.path.join(os.path.dirname(__file__), "listening/listening.html")
+    return FileResponse(file_path)
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
+

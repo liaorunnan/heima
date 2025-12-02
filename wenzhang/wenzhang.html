@@ -1,0 +1,215 @@
+<!-- 文件：./index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章智能摘要助手</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --bg-color: #f5f7fa;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            align-self: flex-end;
+            transition: background-color 0.3s, transform 0.1s;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .output-section {
+            margin-top: 20px;
+            border-top: 2px dashed #eee;
+            padding-top: 20px;
+            display: none; /* 默认隐藏，有结果才显示 */
+        }
+
+        .result-box {
+            background-color: #f0f7ff;
+            border-left: 5px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            line-height: 1.6;
+            white-space: pre-wrap; /* 保持换行格式 */
+        }
+
+        /* 加载动画 */
+        .loader {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .btn-content {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📑 文章要点智能摘要</h1>
+        
+        <div class="input-section">
+            <label for="articleInput">请输入文章内容：</label>
+            <textarea id="articleInput" placeholder="请在此处粘贴需要提取摘要的文章..."></textarea>
+            <button id="submitBtn" onclick="submitArticle()">
+                <div class="btn-content">
+                    <div class="loader" id="loader"></div>
+                    <span id="btnText">生成摘要</span>
+                </div>
+            </button>
+        </div>
+
+        <div class="output-section" id="outputSection">
+            <label>✨ 摘要要点：</label>
+            <div class="result-box" id="resultDisplay"></div>
+        </div>
+    </div>
+
+    <script>
+        async function submitArticle() {
+            const input = document.getElementById('articleInput');
+            const resultBox = document.getElementById('resultDisplay');
+            const outputSection = document.getElementById('outputSection');
+            const btn = document.getElementById('submitBtn');
+            const loader = document.getElementById('loader');
+            const btnText = document.getElementById('btnText');
+
+            const text = input.value.trim();
+
+            if (!text) {
+                alert("请先输入文章内容！");
+                return;
+            }
+
+            // 1. 设置加载状态
+            btn.disabled = true;
+            loader.style.display = 'block';
+            btnText.innerText = '正在分析中...';
+            outputSection.style.display = 'none';
+
+            try {
+                // 2. 发送请求给 Python 后端
+                // 注意：http://127.0.0.1:5000 是 server.py 运行的地址
+                const response = await fetch('http://127.0.0.1:8000/zaiyao', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ article: text })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // 3. 显示结果
+                    resultBox.innerText = data.summary;
+                    outputSection.style.display = 'block';
+                } else {
+                    alert('生成失败: ' + data.message);
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('连接服务器失败，请确保 Python 后端已启动！');
+            } finally {
+                // 4. 恢复按钮状态
+                btn.disabled = false;
+                loader.style.display = 'none';
+                btnText.innerText = '生成摘要';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 智能对话</title>
+    
+    <!-- 1. 引入 marked.js 用于解析 markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- 2. 引入 highlight.js 用于代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #f3f4f6;
+            --chat-bg: #ffffff;
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --user-msg-bg: #4f46e5;
+            --user-msg-text: #ffffff;
+            --ai-msg-bg: #f3f4f6;
+            --ai-msg-text: #1f2937;
+            --border-radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+        body {
+            background-color: var(--bg-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            width: 95%;
+            height: 90vh;
+            background: var(--chat-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            background: #fff;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background-color: #ffffff;
+        }
+
+        .chat-messages::-webkit-scrollbar { width: 6px; }
+        .chat-messages::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 3px; }
+
+        .message {
+            max-width: 85%;
+            padding: 10px 16px;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            line-height: 1.6;
+            position: relative;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background-color: var(--user-msg-bg);
+            color: var(--user-msg-text);
+            border-bottom-right-radius: 2px;
+            white-space: pre-wrap; 
+        }
+
+        .message.ai {
+            align-self: flex-start;
+            background-color: var(--ai-msg-bg);
+            color: var(--ai-msg-text);
+            border-bottom-left-radius: 2px;
+        }
+
+        /* --- Markdown 内容样式 --- */
+        .markdown-content p { margin-bottom: 0.5em; }
+        .markdown-content p:last-child { margin-bottom: 0; }
+        .markdown-content pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .markdown-content code { font-family: Consolas, Monaco, 'Andale Mono', monospace; font-size: 0.9em; }
+        .markdown-content p code, .markdown-content li code {
+            background: #e5e7eb; color: #d63384; padding: 2px 4px; border-radius: 4px;
+        }
+        .markdown-content ul, .markdown-content ol { margin-left: 20px; margin-bottom: 10px; }
+        .markdown-content a { color: #2563eb; text-decoration: underline; }
+
+        /* --- 底部区域样式重构 --- */
+        .chat-footer {
+            border-top: 1px solid #e5e7eb;
+            background: #fff;
+            padding: 1rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* 场景选择栏 */
+        .scenario-bar {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        .scenario-bar label {
+            margin-right: 8px;
+            font-weight: 600;
+        }
+
+        .scenario-select {
+            padding: 6px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background-color: #f9fafb;
+            color: #1f2937;
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .scenario-select:hover { border-color: var(--primary-color); }
+        .scenario-select:focus { border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1); }
+
+        /* 输入框栏 */
+        .input-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        textarea {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            resize: none;
+            height: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        textarea:focus { border-color: var(--primary-color); }
+        
+        /* 禁用状态 */
+        textarea:disabled, button:disabled, select:disabled {
+            background-color: #f3f4f6;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        button {
+            padding: 0 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover:not(:disabled) { background-color: var(--primary-hover); }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background-color: var(--ai-msg-bg);
+            padding: 10px 16px;
+            border-radius: var(--border-radius);
+            border-bottom-left-radius: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .typing-indicator span {
+            display: inline-block; width: 6px; height: 6px; background-color: #6b7280; border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both; margin: 0 2px;
+        }
+
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <div class="chat-header">Bot Assistant</div>
+        
+        <div class="chat-messages" id="messages-container">
+            <div class="message ai markdown-content">你好！请选择一个对话场景，然后开始提问吧。</div>
+            <div class="typing-indicator" id="loader">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <div class="chat-footer">
+            <!-- 1. 新增：场景选择栏 -->
+            <div class="scenario-bar">
+                <label for="scenario-select">🎭 当前场景：</label>
+                <select id="scenario-select" class="scenario-select">
+                    <option value="general">通用 AI 助手</option>
+        
+                    <!-- 对应上面的 prompts_map -->
+                    <option value="interview">Google 技术面试官</option>
+                    <option value="coding">资深代码审计专家</option>
+                    <option value="translator">顶级学术翻译</option>
+                    <option value="business">麦肯锡商业分析师</option>
+                    <option value="legal">专业法律顾问</option>
+                </select>
+            </div>
+
+            <!-- 2. 原有的输入框栏 -->
+            <div class="input-row">
+                <textarea id="user-input" placeholder="请输入您的问题..." rows="1"></textarea>
+                <button id="send-btn" onclick="sendMessage()">发送</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        marked.setOptions({
+            highlight: function(code, lang) {
+                const language = highlight.getLanguage(lang) ? lang : 'plaintext';
+                return highlight.highlight(code, { language }).value;
+            },
+            langPrefix: 'hljs language-', 
+            breaks: true 
+        });
+
+        const inputField = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const messagesContainer = document.getElementById('messages-container');
+        const loader = document.getElementById('loader');
+        const scenarioSelect = document.getElementById('scenario-select'); // 获取选择框
+
+        let conversationHistory = [];
+        scenarioSelect.addEventListener('change', () => {
+            conversationHistory = []; // 清空历史
+            const div = document.createElement('div');
+            div.style.textAlign = 'center';
+            div.style.color = '#999';
+            div.style.margin = '10px 0';
+            div.style.fontSize = '0.8rem';
+            div.innerText = '--- 已切换场景，上下文已重置 ---';
+            messagesContainer.insertBefore(div, loader);
+        });
+        inputField.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        async function sendMessage() {
+            const text = inputField.value.trim();
+            if (!text) return;
+
+            // 获取当前选择的场景值
+            const selectedScenario = scenarioSelect.value;
+
+            setInputState(false);
+
+            addMessage(text, 'user');
+            inputField.value = '';
+
+            loader.style.display = 'block';
+            scrollToBottom();
+
+            try {
+                // 修改：在 JSON 中发送 scenario 字段
+                const payload = { 
+                    question: text,
+                    scenario: selectedScenario,
+                    history: conversationHistory // 把之前的聊天记录发给后端
+                };
+
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload) 
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                var aiText = data.answer || data.response || data.result || data.chat || JSON.stringify(data);
+
+                if (typeof aiText === 'string') {
+                    aiText = aiText.replace(/\\n/g, '\n');
+                    // 去掉首尾中文引号
+                    aiText = aiText.replace(/^“+|”+$/g, '');
+                }
+             
+                loader.style.display = 'none';
+                
+                addMessage(aiText, 'ai', true);
+
+                // 【新增 4】将本轮对话存入历史数组，供下一次使用
+                // 先存用户的
+                conversationHistory.push({ "role": "user", "content": text });
+                // 再存 AI 的
+                conversationHistory.push({ "role": "assistant", "content": aiText });
+                
+                // (可选) 限制历史长度，防止 Token 爆炸，比如只保留最近 10 轮
+                if (conversationHistory.length > 20) {
+                    conversationHistory = conversationHistory.slice(conversationHistory.length - 20);
+                }
+
+            } catch (error) {
+                loader.style.display = 'none';
+                addMessage("连接服务器失败，请稍后再试。", 'ai');
+                console.error(error);
+            } finally {
+                setInputState(true);
+                inputField.focus();
+            }
+        }
+
+        function addMessage(text, type, isMarkdown = false) {
+            const div = document.createElement('div');
+            div.className = `message ${type} ${isMarkdown ? 'markdown-content' : ''}`;
+            
+            if (isMarkdown) {
+                div.innerHTML = marked.parse(text);
+            } else {
+                div.textContent = text;
+            }
+            
+            messagesContainer.insertBefore(div, loader);
+            scrollToBottom();
+        }
+
+        function setInputState(enabled) {
+            if (enabled) {
+                inputField.disabled = false;
+                sendBtn.disabled = false;
+                scenarioSelect.disabled = false; // 同时解锁选择框
+                inputField.placeholder = "请输入您的问题...";
+            } else {
+                inputField.disabled = true;
+                sendBtn.disabled = true;
+                scenarioSelect.disabled = true; // 发送期间锁定场景选择
+                inputField.placeholder = "对方正在输入...";
+            }
+        }
+
+        function scrollToBottom() {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    </script>
+</body>
+</html>

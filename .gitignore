@@ -1,2 +1,7 @@
+*.pyc
+data/*
+*/.DS_Store
+model/*
+*.DS_Store
 *.iml
 *.xml

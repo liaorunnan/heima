@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 智能服务中心</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --card-bg: #ffffff;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-teal: #14b8a6;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            text-decoration: none;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            text-align: center;
+        }
+
+        header {
+            margin-bottom: 4rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        p.subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        /* 网格布局 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            padding: 1rem;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: left;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* 鼠标悬停效果 */
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+        }
+
+        /* 不同卡片的顶部颜色条 */
+        .card-interview::before { background: var(--accent-blue); }
+        .card-translate::before { background: var(--accent-purple); }
+        .card-summary::before { background: var(--accent-teal); }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .card-interview .icon-box { background: #eff6ff; color: var(--accent-blue); }
+        .card-translate .icon-box { background: #f5f3ff; color: var(--accent-purple); }
+        .card-summary .icon-box { background: #f0fdfa; color: var(--accent-teal); }
+        .card-chat .icon-box { background: #f0fdfa; color: var(--accent-pink); }
+
+        .card:hover .icon-box {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .btn-link {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        .card-interview .btn-link { color: var(--accent-blue); }
+        .card-translate .btn-link { color: var(--accent-purple); }
+        .card-summary .btn-link { color: var(--accent-teal); }
+        .card-chat .btn-link { color: var(--accent-pink); }
+
+        .arrow {
+            margin-left: 8px;
+            transition: margin-left 0.2s;
+        }
+
+        .card:hover .arrow {
+            margin-left: 12px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>AI Intelligence Hub</h1>
+            <p class="subtitle">选择您需要的智能服务，开启高效工作流</p>
+        </header>
+
+        <div class="card-grid">
+            
+            <!-- 1. 面试题模块 -->
+            <!-- <a href="/mianshifont" class="card card-interview">
+                <div class="icon-box">💼</div>
+                <h2>模拟面试官</h2>
+                <p>针对不同技术栈（Python, Java, Go等）随机生成高频面试题，助您查漏补缺。</p>
+                <span class="btn-link">开始练习 <span class="arrow">→</span></span>
+            </a> -->
+
+            <!-- 2. 翻译模块 -->
+            <a href="/translatefont" class="card card-translate">
+                <div class="icon-box">🌍</div>
+                <h2>神经翻译引擎</h2>
+                <p>支持多语言实时互译，精准理解上下文语义，打破语言沟通障碍。</p>
+                <span class="btn-link">立即翻译 <span class="arrow">→</span></span>
+            </a>
+
+            <!-- 3. 摘要模块 -->
+            <a href="/zaiyaofont" class="card card-summary">
+                <div class="icon-box">📑</div>
+                <h2>智能文章摘要</h2>
+                <p>快速提取长篇文章的核心要点和逻辑结构，提升信息获取效率。</p>
+                <span class="btn-link">提取摘要 <span class="arrow">→</span></span>
+            </a>
+
+            <!-- 4. 聊天模块 -->
+            <a href="/chatfont" class="card card-chat">
+                <div class="icon-box">💬</div>
+                <h2>智能聊天助手</h2>
+                <p>基于AI的智能对话系统，提供实时、智能的客户服务和支持。</p>
+                <span class="btn-link">开始聊天 <span class="arrow">→</span></span>
+            </a>
+
+            <!-- 5. 录音模块 -->
+            <a href="/listeningfont" class="card card-listen">
+                <div class="icon-box">🎤</div>
+                <h2>AI音频评估</h2>
+                <p>利用AI技术分析音频内容，评估语音质量、情感表达和语法错误。</p>
+                <span class="btn-link">开始录音 <span class="arrow">→</span></span>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>

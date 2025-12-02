@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音频管理</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338ca;
+            --bg-color: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text-main: #1F2937;
+            --text-sub: #6B7280;
+            --danger: #EF4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 卡片容器 */
+        .container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 420px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            padding: 24px;
+        }
+
+        /* 顶部导航 */
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-sub);
+            padding: 8px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-btn:hover {
+            background-color: #F3F4F6;
+            color: var(--text-main);
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-left: 12px;
+        }
+
+        /* 选项卡切换 */
+        .tabs {
+            display: flex;
+            background: #F3F4F6;
+            padding: 4px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px;
+            color: var(--text-sub);
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* 内容区域 */
+        .content-area {
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 上传样式 */
+        .upload-zone {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed #D1D5DB;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--primary);
+            background-color: #EEF2FF;
+        }
+
+        .upload-icon {
+            width: 48px;
+            height: 48px;
+            color: #9CA3AF;
+            margin-bottom: 12px;
+        }
+
+        .upload-text {
+            color: var(--text-sub);
+            font-size: 14px;
+        }
+
+        /* 录音样式 */
+        .record-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .mic-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .mic-btn:hover {
+            transform: scale(1.05);
+            background: var(--primary-hover);
+        }
+
+        /* 录音中的动画效果 */
+        .mic-btn.recording {
+            background: var(--danger);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .timer {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-main);
+            font-variant-numeric: tabular-nums; /* 防止数字跳动 */
+        }
+
+        .status-text {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--text-sub);
+        }
+
+        /* 音频播放器 */
+        .audio-player {
+            width: 100%;
+            margin-top: 20px;
+            display: none; /* 默认隐藏 */
+        }
+        
+        audio {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* 隐藏的原生input */
+        #fileInput { display: none; }
+
+        /* 确认按钮 */
+        .confirm-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 24px;
+            cursor: pointer;
+            opacity: 0.5;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .confirm-btn.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <button class="back-btn" onclick="goBack()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        <span class="title">添加音频</span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <div class="tab active" onclick="switchTab('upload')">上传文件</div>
+        <div class="tab" onclick="switchTab('record')">在线录制</div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+        
+        <!-- Upload Section -->
+        <div id="uploadSection" class="upload-zone" onclick="document.getElementById('fileInput').click()">
+            <input type="file" id="fileInput" accept="audio/*" onchange="handleFileSelect(event)">
+            <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+            </svg>
+            <span class="upload-text" id="uploadText">点击或拖拽音频文件到此处</span>
+        </div>
+
+        <!-- Record Section -->
+        <div id="recordSection" class="record-wrapper" style="display: none;">
+            <button id="micBtn" class="mic-btn" onclick="toggleRecording()">
+                <!-- Mic Icon -->
+                <svg id="micIcon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="23"/>
+                    <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+                <!-- Stop Icon (Hidden by default) -->
+                <svg id="stopIcon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                    <rect x="6" y="6" width="12" height="12" rx="2" />
+                </svg>
+            </button>
+            <div class="timer" id="timer">00:00</div>
+            <div class="status-text" id="statusText">点击麦克风开始录音</div>
+        </div>
+
+        <!-- Audio Preview -->
+        <div id="audioPreview" class="audio-player">
+            <audio id="player" controls></audio>
+        </div>
+    </div>
+
+    <!-- Action Button -->
+    <button class="confirm-btn" id="confirmBtn" onclick="submitAudio()">确认使用</button>
+</div>
+
+<script>
+    // --- 变量定义 ---
+    let currentMode = 'upload'; // 'upload' or 'record'
+    let mediaRecorder;
+    let audioChunks = [];
+    let isRecording = false;
+    let timerInterval;
+    let seconds = 0;
+    let finalAudioBlob = null;
+
+    // --- 导航功能 ---
+    function goBack() {
+        // 返回当前路由/根目录，你可以根据需要改为 history.back()
+        window.location.href = '/'; 
+    }
+
+    // --- Tab 切换 ---
+    function switchTab(mode) {
+        currentMode = mode;
+        const uploadSec = document.getElementById('uploadSection');
+        const recordSec = document.getElementById('recordSection');
+        const tabs = document.querySelectorAll('.tab');
+        const preview = document.getElementById('audioPreview');
+        const player = document.getElementById('player');
+        
+        // 重置状态
+        resetAll();
+
+        if (mode === 'upload') {
+            uploadSec.style.display = 'flex';
+            recordSec.style.display = 'none';
+            tabs[0].classList.add('active');
+            tabs[1].classList.remove('active');
+        } else {
+            uploadSec.style.display = 'none';
+            recordSec.style.display = 'flex';
+            tabs[0].classList.remove('active');
+            tabs[1].classList.add('active');
+        }
+    }
+
+    // --- 文件上传逻辑 ---
+    function handleFileSelect(event) {
+        const file = event.target.files[0];
+        processFile(file);
+    }
+
+    // 拖拽支持
+    const uploadZone = document.querySelector('.upload-zone');
+    uploadZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadZone.classList.add('dragover');
+    });
+    uploadZone.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+    });
+    uploadZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+        if (e.dataTransfer.files.length) {
+            processFile(e.dataTransfer.files[0]);
+        }
+    });
+
+    function processFile(file) {
+        if (!file || !file.type.startsWith('audio/')) {
+            alert('请上传有效的音频文件');
+            return;
+        }
+        document.getElementById('uploadText').textContent = file.name;
+        finalAudioBlob = file;
+        
+        const url = URL.createObjectURL(file);
+        showPreview(url);
+    }
+
+    // --- 录音逻辑 ---
+    async function toggleRecording() {
+        if (!isRecording) {
+            startRecording();
+        } else {
+            stopRecording();
+        }
+    }
+
+    async function startRecording() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks = [];
+
+            mediaRecorder.ondataavailable = event => {
+                audioChunks.push(event.data);
+            };
+
+            mediaRecorder.onstop = () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' }); // 或 audio/webm
+                finalAudioBlob = audioBlob;
+                const audioUrl = URL.createObjectURL(audioBlob);
+                showPreview(audioUrl);
+            };
+
+            mediaRecorder.start();
+            isRecording = true;
+            updateUIState(true);
+            startTimer();
+        } catch (err) {
+            console.error("Error accessing microphone:", err);
+            alert("无法访问麦克风，请检查权限设置 (注意: 录音通常需要HTTPS环境)");
+        }
+    }
+
+    function stopRecording() {
+        if (mediaRecorder) {
+            mediaRecorder.stop();
+            // 停止所有轨道
+            mediaRecorder.stream.getTracks().forEach(track => track.stop());
+        }
+        isRecording = false;
+        updateUIState(false);
+        stopTimer();
+    }
+
+    // --- 辅助功能 ---
+    function updateUIState(recording) {
+        const micBtn = document.getElementById('micBtn');
+        const statusText = document.getElementById('statusText');
+        const micIcon = document.getElementById('micIcon');
+        const stopIcon = document.getElementById('stopIcon');
+
+        if (recording) {
+            micBtn.classList.add('recording');
+            statusText.textContent = "正在录制... (点击停止)";
+            statusText.style.color = "#EF4444";
+            micIcon.style.display = 'none';
+            stopIcon.style.display = 'block';
+        } else {
+            micBtn.classList.remove('recording');
+            statusText.textContent = "点击麦克风开始录音";
+            statusText.style.color = "#6B7280";
+            micIcon.style.display = 'block';
+            stopIcon.style.display = 'none';
+        }
+    }
+
+    function startTimer() {
+        seconds = 0;
+        document.getElementById('timer').textContent = "00:00";
+        timerInterval = setInterval(() => {
+            seconds++;
+            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            document.getElementById('timer').textContent = `${mins}:${secs}`;
+        }, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+    }
+
+    function showPreview(url) {
+        const preview = document.getElementById('audioPreview');
+        const player = document.getElementById('player');
+        const confirmBtn = document.getElementById('confirmBtn');
+
+        preview.style.display = 'block';
+        player.src = url;
+        confirmBtn.classList.add('active');
+    }
+
+    function resetAll() {
+        stopRecording(); // 确保录音停止
+        finalAudioBlob = null;
+        document.getElementById('audioPreview').style.display = 'none';
+        document.getElementById('player').src = "";
+        document.getElementById('uploadText').textContent = "点击或拖拽音频文件到此处";
+        document.getElementById('fileInput').value = "";
+        document.getElementById('confirmBtn').classList.remove('active');
+    }
+
+    // --- 提交逻辑 ---
+    function submitAudio() {
+        if (!finalAudioBlob) return;
+        
+        console.log("准备提交文件:", finalAudioBlob);
+        
+        // 示例：使用 FormData 上传
+        const formData = new FormData();
+        formData.append('audio', finalAudioBlob, 'recording.mp3');
+
+        // 这里编写你的 fetch / axios 逻辑
+        alert(`已准备好提交！\n类型: ${currentMode}\n大小: ${finalAudioBlob.size} bytes`);
+        
+        // fetch('/api/upload', { method: 'POST', body: formData })...
+    }
+</script>
+
+</body>
+</html>
