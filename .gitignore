@@ -1,2 +1,5 @@
 .idea/*
 
+xiaokui/data/*
+
+*.pyc
