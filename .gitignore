@@ -1,1 +1,9 @@
 .idea/*
+*.pdf
+*.md
+*.png
+*.json
+
+llm_agent_rag_ft/.env
+llm_agent_rag_ft/.env.dev
+llm_agent_rag_ft/.env.test
