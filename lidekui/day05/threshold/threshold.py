@@ -2,7 +2,7 @@ import json
 from tqdm import tqdm
 import numpy as np
 import simple_pickle as sp
-from b_rag.day03.embedding import get_embedding
+from heima.lidekui.day03.embedding import get_embedding
 
 
 def text_similarity(lines):

@@ -1,6 +1,6 @@
 from redis_om import HashModel, get_redis_connection, Field, Migrator
 
-from conf import settings
+from heima.conf import settings
 
 redis = get_redis_connection(
     host=settings.redis_host,

@@ -1,6 +1,6 @@
-from conf import settings
+from heima.conf import settings
 from elasticsearch_dsl import Document,Text,connections,Keyword
-from b_rag.day02.items import BookItem, LawItem
+from heima.lidekui.day02.items import BookItem, LawItem
 
 
 connections.create_connection(hosts=settings.es_host,

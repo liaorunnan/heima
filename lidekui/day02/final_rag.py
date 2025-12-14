@@ -1,9 +1,9 @@
 from heima.lidekui.day02.match_keyword import Law
-from b_rag.day03.indexing import VecIndex, VecIndexLaw, VecIndexFaq
-from b_rag.day03.embedding import get_embedding
+from heima.lidekui.day03.indexing import VecIndex, VecIndexLaw, VecIndexFaq
+from heima.lidekui.day03.embedding import get_embedding
 from heima.lidekui.day02.llm import chat
-from b_rag.day03.reranker import get_books_topk, get_laws_topk
-from b_rag.day04.cache import get_redis_answer, set_redis_answer, run_migrate
+from heima.lidekui.day03.reranker import get_books_topk, get_laws_topk
+from heima.lidekui.day04.cache import get_redis_answer, set_redis_answer, run_migrate
 
 # Book.init()
 # 已停止迭代
@@ -42,7 +42,7 @@ def my_law():
         else:
             vec = get_embedding(query)
             faqs = VecIndexFaq("laws_faq").search(vec, topk=1)[0]
-            if faqs.score > 0.82:
+            if faqs.score > 0.76:
                 print('答案来自FAQ')
                 print('='*50)
                 answer = faqs.answer

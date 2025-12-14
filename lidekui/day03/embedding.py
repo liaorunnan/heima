@@ -1,7 +1,7 @@
 from openai import OpenAI
 import numpy as np
 import requests
-from conf import settings
+from heima.conf import settings
 
 
 def test_vllm_connection():

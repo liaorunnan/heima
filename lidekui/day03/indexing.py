@@ -5,8 +5,8 @@ import numpy as np
 from pymilvus import MilvusClient, DataType
 from tqdm import tqdm
 import joblib
-from b_rag.day02.items import BookItem, LawItem, FAQItem
-from conf import settings
+from heima.lidekui.day02.items import BookItem, LawItem, FAQItem
+from heima.conf import settings
 
 dimension = 1024
 search_params = {"metric_type": "IP", "params": {"nprobe": 10}}
@@ -74,8 +74,8 @@ class VecIndex(metaclass=Singleton):
         # return hits
 
     def load(self):
-        from b_rag.day02.match_keyword import Book
-        from b_rag.day03.embedding import get_embedding
+        from heima.lidekui.day02.match_keyword import Book
+        from heima.lidekui.day03.embedding import get_embedding
 
         for item in Book.scan():
             embed = get_embedding(item.child)
@@ -130,8 +130,8 @@ class VecIndexLaw(metaclass=Singleton):
         # return hits
 
     def load(self, batch_size=100):
-        from b_rag.day02.match_keyword import Law
-        from b_rag.day03.embedding import get_embedding
+        from heima.lidekui.day02.match_keyword import Law
+        from heima.lidekui.day03.embedding import get_embedding
 
         items = list(Law.scan())  # 先转成列表以便分批（如果数据量极大，可改用生成器+缓冲）
         total = len(items)
@@ -206,7 +206,7 @@ class VecIndexFaq(metaclass=Singleton):
         # return hits
 
     def load(self, batch_size=100):
-        from b_rag.day03.embedding import get_embedding
+        from heima.lidekui.day03.embedding import get_embedding
 
         items = joblib.load("../day05/data/qas.pkl")
         items = [FAQItem(question=item['query'], answer=item['answer']) for item in items]
@@ -234,7 +234,7 @@ class VecIndexFaq(metaclass=Singleton):
 
 
 if __name__ == '__main__':
-    from b_rag.day03.embedding import get_embedding
+    from heima.lidekui.day03.embedding import get_embedding
 
     vec = get_embedding("某合伙企业在清算期间，其中一个合伙人私自开展了与清算无关的经营活动，违反了合伙企业法的相关规定。其他合伙人该如何应对？")
     hits = VecIndexFaq("laws_faq").search(vec)

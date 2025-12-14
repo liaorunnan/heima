@@ -1,5 +1,5 @@
 import openai
-from conf import settings
+from heima.conf import settings
 
 client = openai.Client(api_key=settings.api_key, base_url=settings.base_url)
 

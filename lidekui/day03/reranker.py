@@ -1,5 +1,5 @@
 import requests
-from conf import settings
+from heima.conf import settings
 
 def rank_score(text_1, text_2, model="bge-reranker-v2-m3"):
     url = f"{settings.vllm_rerank_url}/score"
