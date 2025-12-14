@@ -5,3 +5,6 @@ model/*
 *.DS_Store
 *.iml
 *.xml
+*.pkl
+/.vscode
+data.jsonl

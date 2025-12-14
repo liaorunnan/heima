@@ -1,0 +1,502 @@
+[
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Amanda: I baked  cookies. Do you want some?\nJerry: Sure!\nAmanda: I'll bring you tomorrow :-)",
+    "output": "A baked cookies and will bring B some tomorrow."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Olivia: Who are you voting for in this election? \nOliver: Liberals as always.\nOlivia: Me too!!\nOliver: Great",
+    "output": "B and Olivier are voting for liberals in this election. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Tim: Hi, what's up?\nKim: Bad mood tbh, I was going to do lots of stuff but ended up procrastinating\nTim: What did you plan on doing?\nKim: Oh you know, uni stuff and unfucking my room\nKim: Maybe tomorrow I'll move my ass and do everything\nKim: We were going to defrost a fridge so instead of shopping I'll eat some defrosted veggies\nTim: For doing stuff I recommend Pomodoro technique where u use breaks for doing chores\nTim: It really helps\nKim: thanks, maybe I'll do that\nTim: I also like using post-its in kaban style",
+    "output": "B may try the pomodoro technique recommended by A to get more stuff done."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Edward: Rachel, I think I'm in ove with Bella..\nrachel: Dont say anything else..\nEdward: What do you mean??\nrachel: Open your fu**ing door.. I'm outside",
+    "output": "A thinks he is in love with Bella. Rachel wants A to open his door. Rachel is outside. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Neville: Hi there, does anyone remember what date I got married on?\nDon: Are you serious?\nNeville: Dead serious. We're on vacation, and Tina's mad at me about something. I have a strange suspicion that this might have something to do with our wedding anniversary, but I have nowhere to check.\nWyatt: Hang on, I'll ask my wife.\nDon: Haha, someone's in a lot of trouble :D\nWyatt: September 17. I hope you remember the year ;)",
+    "output": "A reminds C his wedding anniversary is on the 17th of September. C's wife is upset and it might be because C forgot about their anniversary."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "John: Ave. Was there any homework for tomorrow?\nCassandra: hello :D Of course, as always :D\nJohn: What exactly?\nCassandra: I'm not sure so I'll check it for you in 20minutes. \nJohn: Cool, thanks. Sorry I couldn't be there, but I was busy as fuck...my stupid boss as always was trying to piss me off\nCassandra: No problem, what did he do this time?\nJohn: Nothing special, just the same as always, treating us like children, commanding to do this and that...\nCassandra: sorry to hear that. but why don't you just go to your chief and tell him everything?\nJohn: I would, but I don't have any support from others, they are like goddamn pupets and pretend that everything's fine...I'm not gonna fix everything for everyone\nCassandra: I understand...Nevertheless, just try to ignore him. I know it might sound ridiculous as fuck, but sometimes there's nothing more you can do.\nJohn: yeah I know...maybe some beer this week?\nCassandra: Sure, but I got some time after classes only...this week is gonna be busy\nJohn: no problem, I can drive you home and we can go to some bar or whatever.\nCassandra: cool. ok, I got this homework. it's page 15 ex. 2 and 3, I also asked the others to study another chapter, especially the vocabulary from the very first pages. Just read it.\nJohn: gosh...I don't know if I'm smart enough to do it :'D\nCassandra: you are, don't worry :P Just circle all the words you don't know and we'll continue on Monday.\nJohn: ok...then I'll try my best :D\nCassandra: sure, if you will have any questions just either text or call me and I'll help you.\nJohn: I hope I won't have to waste your time xD\nCassandra: you're not wasting my time, I'm your teacher, I'm here to help. This is what I get money for, also :P\nJohn: just kidding :D ok, so i guess we'll stay in touch then\nCassandra: sure, have a nice evening :D\nJohn: you too, se ya\nCassandra: Byeeeee",
+    "output": "B didn't show up for class due to some work issues with his boss. A, his teacher told him which exercises to do, and which chapter to study. They are going to meet up for a beer sometime this week after class. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Sarah: I found a song on youtube and I think you'll like it\nJames: What song?\nSarah: <file_other>\nJames: Oh. I know it! \nJames: I heard it before in some compilation\nSarah: I can't stop playing it over and over\nJames: That's exactly how I know lyrics to all of the songs on my playlist :D\nSarah: Haha. No lyrics here though. Instrumental ;D\nJames: Instrumental songs are different kind of music. \nJames: But you have to remember that the activity you do when you listen to this song\nJames: Is the actvity your brain will connect to the song\nJames: And everytime you play this song at home\nJames: You'll be thinking of your work\nSarah: Yeah, I know that. That's why we sometimes say - I used to like that song, but now it just reminds me of bad memories\nJames: Yup. Everytime you change your partner, you have to get rid of your favorite music :D\nSarah: Hahaha. True, true.",
+    "output": "A sends B an instrumental song he might like. B knows the song. The brain connects the songs to the context they were played in and brings to mind the associated memories."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Noah: When and where are we meeting? :)\nMadison: I thought you were busy...?\nNoah: Yeah, I WAS. I quit my job. \nMadison: No way! :o :o :o Why? I thought you liked it...?\nNoah: Well, I used to, until my boss turned into a complete cock... Long story.",
+    "output": "B wants to meet, he quit his job, because his boss was a dick."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Matt: Do you want to go for date?\nAgnes: Wow! You caught me out with this question Matt.\nMatt: Why?\nAgnes: I simply didn't expect this from you.\nMatt: Well, expect the unexpected.\nAgnes: Can I think about it?\nMatt: What is there to think about?\nAgnes: Well, I don't really know you.\nMatt: This is the perfect time to get to know eachother\nAgnes: Well that's true.\nMatt: So let's go to the Georgian restaurant in Kazimierz.\nAgnes: Now your convincing me.\nMatt: Cool, saturday at 6pm?\nAgnes: That's fine.\nMatt: I can pick you up on the way to the restaurant.\nAgnes: That's really kind of you.\nMatt: No problem.\nAgnes: See you on saturday.\nMatt: Yes, looking forward to it.\nAgnes: Me too.",
+    "output": "B invites A for a date to get to know each other better. They'll go to the Georgian restaurant in Kazimierz on Saturday at 6 pm, and he'll pick her up on the way to the place."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Lucas: Hey! How was your day?\nDemi: Hey there! \nDemi: It was pretty fine, actually, thank you!\nDemi: I just got promoted! :D\nLucas: Whoa! Great news!\nLucas: Congratulations!\nLucas: Such a success has to be celebrated.\nDemi: I agree! :D\nDemi: Tonight at Death & Co.?\nLucas: Sure!\nLucas: See you there at 10pm?\nDemi: Yeah! See you there! :D",
+    "output": "B got promoted. She will celebrate that with A at Death & Co at 10 pm."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Mark: I just shipped the goods\nMark: Tomorrow I’ll send you the tracking number\nGeorge: Thanks!",
+    "output": "A just shipped the goods and he will send B the tracking number tomorrow."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Anita: I'm at the station in Bologna\nJenny: No problems so far?\nAnita: no, everything's going smoothly\nTomy: good!",
+    "output": "A is at Bologna station."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Leon: did you find the job yet?\nArthur: no bro, still unemployed :D\nLeon: hahaha, LIVING LIFE\nArthur: i love it, waking up at noon, watching sports - what else could a man want?\nLeon: a paycheck? ;)\nArthur: don't be mean... \nLeon: but seriously, my mate has an offer as a junior project manager at his company, are you interested?\nArthur: sure thing, do you have any details?\nLeon: <file_photo>\nArthur: that actually looks nice, should I reach out directly to your friend or just apply to this email address from the screenshot?\nLeon: it's his email, you can send your resume directly and I will mention to him who you are :)",
+    "output": "A is still unemployed. B sends him a job offer for junior project manager position. A is interested."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Macca: i'm so exited today\nAdrien: why?\nMacca: I've never done ice climbing before\nMark: Are you ready?\nMacca: think so\nTobias: where are you doing this?\nMacca: not far from Reykjavik\nMacca: Has anybody seriously injured themselves doing this?\nMark: not seriously\nAdrien: I didn't know you're in Iceland!\nMacca: hahaha, doesn't sound so good\nMark: no need to be afraid\nMacca: gosh, it was such a rush\nMark: did you enjoy it?\nMacca: every second\nMacca: it was not very cold\nMacca: the landscapes were magnificent\nMark: I'm glad to read that\nMacca: Challenge of the day done!",
+    "output": "A has done ice climbing for the first time today, close to Reykjavik. He enjoyed it very much."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Isabella: fuck my life, I'm so not able to get up to work today\nIsabella: I need to call in sick :(\nOscar: haha, well you certainly had a good time at the Christmas party yesterday XD\nIsabella: shut up, you're a traitor\nIsabella: I told you to guard my glass\nIsabella: and my sobriety. You clearly failed!\nOscar: but you were having such fun, I didn't have a heart to stop it\nOscar: <file_photo>\nOscar: <file_photo>\nIsabella: you're so dead! Is that Jimmy from marketing department?\nOscar: yes indeed, it's him :D\nIsabella: I am a fallen woman, I cannot get back to the office now\nIsabella: <file_gif>\nOscar: oh come on, almost everybody was drunk\nOscar: so they won't remember a thing :D\nIsabella: I assure you, they tend to remember such things…\nOscar: <file_gif>",
+    "output": "A feels bad after the Christmas party. She got drunk. She is ashamed to go back to work. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Tina: I'd only like to remind you that you owe me 50 bucks\nLucy: Of course, I know.\nLucy: I've already transferred the money but it's Sunday today so you'll have it in your bank account tomorrow\nTina: That's good news cuz I've been having a lot of expenses lately",
+    "output": "A owes B 50 dollars. She made a transfer but it is Sunday so the payment will be on B's account on Monday. B needs the money because she has been having expanses recently."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Betty: Please remind me next time that too much wine isn't good for me and me surrounding\nBetty: Hangover is one thing\nBetty: But I feel like never touching wine again\nAmber: Hahaha. You were so drunk with wine last night, you couldn't walk straight even 5 steps\nAmber: You took off your weeding ring and shouted \"My precious\"\nBetty: Uhh. I have no blackouts so I know exactly what to feel embarassed about....",
+    "output": "B feels remorse she got drunk last night and went out of control."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Mary: Hi Mike!\nMike: Hello :)\nMary: do u have any plans for tonight?\nMike: I'm going to visit my grandma.\nMike: You can go with me.\nMike: She likes u very much.\nMary: Good idea, i'll buy some chocolate for her.",
+    "output": "A and B are going to visit A's grandma tonight. B will buy her some chocolate."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Laura: ok , I'm done for today-)\nLaura: let me know once u're free and we come back home together\nKim: hmm.. 7?\nLaura: ok\nKim: cool, wait for me at work, I'll call once I get here",
+    "output": "B will pick up A from work around 7, and they will come back home together."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Ashley: Guys, you have to read this book!  <file_photo>\nMarcus: Why, what's so special about it?\nErin: I think I've already heard about it from someone. Is it really that good?\nAshley: It's the best thing I've ever read! Completely life-changing! It's opened my eyes to a lot of things.\nSeamus: Sorry, but I don't like books that are written to change my life. I prefer books that are simply fun to read :P\nMarcus: I get what you mean. I feel like some authors are so concentrated on making their books full of wisdom that they completely forget that they should also be readable.\nErin: Do you mean Coelho? XD\nMarcus: No, while I'm not a fan of his, at least I've never fallen asleep while reading his books. I meant this one for example: <file_other>\nAshley: Erm, I quite like his books.\nSeamus: Did they change your life too? :D\nAshley: Wait, I meant Coelho. I've never read the other guy.\nMarcus: Trust me, don't. There are lots of better ways of wasting your time.\nAshley: LOL, okay, I trust you. But the one I posted at the beginning is really good. It's not just some philosophical gibberish, it's actually a crime novel, so there's a lot of action too.\nErin: Does it have a cute detective? ;)\nAshley: Even two of them, actually. Believe me, you won't be able to decide which one to love more!\nErin: Okay, I'm already sold :D",
+    "output": "D is convinced by A's book recommendations, while C and B aren't."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Aria: You won't believe who I've just met!\nAria: Charlie Evans!\nMaverick: Oh God, I haven't seen him from ages!\nMaverick: How is he doing?\nAria: He's doing great. :)\nAria: He got married, he runs a small family business, which he is very passionate about and generally he seems to be a happy and fulfilled man. :)\nAria: Oh, and he has two absolutely adorable daughters. :)\nAria: It was so nice to meet him, he's such a sweet soul.\nMaverick: I’m glad to hear that. :)\nMaverick: Time flies so fast, doesn't it?\nAria: It does. :) Recently I’ve met Cooper Roy, I'm sure you remember him, I constantly talked about him back then in high school, because I had a huge crush on him. He’s changed a lot!\nAria: I barely recognized him!\nMaverick: I remember, how you and Kylie used to gossip about him all the time. :)\nAria: Well, we were madly in love with him.\nAria: Or at least we thought so. ;)\nMaverick: I sometimes miss those times.\nMaverick: Everything seemed to be easier, better and calmer back then.\nAria: The world wasn’t as crazy as it is now.\nAria: I feel like politics got crazier, people - more radical and hostile and economics - less predictable...\nMaverick: Me too...:(",
+    "output": "A has just run into Charlie Evans. He is now married, with two daughters, and a family business. She has also met Cooper Roy from high school. She used to have a crush on him, now she almost didn't recognise him. B and A miss the old times and think the world has changed for the worse."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Anna: where are you\nOmenah: at home \nAnna: I will be there in a minute ",
+    "output": "A is at home, B will be there in a minute."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Renee: Just saying Hi. Thought of you this morning.Layla misses you. She is having knee surgery. Hope you are doing well.\nRachel: Renee! Hey! Whoa! So crazy that you wrote. I was literally thinking of you the other day as well. \nRachel: I am doing really well, getting settled here and everything. Looking for a new job. \nRachel: Layla is getting knew surgery?! What happened?\nRenee: Her arthritis got really bad. I saw her limping every time we went out for a walk, and so I took her to the vet and they decided she needs surgery. \nRachel: Oh wow. That is really intense. I am sending her lots of love.\nRenee: Thanks Rachel. \nRenee: Here is a pic of Layla from this morning.\nRenee: <file_picture>\nRenee: She is all cute in her usual spot. \nRachel: Ha! Yeah, I remember, she would always try to fit in there even though she's obviously too big\nRachel: 😂\nRenee: Yeah, she's always getting into some sort of silly situations.\nRenee: What kind of work are you looking for?\nRachel: Just the usual, something with teaching. I am not too stressed yet, I have some savings.\nRenee: That's good, yeah, you don't want to have to feel pressured into taking a certain job. \nRenee: Just so you know, if you are ever back, you are more than welcome to come back and work for me. \nRenee: Layla is definitely missing you taking her on walks everyday. \nRachel: Aw, yeah, I miss you guys too. Of course :) If I am ever back I will let you know! ",
+    "output": "Layla the dog misses A. She is having a knee surgery, because of arthritis. B sends a picture of her dog. A getting settled and she's looking for a job in teaching. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Jonas: I’m running 10 minutes late. Could you guys just let Mary know that I’m coming and will present today before she starts?\nNatalie: Sure no problem\nOlivia: I’ll save a seat for you 😍\nJonas: Thanks so much. See you in a bit xx",
+    "output": "C will be 10 minutes late. A will let Mary know C will present before she starts."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Julius: dude, your assessment of manutd\nLawrence: i have nothing to say, im so offended and hopeless of them this season\nJulius: me too\nLawrence: i dont even know whats wrong with the team\nJulius: the quality is there but nothing is happening\nLawrence: the players look tired of something\nJulius:  with mourinhos conservative football!!\nLawrence: its so boring\nJulius: so lifeless\nLawrence: man!!\nJulius: it needs to change, hope the board sees it\nLawrence: sooner than later\nJulius: yeah\nLawrence: yeah",
+    "output": "A doesn't like the play of Manchester United. He and B complain about the team and Mourinho's style."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Jade: are you going to that trip\nWayne: was\nJade: what do you mean\nWayne: its portponed\nJade: are you kidding me XD\nWayne: im serious, why surprised\nJade: i had to go home and miss it xD\nWayne: oh, cool you can make it when we go\nJade: yea, yesss\nWayne: :D",
+    "output": "The trip A was going to go on was postponed. Now B will be able to go to."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Natalie: are you still going to Thailand?\nJason: yeah, next week as planned\nJason: why?\nNatalie: could you buy me some spices?\nNatalie: I can't find anything similar here\nNatalie: and I really like those\nJason: sure, if you'll send me all the names\nJason: you know, I'm not very good when it comes to remembering those\nNatalie: of course, I will take pictures of the ones I have to make it easier\nJason: great and just to be sure remind me about that in two weeks or so\nJason: I might have other things on my mind and I tend to forget things easily :)\nNatalie: that shouldn't be a problem :)",
+    "output": "A is going to Thailand next week. B will send him pictures of the spices she wants him to buy for her. Then she will remind him about it in two weeks."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Elisa: Who wants to come for drinks tonight at Mombasa?\nAlice: me!\nSadie: I'm in as well\nCarol: may I bring some people?\nElisa: sure, the more the better!\nCarol: amazing\nArthur: count me in! I'll come with Alice of course\nLiam: me too!\nKai: I will join you but after my courses, around 8\nElisa: No problem, we'll be there till midnight at least\nTom: i may come over :)\nElisa: Anybody else? I'd like to book the corner table\nTom: the big one?\nElisa: exactly\nJohn: So count me in as well\nElisa: Perfect, the table is for 15 people so we should manage! See you there",
+    "output": "D, F, B, H, E and I want to go for drinks tonight at Mombasa. G will come with A. C will join them around 8. D will book the big corner table for 15 people."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Hal: Have you got any homework for tomorrow?\nAmy: no dad\nHal: ru sure?\nAmy: told ya\nHal: You know mum's not home today.\nAmy: I know, I can use the microwave\nHal: good girl. I'll be home around 6\nAmy: yeah right\nHal: what do you mean\nAmy: sry dad but you're never ever home at 6\nHal: i suppose you;re right. but I'll try today\nAmy: ok. can I go to Alex?\nHal: ok, but be back home before 7. we'll have dinner together\nAmy: ok dad\nHal: and if you really have no homework to do\nAmy: sure thing dad",
+    "output": "B and A will have dinner together when he is back home before 7."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Ray: Hey guys, I don't know if you heard but someone stole my bike yesterday so I'm going to post it on fb and would appreciate if you share! THX\nSam: shit, man, sorry to hear, I will share for sure\nLuke: when was it, Ray? I had mine stolen last month around when I parked around on the 9th street\nRay: Mine was there too :( cops said it's a common area for it to happen but I still havent lost hope :(\nScott: Did they check the security cameras around the place? Maybe Mariott people saw someone?\nRay: Apparently they don't overlook that area... \nLuke: Yeah, cops were completely useless too, I ended up going to Mariott on my own and asking people but they didn't see anything. I emailed their manager if they could look at the tapes but because of privacy issues blah blah blah it was a no go... Good luck man!\nRay: I mean those guys are pros... I had high grade lock on mine and an app alert and it didn't do shit. Now I'm out few grand and pissed off\nScott: I would be too. Did you post posters in the area? it's a busy street so maybe someone saw something\nRay: Yeah, I'm getting around to it now and I really hope that smeone was sober enough to notice anything. I mean it's a custom bike so I hope if they try to get rid of it it will rise suspicion\nLuke: I think it might ve already been turned into parts and shipped off. Even if you wanted to keep it and painted it, you could still recognize it\nRay: I know, that's why I wanna reach as many people as posible,maybe they ll get spooked and leave it somewhere\nSam: Let us know if you need someone to go dumpster diving with \nRay: Heh, thx Sam! I appreciate all help",
+    "output": "C's bike was stolen from the 9th street yesterday even though it was secured. It was a custom bike so now C's out few grand. C wants to post posters in the area so they'll get scared and leave it somewhere. D had one stolen last month from the same area. A wants to help out."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Eric: Champions League is coming soon :D\nCurtis: Oh, yea I forgot about that.\nCurtis: when exactly?\nEric: 26th of June\nEric: but there is still a very long way.\nCurtis: any predictions?\nEric: It's too early for that.\nCurtis: True, last year you were betting a lot\nEric: I lost a lot :P \nEric: I'm gonna roar back this year :)\nCurtis: good luck, I'm not into risking money\nEric: You have 50% chance to win.\nCurtis: I'll pass anyway.\nEric: okay",
+    "output": "B wants to bet during the Champions League this year although he lost a lot of money last year. A won't bet."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Gunther: did you pay for coffee?\nChandler: uhh.. i guess not xDbut it's okay i'll pay him tomorrow\nGunther: -_-",
+    "output": "B will pay for his coffee tomorrow."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Karen: <file_photo>\nJennifer: OH. MY. GOD. is that you?? I would not recognize you haha\nKaren: of course it's me, i always look like that hahaha\nJennifer: oh god Karen you look so hot in this picture\nAbigail: i would not recognize you either :D why where you so dressed up?\nKaren: it was our 5th anniversary dinner\nAbigail: Mark is such a lucky guy\nMeggy: i agree with the girls, you look OUTSTANDING\nKaren: thank you sisters!!! :*** that's so sweet of you\nJennifer: where did you buy this dress? i need one like it too\nAbigail: i was gonna ask the same thing!\nMeggy: chill out girls, we can't all buy the same clothes, i need it more hahaha\nKaren: <file_other>\nMeggy: first come, first serve!! I am ordering it\nKaren: give the rest a chance too haha\nJennifer: let her have it :P",
+    "output": "D looked very good on her 5th anniversary dinner with Mark. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Ted: Any news about weekend?\nJake: About the reunion?\nPia: I am available! Did we talk where?\nJessica: If I move some things around, I can too!\nTed: Great! we should set the place then\nJake: Whoa! I didn't say I could\nTed: Can you?\nJake: Hell yeah man! You know I freelance, worst case scenario I'll work from wherever we are\nTed: Lucky bastard\nJessica: We should meet up where we did last time, it's perfect middle for everyone\nTed: I agree\nPia: Friday night then?\nJess: Sure\nTed: It's a date, I'll book rooms\nJake: See you soon my peeps!",
+    "output": "A, D, B, Cica and C are having a reunion this Friday at the same place as the previous one."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Bradley: It's very safe. Not like they make it look on TV\nJulianna: Hehe I told them that also that tv will never show anything nice\nBradley: True...\nJulianna: But in general I think Europe is safer because here we have different law. I mean we have too much law\nBradley: Haha\nJulianna: E.g here if a teacher even touches a children's arm, he or she can have problems with police and law. Because it might be a sign of pedophilia or children sexual harassment\nBradley: Ok\nJulianna: That's sick a bit hehe but on the other hand sometimes it's ok\nBradley: Haha ok how ?\nJulianna: Because there are pedophiles in that world\nBradley: They are everywhere\nJulianna: And when someone hits a child that person should be punished",
+    "output": "B tells A about Europe's law and the approach towards pedophiles."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Lucia: I need my hair cut.\nLucia: When can I come? I've got some time on Thursday and Friday.\nEric: Lucia! My dear!\nEric: Are you sure? After all, you had your hairstyle done a week ago.\nEric: What's the matter? Don't you like it?\nLucia: I like it very much and I regret to lose it.\nLucia: But I'm changing the job and my hair must be shorter...\nEric: I see. You'll tell me everything in detail once you're here, in my beauty salon.\nEric: I suggest Friday at 3 p.m. Is it fine for you?\nLucia: Sure, perfect.\nEric: Fantastic, have a nice day then.\nLucia: Thanks, bye.",
+    "output": "A needs a new hairstyle due to a change of work and she makes an appointment with B for Friday 3 p.m."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Gabriella: Hey Jasmine, how are you doing?\nJasmine: I’m fine, thanks 😊\nGabriella: Would you do me a favor?\nJasmine: No problem. How can I help?\nGabriella: I need to send my CV in English to a truly perfect job for me and I’m wondering if you could take a look at it?\nJasmine: Sure! Send it to me 😊\nGabriella: Done 😊\nJasmine: Got it. Give me an hour and I’ll check it \nGabriella: Perfect! Thank you soooo much!\nJasmine: I’ve checked it. I must say that there wasn’t much to correct. It was practically perfect. I just fixed a little bit grammar and a few spelling mistakes. \nGabriella: I know how great you are at spelling!\nJasmine: Thanks Gabriella. I hope that you will get that job!\nGabriella: I hope so, too.\nJasmine: I’ll keep my fingers crossed 😊",
+    "output": "B asked A to check her CV which is in English. She's applying for a perfect job. A checked it and did only minor corrections. She hopes B will get the job."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Grace: Hey lady\nGrace: Today I saw you in town.\nRuth: Really?\nRuth: Why didn't you stop me?\nGrace: You were in Galitos and I could not have stormed in just to greet you.\nRuth: Of course you would have.\nRuth: There is no harm in doing that.\nGrace: 😂😂The embarrassment though.\nRuth: Furthermore I would have given you a piece of my pizza.😂\nGrace: Pizza is bomb🤤\nGrace: Be sure next time i will not need any invitation😂\nRuth: You are still welcome🤣\nGrace: Okay. BTW, do you think we can catch up some time?\nRuth: Yeah sure. Just say the day.\nGrace: Tomorrow?\nRuth: I'm in.\nGrace: Okay see you then\nRuth: Bye",
+    "output": "B saw A in Galitos but she thought it would be embarassing to get in and greet her. They will meet tomorrow."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Kerri: Did you see the apartment?\nStella: yes brb\nKerri: ok\nStella: Sorry I was driving\nStella: I saw it yesterday but it was already dark so I want to go again to see it in the morning\nStella: First of all, its really big, 130 sqm\nKerri: WOW\nStella: I could split it into 2 apartments\nStella: 90 and 40 sqm more or less\nKerri: Or 80 and 50?\nStella: Not really, there's only one way to split it\nStella: So I could stay in the big one with 3 bedrooms and 2 bathrooms\nKerri: Sounds good\nStella: I want to see it in the morning\nStella: The agent said the bedrooms are very sunny in the morning\nStella: Maybe I'll go tomorrow\nKerri: Took some photos?\nStella: <file_photo>\nStella: <file_photo>\nStella: <file_photo>\nKerri: Nice!!!\nKerri: The kitchen looks fantastic\nKerri: Its huge\nStella: It's the size of my living room!\nStella: We obviously don't need 3 bedrooms\nStella: But I could have a decent home office at last\nKerri: Has Greg seen it?\nStella: No, he's away this week",
+    "output": "Stella wants to see the apartment in the morning. She plans to split it into 2 apartments."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Andrea: hey Babes, how's it going? I've got some job to do. 20 short texts for an online shop. 50% for correction. Deadline in two weeks. Will you help me?\nSondra: Hi, sorry I don't think Im gonna make it. It is hard these days.\nAndrea: ?\nSondra: My cat is dying and nanny's leaving... :/\nAndrea: damn.. sorry to hear that. I f you could give me someone, maybe you know somebody suitable? I know aleady Jill can't do it :/\nSondra: Jill is the best. Other people need assitance. Do you want these contacts?\nAndrea: not really...\nSondra: :)\nAndrea: If you found a window in a spacetime, please let me know. Ill get the texts on Friday.\nSondra: OK, but I dont think it will happen. The first window I see is probably in June.\nAndrea: I understand. I hope the kitty is going to make it, I keep my fingers crossed for him..\nSondra: In march Im gonna have as many as ONE free evening if everything goes well. Thanks he is still alive, maybe he is stronger than it looks now.\nAndrea: <file_gif>",
+    "output": "A must correct 50% of 20 short texts for an online shop. She has a deadline in two weeks. Sondra cannot help A, because her cat is dying and nanny's leaving. Jill also cannot help. Sondra will probably have only one free evening in March and more free time probably in June. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Victor: do you want to go to the museum tonight?\nVictor: there's a great exhibition about cubism going on\nCharles: you know i hate museums! lol\nCharles: i'd rather watch paint dry hahaha\nVictor: i know you hate museums...\nVictor: BUT tonight special\nCharles: why?\nVictor: because tonight is opening night!!! :-D\nCharles: what makes it different?\nVictor: there's food, music, VIPs, everyone dresses up, it's just fun\nVictor: it's upscale fun :-D\nVictor: come on! be my plus 1!!!\nCharles: i guess if you're asking me that means tons of people have said no\nCharles: i'm sure i'm not at the top of your list lol\nCharles: am i right? lol\nVictor: hahaha you're right... \nVictor: but the only reason you were not at the top of my list is becase i know it's not your thing\nVictor: i promise you it'll be fun\nVictor: and if you don't like it we'll go to a sports bar afterwards and i'll treat you to all the beer you want\nCharles: hahaha, ok, that sweetens the pot\nCharles: i'll go with you",
+    "output": "A will go with B to the museum tonight. There is an opening of an exhibition about cubism. There'll be food, music and VIPs."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "William: Hey. Today i saw you were arguing with Blackett.\nWilliam: Are you guys fine?\nElizabeth: Hi. Sorry you had to see us argue.\nElizabeth: It was just a small misunderstanding but we will solve it.\nWilliam: Hope so\nWilliam: You think I should to talk to him about it?\nElizabeth: No don't\nElizabeth: He won't like it that we talked after the argument.\nWilliam: Ok. But if you need any help, don't hesitate to call me\nElizabeth: Definitely",
+    "output": "B had an argument with Blackett today, but she doesn't want A to intermeddle."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Henry: Hey Lily, tried to catch you on landline but no answer. Gone already? Let me know when we can talk.\nLily: Am driving to town.\nHenry: OK\nHenry: Before we talk: I bumped into William in the street yesterday and we ended up in a pub. Poor chappy! Really. He'll never recover from his loss. En passant I mentioned our trip to Riehen next week and had an impression he'd be happy to be taken along. What d'you think?\nHenry: I thought it doesn't matter that much to us and he's a nice chap, interesting to talk to, good company. And he seems sort of famished for company, old friends around him. You know what I mean.\nHenry: And that could be our good deed before Xmas! ;)\nLily: Traffic was soooooo slow but I couldn't really reply. In the lecture now.\nLily: I always liked William, have no problem with him joining us to Riehen. How do you imagine that?\nHenry: He'll come to FR, leave his car in my drive and in mine we'll pick you up.\nLily: Very good. A coffee at mine before we start?\nHenry: I thought maybe a meal together afterwards?\nLily: Even better. I like that! Haven't seen him for ages, so glad to meet him again.\nLily: Will you arrange it all?\nHenry: Sure. But get prepared: he has aged. Quite visible now.\nLily: But not mentally I hope?\nHenry: No, intellectually not at all. But there's this sadness around him. An air of depression.\nLily: We'll cheer him up. If only for a day. Have to finish now.  Cheers!",
+    "output": "A and B take William with them to Riehen. They will meet with him for a coffee before they start, and eat a meal together afterwards."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Linda: I'm going to have my room painted\nLinda: Can't decide what colors would best express my personality\nLinda: I'm considering advices, do you have one for me maybe? :)\nBrian: Fitting your personality... hmm\nBrian: I consider you an enthusiastic and lively person and the color for it is yellow\nBrian: On the other hand you can be calm and steady and they say those qualities are expressed in greyness\nBrian: So yellow & grey, how do you like the idea? :D\nLinda: Wow, I'm impressed!\nLinda: You've just paid me a compliment and come up with interesting colors!\nBrian: Well, those are actually facts :)\nBrian: Are you going to make use of the colors?\nLinda: Actually, I was planning to ask a few friends and then sum all the ideas up\nLinda: But now I think I don't need to do any further research\nLinda: Asking you for help was a bull's-eye! :D\nBrian: Perfection! :D\nBrian: I'll come and check the results of your work soon, it'll be a nice chance for us to talk :)\nLinda: Sure, feel invited!",
+    "output": "According to B, colors that match A's personality are yellow and grey."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Juliette: So what? Tell me\nJimmy: One minute\nJuliette: What did the doctor say? \nJimmy: It's almost finished, wait a second\nJuliette: Is it so serious? Should I be afraid?\nJimmy: OK, just finished\nJuliette: So, tell me, I can't wait longer\nJimmy: Acute gastritis\nJuliette: What's that?\nJimmy: Acid attacks in the stomach\nJuliette: It's not a cancer?\nJimmy: No, it's not\nJuliette: Is this sure?\nJimmy: Yes, darling\nJuliette: You're not lying to me ?\nJimmy: No, darling, please believe me\nJuliette: And how can we cure this?\nJimmy: Just a few tablets for a month and that should be enough\nJuliette: I'm so glad it's not a cancer\nJimmy: :000\nJuliette: I love you\nJimmy: Me too",
+    "output": "A is going to take medication for a month to cure his acute gastritis."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Mary: Hi <3\nPeter: Hey gorgeous ;)\nMary: What's up\nPeter: Not much, jsut thinking about you \nMary: Aww I miss you so much :(\nPeter: I know baby but ill be back home in 2 days. The we can do whatever you want :*\nMary: Whatever I want, huh? 3:)\nPeter: ;)\nMary: I was actually hoping to cash in on that raincheck :) We haven't been on a date for quite a while... :/\nPeter: I'ld like that :)\nMary: :)",
+    "output": "A will be back home in 2 days. B would like to go on a date when he gets back."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Francesca: It's 3 a.m. You're not asleep yet\nJacob: What a stalker ;-)\nFrancesca: :D \nFrancesca: I cannot sleep\nJacob: Me neither\nFrancesca: Why?\nJacob: I just can't. Thinking about stuff\nFrancesca: Me too\nFrancesca: Sometimes I wish I didn't think that much\nJacob: What were you thinking about?\nFrancesca: My mum, school, you...\nJacob: Me?\nFrancesca: I seen you've been sad recently \nJacob: Maybe you're right\nJacob: What about your mum?\nFrancesca: I cannot understand\nFrancesca: Why did she do it??\nFrancesca: Why would anyone want to kill themselves?\nJacob: I could understand...\nFrancesca: Are you serious? Do you have these thoughts?\nJacob: Sometimes\nFrancesca: Please don't... I beg you, don't do it...",
+    "output": "Neither B nor A can sleep. A has suicidal thoughts. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Ted: Feeling sorry for.. myself! \nKelly: What’s happened? Are you ok?\nTed: I’ve twisted my ankle \nMike: what have you done?\nVictoria: bless you! x\nOliver: too much to drink?\nRob: all the best!\nKelly: get well soon!\nMary: oh dear! xxx\nTed: cheers guys! ",
+    "output": "A has twisted his ankle."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Chloe: Hey, you told me about this cream that you find really good\nJulie: Ehhm yea, GlamRock\nChloe: Where did you buy it?\nJulie: Online, there’s a shop called a GlamShop\nChloe: Cool, thanks\nJulie: You said you’re broke now and not going to buy anything\nChloe: I got money earlier than expected ^^\nJulie: Oh I get it. So will you give me back the money I borrowed you?\nChloe: Ah ofc, sending it right away\nJulie: Thanks, will help me a lot :)\nChloe: Sth wrong? O.o\nJulie: Noo haha but me and Jake, we want to get a dog and there’s going to be a lot of costs, vet, vaccination, trying different types of food etc\nChloe: A dog, cool, which breed?\nJulie: We just want to take some poor animal from the shelter, so it’s whatever. We want it to be big ;p\nChloe: That’s so sweet of you! Yea you have a big house, you can have a big dog ^^\nJulie: Many kids would fit in as well, but my husband’s not interested -_-\nChloe: Seriously O>O\nJulie: He keeps saying that we need to wait until we pay more of our debts and that sort og stuff\nChloe: Well, you never complain about money, youhave a big house, looks like you can afford kids!\nJulie: I thinks so too, but he doesn’t agree ;/\nChloe: Just stop taking pills, he’ll have no choice ;)\nJulie: That would be cruel xD",
+    "output": "A recommends the GlamRock cream from the GlamShop. B got the money early so she can pay back A. A and Jake are getting the dog so they need the money for extra dog-related expenses."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Pitt: Hey Teddy! Have you received my message?\nTeddy: No. An email?\nPitt: No. On the FB messenger.\nTeddy: Let me check.\nTeddy: Yeah. Ta!",
+    "output": "A has a message from B on Messenger."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Mary: Sorry, I didn't make it to your bday party :(\nNick: It's OK...\nMary: But I just got SOOO distracted! I forgot it was yesterday!\nNick: do tell!\nMary: I met this guy...\nNick: REALLY? I want details :D\nMary: Yeah, his name is Kirk and he's an architect...\nNick: OK, just your type then <file_gif>\nMary: And we ended up spending the whole week together. xD\nNick: A WEEK?\nMary: Yeah... It's madness, I'll tell you more this evening. Are we still on?\nNick: You bet we are!",
+    "output": "B didn't come to A's birthday party. She met an architect named Kirk. B and A will meet in the evening."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Connor: I'm too tired to come to the meeting I think\nJade: decided?\nIsaiah: I didn't even have intention to go there really\nConnor: Yes, I'm going to bed",
+    "output": "C will not attend the meeting, he has to rest. A never wanted to go."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Karen: Where'd you buy this dress you had at the wedding?\nSamara: Oh, from an online shop\nSamara: Hold on\nSamara: <file_other>\nSamara: That's the one\nKaren: Wow thanks\nSamara: Youre welcome!\nKaren: Oooh, they have some neat stuff there\nSamara: Yeah, I was so happy when i disovered it\nSamara: There's few places where I shop regularly, most of the time I'm kind of all over the place\nKaren: Same here\nSamara: But I've already bought several skirts and blouses from this shop too, so I'll probably become a more frequent customer ;)",
+    "output": "A bought the dress she had at the wedding in an online shop and she was happy when she discovered it."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Gabi: What do you guys want for Christmas? Let's say up to $100.\nJack: I need to think about it...\nMary: I want cosmetics. I wouldn't say no to some good skin care.\nKate: I dream about a Kindle!!\nGabi: How about the rest?\nJack: How about yourself?\nGabi: I want a surprise gift. I think you all know me quite well. \nPeter: I need a set of drills. Later I'll pass you the Amazon link.\nJohn: I want new sneakers. Size 10.\nJack: It seems you all thought it through.\nJohn: We do it every year. I was thinking about my gift already in September :D\nJack: That's early! LOL\nJack: Until when should I let you know?\nGabi: In about a week we should all know so we have enough time for online orders etc.",
+    "output": "C, E, A and D want various items for Christmas. F wants a surprise. B is unsure what he wants. B should let the rest know within a week. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Daniel: Hi Jeff, I was just browsing thought your notes from yesterday and I have a couple of questions.\nJeff: Shoot :)\nDaniel: Was Mindy there?\nJeff: Yes, she was.\nDaniel: Could you please add her input on the first presentation? She must have said something since she's involved in phase one of the project\nJeff: Actually, she didn't react that much\nDaniel: like not at all?\nJeff: Wait a sec, let me double check",
+    "output": "A will double check Mindy's reaction, connected to her involvement in phase one of the project."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Client: Good afternoon. I suggest you adjust the timetable to the reality on the Polish roads. P6 bus Radom - Warsaw, arriving from Cracow, 40 minutes delay.\nClient: And it was not the first time, there was one hour delay not so long ago...\nFlix: Hi Marta. We are very sorry that the bus arrived late, but they are operational delays which we have no control over. Apologies.\nClient: But this happens too often. Why don't you consider rearranging the timetable??\nClient: I was waiting at the station from 17.10, hoping to get the bus at 17.25. It arrived at 18.10. One hour waiting.\nClient: It hardly ever happens that the bus arrives on time. The timetable is too optimistic. I understand there are traffic jams but...\nFlix: Thank you for the information, we will inform our managers about it.\nClient: Can I make a formal complaint? I had a similar situation last year.\nFlix: Sure, you can send a complaint by email to info@flix.com. \nClient: thanks, I will definitely. But I really hope you do something about it this time...\nFlix: yes, all complaints are addressed by our managers.\nClient: great. They should not just read them, but do something about it. Will you inform me about the status?\nFlix: We don't do that automatically, but you can call us and find out. You can find all the necessary info on our website. \nClient: Ok, I see.\nFlix: Once again apologies.",
+    "output": "A informs B about a 40 minutes delay of the bus from Radom to Warsaw. B explains that this is an operational delay. A decides to make a formal complaint as it wasn't the first such delay."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Jeff: Are you ready for the hiking tomorrow?\nAnn: I've just packed\nCorina: is it going to be very difficult\nJeff: this track is quite heavy\nJeff: so please, take good shoes\nMaria: sure, how long is the track?\nJeff: about 20km\nJeff: let me check it\nMaria: thanks\nJeff: 21,3 km\nMaria: but it's only to the lighthouse?\nJeff: yes\nMaria: so we have to take a bus back\nJeff: I think so, to walk back would be too tiring\nCorina: and too boring\nCorina: doing the same way again\nJeff: true\nJeff: so I'll check the busses\nAnn: great\nJeff: yes, there is one at 5PM\nMaria: just perfect!\nJeff: :)",
+    "output": "A, Ann, Corina, and Maria are going to hike tomorrow. A reminds everyone to take good shoes, because they are going to walk over 20 km. A, Ann, Corina, and Maria will take a bus on the way back at 5 PM."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Joyce: Guys, sorry I'm running late today! Will be there soon\nAndrew: I’m a wee bit late too but will be there before 8! Leaving soon\nCarla: On my way, with sipke😀\nAnette: On the way kids\nAnette: In the first here wtf\nHelen: Where are yall\nHelen: Annette are you here?\nHelen: I'm at a table by one of the windows at the front!",
+    "output": "A and Andrew are running late. Carla and Anette are on their way. Helen is at a table by one of the windows at the front."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Aiden: Have you subscribed my channel?\nMia: Nop I havent \nAiden: :/\nMia: Whats the name?\nAiden: Tuberflicks\nMia: Send me the link\nAiden: wait\nMia: k\nAiden: <file_link> Here you go\nMia: It has pretty much grown now\nAiden: Yeah it is\nMia: Since when have you been working on it?\nAiden: Its been 6 month now\nMia: wow",
+    "output": "A hasn't subscribed to B's channel yet but she wants to. B has been working on it for 6 months."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Oli: I've talked to some people from the third year\nJacob: About the statistics exam?\nMarcia: What did they say?\nOli: Yeah, about the exam\nOli: We need to prepare for a battle\nJacob: So it will be difficult\nOli: They said it was the hardest exam ever\nMarcia: 😱\nOli: The questions were displayed on the screen \nOli: One minute per question and it disappears\nOli: They won't come back so if you didn't get your answer you're fucked\nMarcia: So we need to make the calculations really fast\nJacob: That's insane\nOli: I know\nOli: Very stressful\nMarcia: How are we even supposed to study for it?\nMarcia: With a timer?\nOli: I guess\nMarcia: Did anybody pass it last year\nOli: Some people did, but the majority had to take the second or even the third chance",
+    "output": "A, Jacob and Marcia have to prepare for a very hard statistics exam. Last year, people had only one minute to answer each question and then it disappeared."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Blake: Why did you tell Steven all those stupid things?\nAlexis: What things?\nBlake: That I did not want him. It's just not true and you know it.\nAlexis: I remember things differently, sorry.\nBlake: You're his mother, I cannot cut you from him, but I really believe you have a terrible influence on him.\nAlexis: I would rather say it about you.\nBlake: Please, stop. I've taken so much care of him in the last years and I always avoid talking with him about you.\nAlexis: Why should you avoid the topic? Is it better to pretend I do not exist?\nBlake: Nobody pretends that, but I don't want to drag him into our games. Your games, actually.\nAlexis: I don't know why I am still talking to you. You keep insulting and accusing me.\nBlake: I'm just trying to stop you from destroying our son's life.\nAlexis: I am his mother, I know what's good for him.\nBlake: No, you're using him for your stupid games against me.\nAlexis: You're really unbelievably self-centred.\nBlake: Alexis, it's not possible to talk to you any more. You're either aggressive or defensive. There is no discussion.\nAlexis: Try not to attack me first. This is a natural reaction to an attack of every human being, of every living creature actually. \nBlake: I tried to discuss how we are managing our relations with our son. Was it an attack?\nAlexis: No, you attacked me saying I told something to Steven that you apparently didn't like. But you will nor censor me. This time is over.\nBlake: For God's sake! \nAlexis: I've had enough. I am coming back to my work now. There is more in this world than your huge ego. Bye!",
+    "output": "B believes that A is trying to turn their son, Steven, against him and has bad influence on Steven. A believes B is self-centered and often attacks her and accuses her of things she didn't do.  "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Roberta: <file_photo>\nRoberta: look what I found!\nMakoto: my dress!\nRoberta: you must have left it when you were visiting this summer\nMakoto: could you send it to me?\nRoberta: sure, I'll do so on Friday :)",
+    "output": "A found B's dress and will send it to B on Friday."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Sawyer: I hope I found you wrapped in a towel when you open the door\nEleanor: No... I will be wearing sexy short black robe instead which is a little bit transparent\nSawyer: It must be fully transparent then\nEleanor: I'm general it is but it's black\nSawyer: Hmmm Would you ever send me a photo of you wearing it ?\nEleanor: When I take a shower and then I put it i always have to have underwear also. If not my flatmates would see what I have under the robe xd\nEleanor: In the photo u can't see anything. Since last time I sent u a photo in it xd hahaha\nSawyer: Hahaha and what if you take the photo when you're alone. So that only you and me can see\nEleanor: But in the picture u can't see that it's transparent. U need to come here :)\nSawyer: Maybe take a better one ?\nEleanor: I can't\nSawyer: Haha and your new phone will take better pictures\nEleanor: The robe is a little bit transparent, :) so it's not possible that in the pic it will be visible\nSawyer: Ok no worries",
+    "output": "When A meets B, she will be wearing a slightly transparent black robe. B would like A to take a picture of herself in the robe, but the transparency is not visible on photos."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Sam: I'm so sorry. I can't make it on time.\nSandra: Should we start without you?\nSam: Please do. I'll be 30 min late.\nStaś: Ok",
+    "output": "A will be 30 minutes late. Sandra and Staś will start without A."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Sam: I just got my 1st credit card!\nTom: Well, congrats and sorry!\nSam: Y sry?\nTom: Aren't u afraid of getting into debts?\nSam: No, not really. Should I be?\nTom: I think u should.",
+    "output": "A got her first credit card."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "James: <file_video>\nJames: My girlfriend is so creative :D\nFred: Hahha. LOL\nJames: She  made me put the trash bin near the window outside\nJames: So that she doesn't have to go outside and walk around the house to take out garbage\nJames: She just opens the kitchen window and done\nFred: If it's stupid but it works...\nJames: It ain't stupid haha I know :D\nFred: Congratulate her from me :D\nJames: I will xD",
+    "output": "A's girlfriend made him put the trash bin near the kitchen window outside so she can throw things out of the window."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Christopher: ok, people, I’ve got an idea\nMatthew: hmm?\nChristopher: let’s go abroad for the weekend 😀 tickets are cheap enough and I don’t know about you, but I’m bored. massively bored.  \nAndrew: I’m out, guys… I just can’t leave Ann alone with the baby, sorry \nChristopher: Matthew, David? what about you?\nMatthew: I’m working this weekend 😕 \nDavid: well, if they can’t then I’m out as well \nChristopher: i hate you guys",
+    "output": "To B's frustration, D, C and A refuse to go abroad for the weekend."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Francine: hey hon\nFrancine: how are you today?\nFrancine: I hope our talk yesterday helped a bit\nJessie: hiya \nJessie: i'm still pretty overwhelmed \nJessie: but I was able to calm down a little after we spoke\nJessie: thank you for checking up on me <3\nJessie: a lot of people just don't know what to say, so they don't call...\nFrancine: I'm always here if you need me\nFrancine: that's what friends are for <3\nFrancine: seriously, whenever you need, just call me\nJessie: 😭😭😭\nJessie: thank you <3\nFrancine: anytime <3",
+    "output": "A and B talked yesterday. The talk has been helpful for B. A says she's always there for B. B is very thankful."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Maria: Guys, don't bring anything, I've cooked so much\nAndrew: We will bring some wine we bought in Italy last year\nMartha: Especially for a night like this\nMaria: How nice of you!! thanks",
+    "output": "C has cooked a lot of food. B will bring some Italian wine."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Hannah: The motherfucker took my spot again\nPamela: Richard?\nAnne: I saw him parking... ",
+    "output": "Richard took A's parking spot again. Anne saw it."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Sophia: What should I get them?\nMonica: How should I know?\nSophia: come on help me out\nMonica: I dont know really Im bad at buying gifts\nSophia: maybe some day spa gift card\nMonica: maybe\nSophia: youre not really helpful :P\nMonica: Told ya... bad at gifts",
+    "output": "Sophie doesn't know what to buy for a gift. She wants A's help. She is considering buying a day spa gift card. A is bad at buying gifts."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Yannick: I heard you are going to sing the anthem\nYannick: At the game\nNicki: Yes I am \nNicki: I am nervous! \nYannick: Dont be\nYannick: It's a huge privilege to sing the anthem in front of thousands of people!\nNicki: I hoep I won't forget the lyrics\nNicki: hope* \nYannick: Youre a great singer\nYannick: You will be fine \nNicki: I have to rehearse \nYannick: Your parents coming with you?\nNicki: Yes\nYannick: They're probably proud of you good luck! \nNicki: Thank you Yannick",
+    "output": "A is going to sing the anthem at the game."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Carter: <file_photo> Sure it's nearly Christmas, right Chloe!?!\nChloe: Yes so it's time I bought you new socks ha\nCarter: Socks serve the purpose of keeping your feet warm, why do they have to be the same 😉\nVictoria: I gave up for the second dive today. Felt like Christmas under there... and to cheer me up I bought myself a new shiny piece of gold equipment....so.....definitely Christmas! Love the unmatched socks 😍🤙🏼🤙🏼",
+    "output": "Christmas is coming. C will buy A new socks as he wears them unmatched. B bought herself a new piece of gold equipment."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Ammalee: <file_photo>\nAmmalee: This lasted over a month.♪┏(・o･)┛♪┗ ( ･o･) ┓\nAmmalee: Could you recommend other styles? (?_?)\nMaryann: Ah! Hello Ma’am! Thank you for the good review! (＾▽＾)\nMaryann: Is there any style you want to do next time?\nAmmalee: Yes, I heard about Acrylic nails and Linen. Which one would be better? (´∀`)\nMaryann: If you want the nails to last longer I recommend you Acrylic rather than Linen. ✌️\nMaryann: If you have any design in your mind, send me pictures. ☺️☺️☺️\nMaryann: Then I could try them on your nails next time!!(^^)!!(^^)!!(^^)!\nAmmalee: Thanks, I will send you some pictures soon!",
+    "output": "A sent Maryann a photo of her nails that lasted over a month. Maryann will try Acrylic instead Linen on A's nails next time. A will send Maryann a photo of a design that she would like to have on her nails."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Alan: sweetie when wil you be home?\nJoan: I'm studying with Laura after classes Dad\nAlan: will you be home by 7?\nAlan:  I'm making my famous chicken wings :)\nJoan: dad my grades are important aren't they?\nAlan: more important than my wings?\nAlan: I'm hurt :D joking. study away!",
+    "output": "A is making his famous chicken wings and would like B to be home by 7. B won't make it as she is studying with Laura."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Johny: That girl on Tuesday music video is sexy as fuck\nLuke: <file_video>\nLuke: This Tuesday?\nJohny: The main chick is worth breaking the rule of no-nut november\nLuke: Johny please find yourself a chick.\nLuke: fall for her\nLuke: Love her with all your heart\nLuke: And stop talking like an asshole\nJohny: Man, it's just a joke\nJohny: I have respect towards women\nJohny: At least when they deserve it :D\nLuke: Everyone deserces some respect bruh\nJohny: I know man, I'm just kidding LOL\nLuke: I know man, I'm just messing\nJohny: You feel like clubbing tonight?\nJohny: You could be my wingman xD\nLuke: <file_gif>\nJohny: What's with this facepalm?\nLuke: Get yourself Tinder and start hunting\nJohny: Hahaha. xD\nJohny: I undestand you don't wanna go? \nLuke:  I've got plans for tonight\nLuke: So another time mate\nJohny: Chill. Another time",
+    "output": "A wants to go out clubbing with B in order to meet a female partner. B has plans but he advises A to install Tinder. B critisizes A for speaking about women without much respect."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Frank: Hi Peter has brought me to Sports Direct store at the top of \nRosie: Ok thanks will look out for you there\nFrank: We are on the ground floor\nRosie: ok\nFrank: Outside Morrisons\nRosie: On my way\nFrank: We might be upstairs later so look there too\nRosie: ok I will - see you soon xxx",
+    "output": "A is on her way to meet B and will have to find him at Sports Direct."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Kyle: hey u got maths homework?\nPatrick: um.. not yet :D\nKyle: hahaha what do you mean not yet\nKyle: it's for tomorrow\nKyle: i just reminded you didn't i hahahah\nPatrick: XD\nKyle: well good luck then\nPatrick: tx xD guess i'm gonna need it XD",
+    "output": "B reminds A about their math homework for tomorrow."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Ellen: Hi, honey, sorry I've been so unreachable lately, the redecoration is a nightmare.\nKate: Don't worry, sweetie, what's wring with the redecoration?\nEllen: Well, nothing's wrong per se, it's just it's taking so much time, I barely sleep nowadays...\nKate: Isn't Paul helping you?\nEllen: He's trying the best he can, but you know how men can be, he doesn't know what goes with what and I wouldn't trust him with our kitchen floor tiles...\nKate: Oh, you're right. It's always women who take care of the aesthetics of it all... And they say we're only good in the kitchen. :D \nEllen: Well, the kitchen is going to be spectacular so that part is true enough, LOL xD\nKate: Can't wait to see it. When are you finishing?\nEllen: I hope it will be ready by Christmas, but the workers are permanently late.\nKate: Oh yes, one of their many 'qualities'... :D\nEllen: Not that I don't like a beer now and then, but for Christs sake, they leave beer cans EVERYWHERE. How are they working if they're always tipsy?!\nKate: Steady hand, they say, hahaha\nEllen: Steady hand my ass, if they damage anything, I'm gonna kill them.\nKate: LOL\nEllen: Yeah, so to answer your question, the redecoration could go better but I'm counting on it to finish as quickly as possible.\nKate: Keeping my fingers crossed, hun and I can't wait for the housewarming party.\nEllen: You'll be the first to know! ",
+    "output": "B and Paul are doing the redecoration and it takes a lot of time. They want to finish it by Christmas but workers are permanently late. A is looking forward for the housewarming party."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Paola: Guys, as I was saying I’d like to take you to the theatre. There’s a very good play this Friday and I can totally get you free tickets if you’re interested\nPaola: It’s about this Serbian family just after the war in Yugoslavia. It’s been a hist for a few years now and I’m happy to see they’re back on stage this season as well\nPaola: I’ve seen the play a few years ago and actually wrote a review of it, but would be happy to go with you and know what you think of it\nAustin: Oh wow that sounds great! Ofc I wanna go\nNicola: Me too! Hope it’s after 6 pm?\nPaola: @Nicola, yes, it’s at 8.15\nPaola: The theatre is called El Rincón de Sánchez <othre_file>\nPaola: We can meet there\nAustin: Sounds good. Nicola, would you like to go together? These long, lonely journeys on the bus are soooo boring\nNicola: Ha ha, sure, I bet we can have a nice chat, especially if we actually walk a little bit. I’d suggest meeting at the entrance to the Alto Palermo shopping mall and walking from there\nAustin: Can I ask if it’s safe? 🙊\nNicola: Yeah, I do think so\nAustin: Splendid, let’s meet at the entrance to the Alto Palermo at 7.30 then\nNicola: Cool, just to make sure, I mean this entrance: <file_other>\nAustin: 👍\nAustin: Oh wait, will you have eaten? Perhaps we can grab a pizza or something\nNicola: I’ll be coming straight from work so it sounds like the perfect plan\nNicola: What do we have nearby\nAustin: There’s actually this place which sells empanadas which are not that bad just where we’re meeting. Not a grand dinner but enough for me\nNicola: Yer, that would do. Let’s just meet at 7:15 in case there are many people in the line or you happen to prefer to eat the empanadas while standing rather than walking 😹\nAustin: Lol sounds perfect\nPaola: I’ll see you at the theatre then. There’s nowhere to wait outside, so I’ll be waiting for you in the hall if that’s ok\nAustin: Totally\nPaola: See you soon then\nNicola: Yep. Byeeee!",
+    "output": "C and her friends are going to the theatre El Rincón de Sánchez on Friday. They are going to see a play about Serbian family just after the war in Yugoslavia. B and A will go to the theatre together. They will eat empanadas on their way."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Harriet: Where are you?\nVincent: In the cloister\nCharlotte: we're studying here today\nCharlotte: join us, we're waiting for Ben as well\nHarriet: It's too cold for me there\nBen: I agree\nHarriet: I'll go to the library\nBen: I'll join Harriet",
+    "output": "Vincent and Charlotte are studying in the cloister today. A and Ben will go to the library. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Hyatt: watch channel 6 now\nNickleby: whats on?\nHyatt: ah i see is that Stu?\nPalin: himself!\nNickleby: couldnt miss it :)",
+    "output": "Stu is on channel 6 now."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Leo: hey jess\nJessie: hey\nLeo: so what're u doing this weekend\nJessie: yea let me have a look at my tight schedule -_-\nLeo: yea who am i kidding. you're always free\nJessie: so what up\nLeo: we could maybe go out\nJessie: is it YOU who's asking\nLeo: what does that mean\nJessie: its always me coming up with the ideas\nLeo: yea right\nJessie: it is right\nLeo: so?\nJessie: so i am right\nLeo: i mean what do you think\nJessie: oh you mean for the weekend\nLeo: yea\nJessie: yea okay, cool\nLeo: btw.. you still have to come up with a place to hangout xD\nJessie: see.. ._. always\nLeo: it was my idea tho XD\nJessie: WOW -_-",
+    "output": "B and A will hang out at the weekend, but B has to come up with a place first. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "John: do you play tennis? :-)\nIrma: i don't, why do you ask?\nJohn: you look like someone who plays tennis\nIrma: HAHAHAHA i'm literally loling\nIrma: i don't know what someone who plays tennis looks like\nJohn: hahah sorry that was a dumb comment\nJohn: anyway, would to enroll in a class with me?\nJohn: they're dirt cheap at the community center\nIrma: sounds good, i can wear one of my tennis outfits!!\nIrma: HAHAHA, i'm still laughing at your comment  lol",
+    "output": "A doesn't play tennis. B and A will enroll in tennis class at the community center."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Jack: Where are you? I can't find you.\nOlivia: carriage 3!\nJack: I'm in 15 I believe :/ it's so crowded\nOlivia: But slowly you can get through.\nJack: I am not sure, there are people sitting, staying, puking everywhere. It's a mess\nOlivia: C'mon, it's a busy weekend\nJack: I already hate this trip.\nOlivia: Just don't make a drama, come here.\nJack: Do you have the tickets? I can't find mine.\nOlivia: I have both of them, so you have no choice anyway. You should come here asap :P",
+    "output": "A has to find B in carriage 3, because she has their tickets."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Pete: Sup?\nLionel: I'm at a meeting, can't talk.\nPete: OK, sorry.",
+    "output": "B is in a meeting and can't talk."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Rob: need a car check, u know a good mechanic?\nWill: yeah, I have someone who fixed my fathers car\nRob: you mean that shit on wheels?\nWill: now it's like an arrow\nRob: than it's not a mechanic but a magician\nWill: well, kind of :D I'll give u a number\nRob: great\nWill: u can say that I send u\nRob: thanks buddy",
+    "output": "B gived A the number of the car mechanic who fixed B's father's car."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Andrew: wow, weekend! finally!\nAndrew: this week's been pretty hard\nNicky: yep, it was\nNicky: work work work\nAndrew: we're starting a new project next month\nAndrew: and we do everything at a last moment, as usual ;)\nRick: yeah, its always like that\nRick: they dont usually plan in advance\nNicky: they dont seem to learn their lessons;)\nAndrew: thats the point\nAndrew: anyways, I hope to have a good rest\nRick: yeah, me too!\nNicky: Im just gonna do nothing!\nNicky: :D\nRick: good idea!\nAndrew: Me too, I really need a break\nAndrew: sleep, in the first place\nAndrew: see kids\nRick: ok take care guys!\nNicky: talk to U later!",
+    "output": "C, A and B had a hard week at work. They just want to rest and do nothing. C has a new project next month, and now he just wants to sleep and see kids."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Olivia: hey\nTaylor: whats up?\nOlivia: I need your help with something haha \nTaylor: yeah?\nOlivia: I wanna post a pic on instagram and I have the pic but idk what to caption it lol\nTaylor: yeah! what picture ?\nOlivia: the one I sent yesterday by the lake? \nTaylor: ahhhh yes I love that one its amazing \nOlivia: yeah I really like it but Idk what to say haah\nTaylor: maybe something like \" Summer Days\" with the sun emoji \nOlivia: but is that cheesy? or to basic ahaha\nTaylor: nahh I think its ok, or maybe just the emoji and say nothing haha\nOlivia: yeah I could do that hahah \nTaylor: either way its a nice picture so whatever you say it will be fine\nOlivia: trueeee thanks for the help :)))\nTaylor: anytime gurlll :DD ",
+    "output": "A doesn't know how to caption the photo she wants to put on Instagram. B gives A some hints."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "John: Maybe some ride?\nIan: Always!!!\nIan: When and where?\nJohn: St.Monica, at 8.00, ok?\nIan: ok!",
+    "output": "A and B will meet at St. Monica at 8.00."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Ali: dude i need that hard drive\nKane: come take it\nAli: alright be there in a sec\nKane: sure..",
+    "output": "A is coming to B to get the hard drive."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Joshua: look out the window\nNoah: what's there? XD\nJoshua: do it :P\nNoah: oh wow\nNoah: so much snow :D when did this happen lol\nJoshua: :D\nNoah: it's definitely time to build a snowman!\nJoshua: build an Olaf :d\nNoah: ofc i will, he's my idol!\nJoshua: XD",
+    "output": "It's snowing outside."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Greg: why don’t you answer my calls?\nAva: cause I don’t want to talk to you anymore, so leave me the fuck alone\nGreg: but we haven’t talked things over yet\nAva: and we won’t, because there’s not a fucking thing to talk about\nGreg: Ava, please\nAva: I’m blocking you on fb. Goodbye Greg ❤",
+    "output": "A doesn't want to talk to B any more and she's blocking him on Facebook. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Shelly: I'm looking for a fall coat, are there any good ones in today?\nPorter: We got some really nice wool ones in today. Come take a look!\nShelly: I will! Be there on my lunch!\nPorter: You better take an early lunch, they will go fast!\nShelly: Ooh! Okay!",
+    "output": "During early lunchtime, A will come to B to take a look at wool fall coats which have arrived today. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Connor: hello can you tell me what songs did they play at the gig in Berlin?\nKyle: their official profile tweeted the set list a couple hours ago\nConnor: ok cool thanks\nKyle: cheers",
+    "output": "A is looking for a playlist from the Berlin concert. Kyle directs him to the band's official Twitter account."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Caleb: How are you guys?\nJeniffer: very good, thanks\nBrooke: yes, it's very exciting here\nCaleb: where are you exactly?\nJeniffer: Now in New York!\nCaleb: how cool!\nCaleb: what have you seen so far?\nJeniffer: We've been to Connecticut and Massachusetts \nJeniffer: But NYC is the best\nBrooke: you forgot about Rhode Island\nJeniffer: right, such an important state! :P\nBrooke: ;)\nCaleb: you see, I knew you would like it\nCaleb: what do you like the most?\nJeniffer: diversity!\nJeniffer: something we don't have in Europe to that extend\nJeniffer: you're walking down a street and you hear 15 different languages \nBrooke: and everything is exaggerated \nBrooke: too big, greater than needed, it's quite fascinating \nBrooke: food, buildings, cars, everything\nCaleb: I'm glad you enjoy it girls!\nBrooke: :*",
+    "output": "A and B're in New York now. They've been also to Connecticut, Massachusetts and Rhode Island. The thing A likes the most in America is diversity while in B's opinion it's urban splendor."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Max: I'm so sorry Lucas. I don't know what got into me.\nLucas: .......\nLucas: I don't know either.\nMason: that was really fucked up Max\nMax: I know. I'm so sorry :(.\nLucas: I don't know, man.\nMason: what were you thinking??\nMax: I wasn't.\nMason: yea\nMax: Can we please meet and talk this through? Please.\nLucas: Ok. I'll think about it and let you know.\nMax: Thanks...",
+    "output": "B is sorry about his behaviour so wants to meet up with A and C. A will let him know. "
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "O'Neill: Is everything ok?\nO'Neill: I didn't hear back from you\nO'Neill: <file_gif>\nTed: Hey\nTed: I have been really busy today\nTed: Sorry..\nTed: Yes everything is fine ;)\nTed: I'll send you a photo later on :)\nO'Neill: Great!! 👏",
+    "output": "A is worried about not having heard from Ted. Ted is fine and is going to send a photo later."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Tom: How’s the weather in Poland now?\nJustin: It’s getting cooler. Ain't no sunshine and winter’s coming 😊\nTom: Have you seen the last episode of Game of Thrones?\nJustin: Not yet. Can’t wait to see it 😊",
+    "output": "It's getting cooler in Poland, because winter is coming. B hasn't seen the last episode of Game of Thrones yet."
+  },
+  {
+    "instruction": "Analyze this English dialogue and provide teaching points",
+    "input": "Gabby: How is you? Settling into the new house OK?\nSandra: Good. The kids and the rest of the menagerie are doing fine. The dogs absolutely love the new garden. Plenty of room to dig and run around.\nGabby: What about the hubby?\nSandra: Well, apart from being his usual grumpy self I guess he's doing OK.\nGabby: :-D yeah sounds about right for Jim.\nSandra: He's a man of few words. No surprises there. Give him a backyard shed and that's the last you'll see of him for months.\nGabby: LOL that describes most men I know.\nSandra: Ain't that the truth! \nGabby: Sure is. :-) My one might as well move into the garage. Always tinkering and building something in there.\nSandra: Ever wondered what he's doing in there?\nGabby: All the time. But he keeps the place locked.\nSandra: Prolly building a portable teleporter or something. ;-)\nGabby: Or a time machine... LOL\nSandra: Or a new greatly improved Rabbit :-P\nGabby: I wish... Lmfao!",
+    "output": "B is setting into the new house; her family is happy with it. Then B and A discuss the nature of their men and laugh about their habit of spending time in the garage or a shed."
+  }
+]
