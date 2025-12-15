@@ -1,8 +1,8 @@
 import simple_pickle as sp
 
-from indexing_fqa import VecIndex
-from items import QaItem
-from embedding import get_embedding
+from rag.indexing_fqa import VecIndex
+from rag.items import QaItem
+from rag.embedding import get_embedding
 from tqdm import tqdm
 
 

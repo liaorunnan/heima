@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG 智能助手</title>
+    <!-- 代码高亮样式 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Markdown 解析 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+    <!-- 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --bg-color: #f3f4f6;
+            --chat-bg: #ffffff;
+            --user-msg-bg: #6366f1;
+            --ai-msg-bg: #f9fafb;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 主容器 */
+        .app-container {
+            width: 95%;
+            height: 100%;
+         
+            background: var(--chat-bg);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0,0,0,0.05);
+        }
+
+        @media (min-width: 768px) {
+            .app-container {
+                height: 95vh;
+                border-radius: 24px;
+                overflow: hidden;
+            }
+        }
+
+        /* 顶部导航 */
+        header {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .header-info h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .header-info p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .clean-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .clean-btn:hover {
+            background: #f3f4f6;
+            color: var(--text-primary);
+            border-color: #d1d5db;
+        }
+
+        /* 聊天区域 */
+        .chat-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            scroll-behavior: smooth;
+        }
+
+        /* 隐藏滚动条但允许滚动 */
+        .chat-area::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-area::-webkit-scrollbar-thumb {
+            background-color: rgba(0,0,0,0.1);
+            border-radius: 3px;
+        }
+
+        .message-wrapper {
+           
+            margin: 0 auto 24px auto;
+            display: flex;
+            gap: 16px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-wrapper.user {
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .avatar.ai {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+        }
+
+        .avatar.user {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+        }
+
+        .message-content {
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-size: 15px;
+            line-height: 1.6;
+            position: relative;
+            max-width: 80%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            word-wrap: break-word;
+        }
+
+        .message-wrapper.ai .message-content {
+            background: var(--ai-msg-bg);
+            color: var(--text-primary);
+            border-top-left-radius: 4px;
+            border: 1px solid #f0f0f0;
+        }
+
+        .message-wrapper.user .message-content {
+            background: var(--user-msg-bg);
+            color: white;
+            border-top-right-radius: 4px;
+        }
+
+        /* Markdown 样式调整 (User消息中的白色文字) */
+        .message-wrapper.user .message-content p {
+            color: white;
+        }
+
+        /* 代码块样式修正 */
+        .message-content pre {
+            background: #282c34;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .message-content code {
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+        }
+
+        /* 底部输入区 */
+        .input-container {
+            padding: 24px 30px;
+            background: white;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .input-box {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-box:focus-within {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+        }
+
+        textarea {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 12px 16px;
+            font-size: 16px;
+            resize: none;
+            max-height: 150px;
+            outline: none;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .send-btn {
+            width: 42px;
+            height: 42px;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            margin-bottom: 2px;
+            margin-right: 2px;
+        }
+
+        .send-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .send-btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* 正在输入动画 */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 4px 8px;
+        }
+        
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: #9ca3af;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* 锁定状态遮罩 */
+        .input-locked {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- 头部 -->
+        <header>
+            <div class="header-title">
+                <div class="logo-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="header-info">
+                    <h1>智能 RAG 助手</h1>
+                    <p>基于检索增强生成的专业问答</p>
+                </div>
+            </div>
+            <button class="clean-btn" onclick="clearSession()">
+                <i class="fas fa-eraser"></i> 清空对话
+            </button>
+        </header>
+
+        <!-- 聊天内容区 -->
+        <div class="chat-area" id="messageContainer">
+            <!-- 默认欢迎消息 -->
+            <div class="message-wrapper ai">
+                <div class="avatar ai"><i class="fas fa-brain"></i></div>
+                <div class="message-content">
+                    <p>您好！我是您的智能业务助手。我可以基于内部知识库为您回答问题。请问今天有什么可以帮您？</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部输入区 -->
+        <div class="input-container">
+            <div class="input-box" id="inputBoxWrapper">
+                <textarea 
+                    id="messageInput" 
+                    rows="1" 
+                    placeholder="输入您的问题..." 
+                    oninput="autoResize(this)"
+                    onkeydown="handleKeyDown(event)"
+                ></textarea>
+                <button id="sendButton" class="send-btn" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <p style="text-align: center; color: #9ca3af; font-size: 12px; margin-top: 10px;">
+                AI生成内容仅供参考，请以官方文档为准
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const API_ENDPOINT = '/rag';
+        
+        // 仅在内存中保存当前会话上下文，刷新页面即重置，符合简洁设计
+        let currentContext = []; 
+        let isProcessing = false;
+
+        // 初始化 Markdown 配置
+        marked.setOptions({
+            highlight: function(code, lang) {
+                const language = highlight.getLanguage(lang) ? lang : 'plaintext';
+                return highlight.highlight(code, { language }).value;
+            },
+            langPrefix: 'hljs language-'
+        });
+
+        // 自动调整输入框高度
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 150) + 'px';
+        }
+
+        // 处理回车发送
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // 发送消息核心逻辑
+        async function sendMessage() {
+            if (isProcessing) return; // 防止重复提交
+
+            const input = document.getElementById('messageInput');
+            const question = input.value.trim();
+
+            if (!question) return;
+
+            // 1. 锁定界面
+            toggleInputState(false);
+            
+            // 2. 显示用户消息
+            addMessageToUI('user', question);
+            input.value = '';
+            input.style.height = 'auto';
+
+            // 3. 显示 AI 思考中
+            const loadingId = showLoadingIndicator();
+
+            try {
+                // 4. 发送请求
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        question: question,
+                        history: currentContext // 发送历史上下文
+                    })
+                });
+
+                if (!response.ok) throw new Error("网络请求失败");
+
+                const data = await response.json();
+                
+                // 5. 移除 Loading，显示 AI 回复
+                removeLoadingIndicator(loadingId);
+                addMessageToUI('ai', data.answer);
+
+                // 6. 更新上下文 (保留 User 问题和 AI 回答)
+                currentContext.push(
+                    { role: 'user', content: question },
+                    { role: 'assistant', content: data.answer }
+                );
+
+            } catch (error) {
+                removeLoadingIndicator(loadingId);
+                addMessageToUI('ai', `❌ 系统暂时无法回复: ${error.message}`);
+                console.error(error);
+            } finally {
+                // 7. 解锁界面
+                toggleInputState(true);
+                // 聚焦回输入框
+                setTimeout(() => document.getElementById('messageInput').focus(), 100);
+            }
+        }
+
+        // 添加消息到界面
+        function addMessageToUI(role, content) {
+            const container = document.getElementById('messageContainer');
+            
+            const wrapper = document.createElement('div');
+            wrapper.className = `message-wrapper ${role}`;
+            
+            const avatarIcon = role === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-brain"></i>';
+            
+            // 处理 Markdown 内容
+            let htmlContent = content;
+            if (role === 'ai') {
+                htmlContent = marked.parse(content);
+            } else {
+                // 用户消息转义 HTML 防止注入，但保留换行
+                htmlContent = `<p>${escapeHtml(content).replace(/\n/g, '<br>')}</p>`;
+            }
+
+            wrapper.innerHTML = `
+                <div class="avatar ${role}">${avatarIcon}</div>
+                <div class="message-content">${htmlContent}</div>
+            `;
+            
+            container.appendChild(wrapper);
+            scrollToBottom();
+        }
+
+        // 显示加载动画
+        function showLoadingIndicator() {
+            const container = document.getElementById('messageContainer');
+            const id = 'loading-' + Date.now();
+            
+            const wrapper = document.createElement('div');
+            wrapper.className = 'message-wrapper ai';
+            wrapper.id = id;
+            
+            wrapper.innerHTML = `
+                <div class="avatar ai"><i class="fas fa-brain"></i></div>
+                <div class="message-content">
+                    <div class="typing-indicator">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(wrapper);
+            scrollToBottom();
+            return id;
+        }
+
+        // 移除加载动画
+        function removeLoadingIndicator(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        // 切换输入框状态 (锁定/解锁)
+        function toggleInputState(enabled) {
+            isProcessing = !enabled;
+            const wrapper = document.getElementById('inputBoxWrapper');
+            const input = document.getElementById('messageInput');
+            const btn = document.getElementById('sendButton');
+
+            if (enabled) {
+                wrapper.classList.remove('input-locked');
+                input.disabled = false;
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+            } else {
+                wrapper.classList.add('input-locked');
+                input.disabled = true;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // 转圈图标
+            }
+        }
+
+        // 滚动到底部
+        function scrollToBottom() {
+            const container = document.getElementById('messageContainer');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // 清空对话
+        function clearSession() {
+            if(confirm("确定要清空当前对话历史吗？")) {
+                currentContext = [];
+                const container = document.getElementById('messageContainer');
+                container.innerHTML = `
+                    <div class="message-wrapper ai">
+                        <div class="avatar ai"><i class="fas fa-brain"></i></div>
+                        <div class="message-content">
+                            <p>对话已重置。您可以重新开始提问。</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // 工具函数：转义 HTML
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>

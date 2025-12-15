@@ -6,7 +6,7 @@ from elasticsearch_dsl import Document, Date, Integer, Keyword, Text, connection
 connections.create_connection(hosts=settings.es_host, http_auth=(settings.es_user, settings.es_password),
                               verify_certs=False, ssl_assert_hostname=False)
 
-from items import YinyutlItem
+from rag.items import YinyutlItem
 from elasticsearch_dsl.query import Script
 
 
@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup
 from pathlib import Path
 import os
 
-from embedding import get_embedding
+from rag.embedding import get_embedding
 
 
 

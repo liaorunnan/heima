@@ -25,8 +25,8 @@ wenzhang = """
 
 
 client = openai.OpenAI(
-        api_key=settings.API_KEY,
-        base_url=settings.BASE_URL
+        api_key=settings.api_key,
+        base_url=settings.base_url
 )
 
 system_prompt = """

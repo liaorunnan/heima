@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧教务管理系统</title>
+    <!-- 引入 Tailwind CSS 进行快速样式开发 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 FontAwesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6; }
+        .sidebar-link.active { background-color: #374151; border-left: 4px solid #60a5fa; }
+        .modal { transition: opacity 0.25s ease; }
+        /* 隐藏滚动条但允许滚动 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* 聊天窗口动画 */
+        #chat-window { transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: bottom right; }
+        .chat-msg-user { background-color: #3b82f6; color: white; border-radius: 12px 12px 0 12px; }
+        .chat-msg-bot { background-color: #f3f4f6; color: #1f2937; border-radius: 12px 12px 12px 0; }
+        .typing-dot { animation: typing 1.4s infinite ease-in-out both; }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+    </style>
+</head>
+<body class="text-gray-800 h-screen overflow-hidden flex">
+
+    <!-- ================= 登录/注册界面 (覆盖层) ================= -->
+    <div id="auth-layer" class="fixed inset-0 z-50 bg-gray-900 flex items-center justify-center transition-all duration-500">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-96 relative overflow-hidden">
+            <div class="text-center mb-6">
+                <i class="fas fa-graduation-cap text-4xl text-blue-600 mb-2"></i>
+                <h2 class="text-2xl font-bold text-gray-700">教务管理系统</h2>
+                <p class="text-sm text-gray-500 mt-1">管理员登录</p>
+            </div>
+            
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">账号</label>
+                    <input type="text" id="login-user" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="admin">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">密码</label>
+                    <input type="password" id="login-pass" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="123456">
+                </div>
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+                    登录
+                </button>
+                <div class="text-center text-xs text-gray-400 mt-2">默认账号: admin / 123456</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= 侧边栏 ================= -->
+    <aside class="w-64 bg-gray-800 text-white flex flex-col shadow-lg hidden" id="sidebar">
+        <div class="h-16 flex items-center justify-center border-b border-gray-700 font-bold text-xl tracking-wider">
+            <i class="fas fa-school mr-2"></i> EduSystem
+        </div>
+        <nav class="flex-1 overflow-y-auto py-4">
+            <a href="#" onclick="switchTab('dashboard')" id="nav-dashboard" class="sidebar-link block px-6 py-3 hover:bg-gray-700 transition-colors active">
+                <i class="fas fa-tachometer-alt w-6"></i> 仪表盘
+            </a>
+            <a href="#" onclick="switchTab('students')" id="nav-students" class="sidebar-link block px-6 py-3 hover:bg-gray-700 transition-colors">
+                <i class="fas fa-users w-6"></i> 学生管理
+            </a>
+            <a href="#" onclick="switchTab('courses')" id="nav-courses" class="sidebar-link block px-6 py-3 hover:bg-gray-700 transition-colors">
+                <i class="fas fa-book-open w-6"></i> 课程安排
+            </a>
+            <a href="#" onclick="switchTab('attendance')" id="nav-attendance" class="sidebar-link block px-6 py-3 hover:bg-gray-700 transition-colors">
+                <i class="fas fa-calendar-check w-6"></i> 考勤记录
+            </a>
+        </nav>
+        <div class="p-4 border-t border-gray-700">
+            <button onclick="logout()" class="w-full py-2 px-4 bg-red-600 hover:bg-red-700 rounded text-sm transition-colors">
+                <i class="fas fa-sign-out-alt mr-1"></i> 退出登录
+            </button>
+        </div>
+    </aside>
+
+    <!-- ================= 主内容区 ================= -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden hidden" id="main-content">
+        <!-- 顶部栏 -->
+        <header class="h-16 bg-white shadow flex items-center justify-between px-8 z-10">
+            <h1 class="text-xl font-semibold text-gray-700" id="page-title">仪表盘</h1>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-500 text-sm">当前用户: <span class="font-bold text-gray-700">管理员</span></span>
+                <div class="h-8 w-8 rounded-full bg-blue-500 text-white flex items-center justify-center">A</div>
+            </div>
+        </header>
+
+        <!-- 内容滚动区 -->
+        <div class="flex-1 overflow-auto p-8 relative" id="content-area">
+            
+            <!-- 1. 仪表盘模块 -->
+            <div id="view-dashboard" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow border-l-4 border-blue-500">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100 text-blue-500 mr-4"><i class="fas fa-user-graduate fa-2x"></i></div>
+                            <div>
+                                <p class="text-gray-500 text-sm">总学生数</p>
+                                <p class="text-2xl font-bold" id="dash-total-students">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4"><i class="fas fa-check-circle fa-2x"></i></div>
+                            <div>
+                                <p class="text-gray-500 text-sm">今日出勤率</p>
+                                <p class="text-2xl font-bold">98%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow border-l-4 border-purple-500">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-purple-100 text-purple-500 mr-4"><i class="fas fa-book fa-2x"></i></div>
+                            <div>
+                                <p class="text-gray-500 text-sm">今日课程数</p>
+                                <p class="text-2xl font-bold">24</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow text-center py-20">
+                    <h3 class="text-xl text-gray-400">欢迎使用智慧教务系统，请从左侧菜单选择功能。</h3>
+                </div>
+            </div>
+
+            <!-- 2. 学生管理模块 -->
+            <div id="view-students" class="hidden space-y-6">
+                <div class="flex justify-between items-center">
+                    <div class="flex space-x-2">
+                         <input type="text" id="search-student-input" placeholder="搜索姓名..." class="border rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                    </div>
+                    <button onclick="openStudentModal()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 shadow flex items-center text-sm">
+                        <i class="fas fa-plus mr-2"></i> 新增学生
+                    </button>
+                </div>
+                
+                <div id="students-container" class="space-y-6">
+                    <!-- JS将在这里按年级/班级渲染分组列表 -->
+                </div>
+            </div>
+
+            <!-- 3. 课程管理模块 -->
+            <div id="view-courses" class="hidden space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">选择学生查看课表</label>
+                            <select id="course-student-select" class="border border-gray-300 rounded px-3 py-2 w-64 focus:ring-blue-500 focus:border-blue-500" onchange="loadCourseTable()">
+                                <!-- JS填充 -->
+                            </select>
+                        </div>
+                        <button onclick="openCourseModal()" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 shadow text-sm">
+                            <i class="fas fa-plus mr-2"></i> 添加/编辑课程
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 border">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-r">节次 \ 星期</th>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">周一</th>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">周二</th>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">周三</th>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">周四</th>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">周五</th>
+                                </tr>
+                            </thead>
+                            <tbody id="course-table-body" class="bg-white divide-y divide-gray-200">
+                                <!-- JS 生成课程表网格 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 考勤管理模块 -->
+            <div id="view-attendance" class="hidden space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 items-end">
+                        <div class="col-span-1">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">学生</label>
+                            <select id="att-student-select" class="w-full border border-gray-300 rounded px-3 py-2">
+                                <!-- JS填充 -->
+                            </select>
+                        </div>
+                        <div class="col-span-1">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">月份</label>
+                            <input type="month" id="att-month-select" class="w-full border border-gray-300 rounded px-3 py-2">
+                        </div>
+                        <div class="col-span-1">
+                            <button onclick="searchAttendance()" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                                <i class="fas fa-search mr-2"></i> 查询
+                            </button>
+                        </div>
+                        <div class="col-span-1 text-right">
+                             <button onclick="openAttendanceModal()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 shadow text-sm">
+                                <i class="fas fa-clock mr-2"></i> 新增考勤
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">日期</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">签到时间</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">签退时间</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">状态</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendance-list" class="bg-white divide-y divide-gray-200">
+                                <!-- JS填充 -->
+                            </tbody>
+                        </table>
+                        <div id="no-att-data" class="hidden text-center py-8 text-gray-500">该月无考勤记录</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ================= 智能助手聊天模块 (新增) ================= -->
+    
+    <!-- 悬浮开关按钮 -->
+    <button id="chat-toggle-btn" class="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 rounded-full shadow-2xl flex items-center justify-center text-white hover:bg-blue-700 focus:outline-none z-[60] transition-transform transform hover:scale-105 hidden" onclick="ChatWidget.toggle()">
+        <i class="fas fa-comment-dots text-2xl"></i>
+    </button>
+
+    <!-- 聊天主窗口 -->
+    <div id="chat-window" class="fixed bottom-24 right-6 w-80 md:w-96 bg-white rounded-xl shadow-2xl z-[60] flex flex-col overflow-hidden hidden border border-gray-200" style="height: 500px; opacity: 0; transform: scale(0.9);">
+        <!-- 头部 -->
+        <div class="bg-blue-600 p-4 flex justify-between items-center text-white">
+            <div class="flex items-center">
+                <i class="fas fa-robot mr-2"></i>
+                <span class="font-bold">智能教务助手</span>
+            </div>
+            <button onclick="ChatWidget.toggle()" class="text-white hover:text-gray-200 focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- 消息记录区域 -->
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 text-sm">
+            <div class="flex flex-col items-start">
+                <div class="chat-msg-bot p-3 max-w-[85%] shadow-sm">
+                    您好！我是您的教务助手。有问题请告诉我，我也支持查看图片哦！
+                </div>
+            </div>
+            <!-- 消息将动态插入这里 -->
+        </div>
+
+        <!-- 预览图片区域 -->
+        <div id="chat-image-preview" class="hidden px-4 py-2 bg-gray-100 border-t border-gray-200 flex items-center justify-between">
+            <div class="flex items-center">
+                <img id="preview-img-tag" src="" alt="preview" class="h-10 w-10 object-cover rounded border border-gray-300 mr-2">
+                <span class="text-xs text-gray-500 truncate max-w-[150px]">已选择图片</span>
+            </div>
+            <button onclick="ChatWidget.clearImage()" class="text-red-500 hover:text-red-700 text-xs">
+                <i class="fas fa-times-circle"></i>
+            </button>
+        </div>
+
+        <!-- 底部输入区 -->
+        <div class="p-3 bg-white border-t border-gray-200">
+            <div class="flex items-end space-x-2">
+                <!-- 图片上传 -->
+                <input type="file" id="chat-file-input" accept="image/*" class="hidden" onchange="ChatWidget.handleFileSelect(this)">
+                <button onclick="document.getElementById('chat-file-input').click()" id="chat-upload-btn" class="p-2 text-gray-400 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-image text-xl"></i>
+                </button>
+                
+                <!-- 文本输入 -->
+                <textarea id="chat-input" rows="1" class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 resize-none no-scrollbar" placeholder="输入问题..." onkeydown="if(event.keyCode===13 && !event.shiftKey){event.preventDefault(); ChatWidget.send();}"></textarea>
+                
+                <!-- 发送按钮 -->
+                <button id="chat-send-btn" onclick="ChatWidget.send()" class="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="text-xs text-center text-gray-400 mt-1 hidden" id="chat-loading-text">对方正在思考...</div>
+        </div>
+    </div>
+
+
+    <!-- ================= 模态框 (Modals) ================= -->
+
+    <!-- 学生编辑模态框 -->
+    <div id="modal-student" class="fixed inset-0 z-50 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-lg w-full max-w-md p-6 shadow-xl transform transition-all">
+            <h3 class="text-lg font-bold mb-4" id="modal-student-title">新增学生</h3>
+            <form id="form-student" class="space-y-4">
+                <input type="hidden" id="student-id">
+                <div>
+                    <label class="block text-sm text-gray-700">姓名</label>
+                    <input type="text" id="student-name" required class="w-full border rounded px-3 py-2 mt-1">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm text-gray-700">年级</label>
+                        <select id="student-grade" class="w-full border rounded px-3 py-2 mt-1">
+                            <option value="高一">高一</option>
+                            <option value="高二">高二</option>
+                            <option value="高三">高三</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-700">班级</label>
+                        <select id="student-class" class="w-full border rounded px-3 py-2 mt-1">
+                            <option value="1班">1班</option>
+                            <option value="2班">2班</option>
+                            <option value="3班">3班</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3 mt-6">
+                    <button type="button" onclick="closeModal('modal-student')" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded">取消</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 课程编辑模态框 -->
+    <div id="modal-course" class="fixed inset-0 z-50 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-lg w-full max-w-md p-6 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">编辑课程安排</h3>
+            <form id="form-course" class="space-y-4">
+                <input type="hidden" id="course-id">
+                <div>
+                    <label class="block text-sm text-gray-700">学生</label>
+                    <input type="text" id="course-student-name" readonly class="w-full bg-gray-100 border rounded px-3 py-2 mt-1 text-gray-500">
+                    <input type="hidden" id="course-student-id">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm text-gray-700">星期</label>
+                        <select id="course-day" class="w-full border rounded px-3 py-2 mt-1">
+                            <option value="Mon">周一</option>
+                            <option value="Tue">周二</option>
+                            <option value="Wed">周三</option>
+                            <option value="Thu">周四</option>
+                            <option value="Fri">周五</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-700">节次</label>
+                        <select id="course-period" class="w-full border rounded px-3 py-2 mt-1">
+                            <option value="1">第1节 (08:00)</option>
+                            <option value="2">第2节 (09:00)</option>
+                            <option value="3">第3节 (10:00)</option>
+                            <option value="4">第4节 (11:00)</option>
+                            <option value="5">第5节 (13:30)</option>
+                            <option value="6">第6节 (14:30)</option>
+                            <option value="7">第7节 (15:30)</option>
+                            <option value="8">第8节 (16:30)</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-700">科目</label>
+                    <select id="course-subject" class="w-full border rounded px-3 py-2 mt-1">
+                        <option value="">(空闲)</option>
+                        <option value="语文">语文</option>
+                        <option value="数学">数学</option>
+                        <option value="英语">英语</option>
+                        <option value="政治">政治</option>
+                        <option value="物理">物理</option>
+                        <option value="化学">化学</option>
+                        <option value="生物">生物</option>
+                    </select>
+                </div>
+                <div class="flex justify-end space-x-3 mt-6">
+                    <button type="button" onclick="closeModal('modal-course')" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded">取消</button>
+                    <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 考勤编辑模态框 -->
+    <div id="modal-attendance" class="fixed inset-0 z-50 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-lg w-full max-w-md p-6 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">录入考勤</h3>
+            <form id="form-attendance" class="space-y-4">
+                <input type="hidden" id="att-id">
+                <div>
+                    <label class="block text-sm text-gray-700">学生</label>
+                    <select id="att-form-student-select" class="w-full border rounded px-3 py-2 mt-1"></select>
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-700">日期</label>
+                    <input type="date" id="att-date" required class="w-full border rounded px-3 py-2 mt-1">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm text-gray-700">签到时间</label>
+                        <input type="time" id="att-signin" class="w-full border rounded px-3 py-2 mt-1">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-700">签退时间</label>
+                        <input type="time" id="att-signout" class="w-full border rounded px-3 py-2 mt-1">
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3 mt-6">
+                    <button type="button" onclick="closeModal('modal-attendance')" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded">取消</button>
+                    <button type="button" onclick="deleteAttendance()" id="btn-delete-att" class="hidden px-4 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200">删除</button>
+                    <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 简单提示框 -->
+    <div id="toast" class="fixed bottom-5 right-20 bg-gray-800 text-white px-6 py-3 rounded shadow-lg transform translate-y-20 transition-transform duration-300 z-40">
+        操作成功
+    </div>
+
+    <script>
+        // ================= 数据管理 (LocalStorage) =================
+        const DataManager = {
+            init: function() {
+                if (!localStorage.getItem('students')) {
+                    const demoStudents = [
+                        { id: 1, name: '张三', grade: '高一', classRoom: '1班' },
+                        { id: 2, name: '李四', grade: '高一', classRoom: '1班' },
+                        { id: 3, name: '王五', grade: '高一', classRoom: '2班' },
+                        { id: 4, name: '赵六', grade: '高二', classRoom: '1班' },
+                    ];
+                    localStorage.setItem('students', JSON.stringify(demoStudents));
+                }
+                if (!localStorage.getItem('courses')) {
+                    // 示例课程: 学生1, 周一, 第1节, 语文
+                    const demoCourses = [
+                        { id: 1, studentId: 1, day: 'Mon', period: 1, subject: '语文' },
+                        { id: 2, studentId: 1, day: 'Mon', period: 2, subject: '数学' },
+                        { id: 3, studentId: 1, day: 'Tue', period: 1, subject: '英语' },
+                    ];
+                    localStorage.setItem('courses', JSON.stringify(demoCourses));
+                }
+                if (!localStorage.getItem('attendance')) {
+                    const today = new Date().toISOString().split('T')[0];
+                    const demoAtt = [
+                        { id: 1, studentId: 1, studentId: 1, date: today, signIn: '07:55', signOut: '17:30' }
+                    ];
+                    localStorage.setItem('attendance', JSON.stringify(demoAtt));
+                }
+            },
+            getStudents: () => JSON.parse(localStorage.getItem('students')) || [],
+            saveStudents: (data) => localStorage.setItem('students', JSON.stringify(data)),
+            
+            getCourses: () => JSON.parse(localStorage.getItem('courses')) || [],
+            saveCourses: (data) => localStorage.setItem('courses', JSON.stringify(data)),
+
+            getAttendance: () => JSON.parse(localStorage.getItem('attendance')) || [],
+            saveAttendance: (data) => localStorage.setItem('attendance', JSON.stringify(data)),
+        };
+
+        DataManager.init();
+
+        // ================= 状态管理 =================
+        let currentTab = 'dashboard';
+        
+        // ================= 登录逻辑 =================
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('login-user').value;
+            const pass = document.getElementById('login-pass').value;
+            
+            if(user === 'admin' && pass === '123456') {
+                document.getElementById('auth-layer').classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    document.getElementById('auth-layer').style.display = 'none';
+                    document.getElementById('sidebar').classList.remove('hidden');
+                    document.getElementById('main-content').classList.remove('hidden');
+                    // 显示聊天按钮
+                    document.getElementById('chat-toggle-btn').classList.remove('hidden');
+                    initDashboard();
+                }, 500);
+            } else {
+                alert('账号或密码错误 (admin/123456)');
+            }
+        });
+
+        function logout() {
+            location.reload();
+        }
+
+        // ================= 导航逻辑 =================
+        function switchTab(tab) {
+            // UI Update
+            document.querySelectorAll('.sidebar-link').forEach(el => el.classList.remove('active', 'bg-gray-700', 'border-l-4', 'border-blue-500'));
+            document.getElementById('nav-' + tab).classList.add('active');
+            
+            // View Update
+            document.getElementById('view-dashboard').classList.add('hidden');
+            document.getElementById('view-students').classList.add('hidden');
+            document.getElementById('view-courses').classList.add('hidden');
+            document.getElementById('view-attendance').classList.add('hidden');
+            
+            document.getElementById('view-' + tab).classList.remove('hidden');
+            
+            // Header Title
+            const titles = {
+                'dashboard': '仪表盘',
+                'students': '学生人员管理',
+                'courses': '课程安排',
+                'attendance': '考勤记录'
+            };
+            document.getElementById('page-title').innerText = titles[tab];
+
+            // Trigger Loads
+            if(tab === 'students') renderStudentList();
+            if(tab === 'courses') initCourseView();
+            if(tab === 'attendance') initAttendanceView();
+            if(tab === 'dashboard') initDashboard();
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.classList.remove('translate-y-20');
+            setTimeout(() => t.classList.add('translate-y-20'), 2000);
+        }
+
+        // ================= 1. 仪表盘 =================
+        function initDashboard() {
+            const s = DataManager.getStudents();
+            document.getElementById('dash-total-students').innerText = s.length;
+        }
+
+        // ================= 2. 学生管理模块 =================
+        function renderStudentList() {
+            const students = DataManager.getStudents();
+            const container = document.getElementById('students-container');
+            container.innerHTML = '';
+
+            // 分组逻辑: 年级 -> 班级
+            const grouped = {};
+            students.forEach(s => {
+                if(!grouped[s.grade]) grouped[s.grade] = {};
+                if(!grouped[s.grade][s.classRoom]) grouped[s.grade][s.classRoom] = [];
+                grouped[s.grade][s.classRoom].push(s);
+            });
+
+            // 渲染
+            for (const [grade, classes] of Object.entries(grouped)) {
+                const gradeSection = document.createElement('div');
+                gradeSection.className = 'bg-white rounded-lg shadow overflow-hidden';
+                
+                const gradeHeader = document.createElement('div');
+                gradeHeader.className = 'bg-gray-100 px-6 py-3 font-bold text-gray-700 border-b flex items-center';
+                gradeHeader.innerHTML = `<i class="fas fa-layer-group mr-2 text-blue-500"></i> ${grade}`;
+                gradeSection.appendChild(gradeHeader);
+
+                const classContainer = document.createElement('div');
+                classContainer.className = 'p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4';
+
+                for (const [cls, stus] of Object.entries(classes)) {
+                    const classCard = document.createElement('div');
+                    classCard.className = 'border rounded-lg p-4 hover:shadow-md transition-shadow';
+                    
+                    let stuListHtml = '';
+                    stus.forEach(stu => {
+                        stuListHtml += `
+                            <div class="flex justify-between items-center py-2 border-b last:border-0">
+                                <span class="text-sm font-medium">${stu.name}</span>
+                                <div class="space-x-2">
+                                    <button onclick="editStudent(${stu.id})" class="text-blue-500 hover:text-blue-700 text-xs"><i class="fas fa-edit"></i></button>
+                                    <button onclick="deleteStudent(${stu.id})" class="text-red-500 hover:text-red-700 text-xs"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    classCard.innerHTML = `
+                        <h4 class="font-bold text-gray-600 mb-2 border-b pb-1">${cls} <span class="text-xs font-normal text-gray-400">(${stus.length}人)</span></h4>
+                        <div class="max-h-48 overflow-y-auto no-scrollbar">
+                            ${stuListHtml}
+                        </div>
+                    `;
+                    classContainer.appendChild(classCard);
+                }
+                gradeSection.appendChild(classContainer);
+                container.appendChild(gradeSection);
+            }
+        }
+
+        // 打开/关闭模态框
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+        
+        function openStudentModal(id = null) {
+            const modal = document.getElementById('modal-student');
+            const form = document.getElementById('form-student');
+            form.reset();
+            document.getElementById('student-id').value = '';
+            document.getElementById('modal-student-title').innerText = '新增学生';
+
+            if(id) {
+                const s = DataManager.getStudents().find(x => x.id === id);
+                if(s) {
+                    document.getElementById('student-id').value = s.id;
+                    document.getElementById('student-name').value = s.name;
+                    document.getElementById('student-grade').value = s.grade;
+                    document.getElementById('student-class').value = s.classRoom;
+                    document.getElementById('modal-student-title').innerText = '编辑学生';
+                }
+            }
+            modal.classList.remove('hidden');
+        }
+        
+        // 绑定 window 函数以便 HTML 调用
+        window.editStudent = openStudentModal;
+        window.deleteStudent = function(id) {
+            if(confirm('确定删除该学生吗？相关课程和考勤也将删除。')) {
+                let stus = DataManager.getStudents().filter(s => s.id !== id);
+                DataManager.saveStudents(stus);
+                // 级联删除课程和考勤(可选)
+                renderStudentList();
+                showToast('删除成功');
+            }
+        };
+
+        // 保存学生
+        document.getElementById('form-student').addEventListener('submit', function(e){
+            e.preventDefault();
+            const id = document.getElementById('student-id').value;
+            const name = document.getElementById('student-name').value;
+            const grade = document.getElementById('student-grade').value;
+            const classRoom = document.getElementById('student-class').value;
+            
+            let stus = DataManager.getStudents();
+            
+            if(id) {
+                // Edit
+                const index = stus.findIndex(s => s.id == id);
+                if(index > -1) stus[index] = { id: parseInt(id), name, grade, classRoom };
+            } else {
+                // Add
+                const newId = stus.length > 0 ? Math.max(...stus.map(s => s.id)) + 1 : 1;
+                stus.push({ id: newId, name, grade, classRoom });
+            }
+            
+            DataManager.saveStudents(stus);
+            closeModal('modal-student');
+            renderStudentList();
+            showToast('保存成功');
+        });
+
+        // 搜索学生 (简单前端过滤)
+        document.getElementById('search-student-input').addEventListener('input', function(e){
+            const val = e.target.value.toLowerCase();
+            if(!val) { renderStudentList(); return; }
+            
+            // 由于分组结构，这里为了简化，搜索时直接展平显示，或者只过滤高亮
+            // 这里为了保持复杂性UI，我们重新渲染列表但只包含匹配项
+            const students = DataManager.getStudents();
+            const filtered = students.filter(s => s.name.toLowerCase().includes(val));
+            
+            // 临时覆盖 getStudents 行为以复用 renderStudentList 逻辑
+            const originalGet = DataManager.getStudents;
+            DataManager.getStudents = () => filtered;
+            renderStudentList();
+            DataManager.getStudents = originalGet; // 恢复
+        });
+
+        // ================= 3. 课程管理模块 =================
+        function initCourseView() {
+            const students = DataManager.getStudents();
+            const sel = document.getElementById('course-student-select');
+            sel.innerHTML = '';
+            students.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s.id;
+                opt.innerText = `${s.grade}${s.classRoom} - ${s.name}`;
+                sel.appendChild(opt);
+            });
+            if(students.length > 0) loadCourseTable();
+        }
+
+        function loadCourseTable() {
+            const sid = parseInt(document.getElementById('course-student-select').value);
+            const courses = DataManager.getCourses().filter(c => c.studentId === sid);
+            const tbody = document.getElementById('course-table-body');
+            tbody.innerHTML = '';
+
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+            
+            // 8节课
+            for(let i=1; i<=8; i++) {
+                const tr = document.createElement('tr');
+                
+                // 节次头
+                const th = document.createElement('th');
+                th.className = "px-6 py-4 whitespace-nowrap text-sm text-gray-500 bg-gray-50 border-r";
+                th.innerText = `第 ${i} 节`;
+                tr.appendChild(th);
+
+                days.forEach(day => {
+                    const td = document.createElement('td');
+                    td.className = "px-6 py-4 whitespace-nowrap text-sm text-center border-r hover:bg-gray-50 cursor-pointer transition-colors relative group";
+                    
+                    const course = courses.find(c => c.day === day && c.period === i);
+                    
+                    if(course) {
+                        td.innerHTML = `
+                            <span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full font-bold text-xs">${course.subject}</span>
+                        `;
+                    } else {
+                        td.innerHTML = `<span class="text-gray-300">-</span>`;
+                    }
+
+                    // 点击单元格进行编辑
+                    td.onclick = () => openCourseModal(sid, day, i, course);
+
+                    tr.appendChild(td);
+                });
+
+                tbody.appendChild(tr);
+            }
+        }
+
+        function openCourseModal(sid = null, day = null, period = null, courseData = null) {
+            if(!sid) sid = parseInt(document.getElementById('course-student-select').value);
+            
+            const student = DataManager.getStudents().find(s => s.id === sid);
+            if(!student) return alert('请先选择学生');
+
+            document.getElementById('course-student-name').value = student.name;
+            document.getElementById('course-student-id').value = sid;
+            
+            document.getElementById('course-day').value = day || 'Mon';
+            document.getElementById('course-period').value = period || 1;
+            document.getElementById('course-subject').value = courseData ? courseData.subject : '';
+            document.getElementById('course-id').value = courseData ? courseData.id : '';
+
+            document.getElementById('modal-course').classList.remove('hidden');
+        }
+
+        document.getElementById('form-course').addEventListener('submit', function(e){
+            e.preventDefault();
+            const id = document.getElementById('course-id').value;
+            const sid = parseInt(document.getElementById('course-student-id').value);
+            const day = document.getElementById('course-day').value;
+            const period = parseInt(document.getElementById('course-period').value);
+            const subject = document.getElementById('course-subject').value;
+
+            let courses = DataManager.getCourses();
+
+            // 如果已经存在该时段课程，先删除
+            courses = courses.filter(c => !(c.studentId === sid && c.day === day && c.period === period));
+
+            // 如果 subject 不为空，则添加
+            if(subject) {
+                 const newId = id ? parseInt(id) : Date.now(); // 简单ID生成
+                 courses.push({ id: newId, studentId: sid, day, period, subject });
+            }
+
+            DataManager.saveCourses(courses);
+            closeModal('modal-course');
+            loadCourseTable();
+            showToast('课程表已更新');
+        });
+
+
+        // ================= 4. 考勤管理模块 =================
+        function initAttendanceView() {
+            // 填充学生下拉
+            const students = DataManager.getStudents();
+            const sel = document.getElementById('att-student-select');
+            const formSel = document.getElementById('att-form-student-select');
+            sel.innerHTML = '';
+            formSel.innerHTML = '';
+            
+            students.forEach(s => {
+                const text = `${s.grade}${s.classRoom} - ${s.name}`;
+                sel.add(new Option(text, s.id));
+                formSel.add(new Option(text, s.id));
+            });
+
+            // 默认选中当前月
+            const now = new Date();
+            const monthStr = now.toISOString().slice(0, 7); // YYYY-MM
+            document.getElementById('att-month-select').value = monthStr;
+
+            searchAttendance();
+        }
+
+        function searchAttendance() {
+            const sid = parseInt(document.getElementById('att-student-select').value);
+            const month = document.getElementById('att-month-select').value; // YYYY-MM
+            
+            if(!sid || !month) return;
+
+            const allAtt = DataManager.getAttendance();
+            const list = allAtt.filter(a => a.studentId === sid && a.date.startsWith(month));
+            
+            // 排序日期
+            list.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            const tbody = document.getElementById('attendance-list');
+            tbody.innerHTML = '';
+            
+            if(list.length === 0) {
+                document.getElementById('no-att-data').classList.remove('hidden');
+            } else {
+                document.getElementById('no-att-data').classList.add('hidden');
+                list.forEach(item => {
+                    const tr = document.createElement('tr');
+                    
+                    // 判断状态
+                    let statusHtml = '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">正常</span>';
+                    if(!item.signIn || item.signIn > '08:00') statusHtml = '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">迟到</span>';
+                    
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${item.date}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.signIn || '--'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.signOut || '--'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${statusHtml}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <button onclick="editAttendance(${item.id})" class="text-indigo-600 hover:text-indigo-900">编辑</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+        }
+
+        window.editAttendance = function(id) {
+            const att = DataManager.getAttendance().find(a => a.id === id);
+            if(att) {
+                document.getElementById('att-id').value = att.id;
+                document.getElementById('att-form-student-select').value = att.studentId;
+                document.getElementById('att-date').value = att.date;
+                document.getElementById('att-signin').value = att.signIn;
+                document.getElementById('att-signout').value = att.signOut;
+                
+                document.getElementById('btn-delete-att').classList.remove('hidden');
+                document.getElementById('modal-attendance').classList.remove('hidden');
+            }
+        };
+
+        function openAttendanceModal() {
+            document.getElementById('form-attendance').reset();
+            document.getElementById('att-id').value = '';
+            
+            // 默认选中当前搜索的学生
+            const currentSid = document.getElementById('att-student-select').value;
+            document.getElementById('att-form-student-select').value = currentSid;
+            
+            document.getElementById('btn-delete-att').classList.add('hidden');
+            document.getElementById('modal-attendance').classList.remove('hidden');
+        }
+
+        document.getElementById('form-attendance').addEventListener('submit', function(e){
+            e.preventDefault();
+            const id = document.getElementById('att-id').value;
+            const sid = parseInt(document.getElementById('att-form-student-select').value);
+            const date = document.getElementById('att-date').value;
+            const signIn = document.getElementById('att-signin').value;
+            const signOut = document.getElementById('att-signout').value;
+
+            let atts = DataManager.getAttendance();
+            
+            if(id) {
+                const idx = atts.findIndex(a => a.id == id);
+                if(idx > -1) atts[idx] = { id: parseInt(id), studentId: sid, date, signIn, signOut };
+            } else {
+                const newId = Date.now();
+                atts.push({ id: newId, studentId: sid, date, signIn, signOut });
+            }
+
+            DataManager.saveAttendance(atts);
+            closeModal('modal-attendance');
+            searchAttendance(); // 刷新列表
+            showToast('考勤记录已保存');
+        });
+
+        function deleteAttendance() {
+            const id = document.getElementById('att-id').value;
+            if(!id) return;
+            if(confirm('确定删除这条考勤记录吗？')) {
+                let atts = DataManager.getAttendance().filter(a => a.id != id);
+                DataManager.saveAttendance(atts);
+                closeModal('modal-attendance');
+                searchAttendance();
+                showToast('删除成功');
+            }
+        }
+
+        // ================= 智能助手聊天逻辑 =================
+        const ChatWidget = {
+            isOpen: false,
+            isLoading: false,
+            history: [], // 存储 {role: 'user' | 'assistant', content: string}
+            currentImageBase64: null,
+
+            toggle: function() {
+                this.isOpen = !this.isOpen;
+                const win = document.getElementById('chat-window');
+                if (this.isOpen) {
+                    win.classList.remove('hidden');
+                    // 简单的进入动画
+                    setTimeout(() => {
+                        win.style.opacity = '1';
+                        win.style.transform = 'scale(1)';
+                    }, 10);
+                } else {
+                    win.style.opacity = '0';
+                    win.style.transform = 'scale(0.9)';
+                    setTimeout(() => win.classList.add('hidden'), 300);
+                }
+            },
+
+            handleFileSelect: function(input) {
+                if (input.files && input.files[0]) {
+                    const file = input.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        ChatWidget.currentImageBase64 = e.target.result;
+                        // 显示预览
+                        document.getElementById('preview-img-tag').src = e.target.result;
+                        document.getElementById('chat-image-preview').classList.remove('hidden');
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            },
+
+            clearImage: function() {
+                this.currentImageBase64 = null;
+                document.getElementById('chat-file-input').value = '';
+                document.getElementById('chat-image-preview').classList.add('hidden');
+            },
+
+            send: function() {
+                if (this.isLoading) return;
+                
+                const inputEl = document.getElementById('chat-input');
+                const userText = inputEl.value.trim();
+                
+                if (!userText && !this.currentImageBase64) return;
+
+                // 1. UI上显示用户消息
+                this.addMessageToUI('user', userText, this.currentImageBase64);
+                
+                // 2. 更新历史记录 (后端要求历史记录为JSON字符串)
+                // 注意：这里为了简化，历史记录只存文本，如果后端需要图片的上下文，需要更复杂的结构
+                if(userText) {
+                    this.history.push({ role: 'user', content: userText });
+                }
+
+                // 3. 锁定状态
+                this.setLoading(true);
+                inputEl.value = '';
+                
+                // 保存并清空当前待发送图片，防止重复发送
+                const payloadImage = this.currentImageBase64; 
+                this.clearImage();
+
+                // 4. 准备发送数据
+                const payload = {
+                    question: userText,
+                    history: this.history
+                };
+
+                // 5. 发送请求 (模拟/真实Fetch)
+                // 这里写真实的 Fetch 逻辑，如果后端没开，会报错
+                fetch('/jiaowuapi', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // 假设后端返回格式 { answer: "..." } 或者直接文本
+                    const answer = data.answer || data.message || JSON.stringify(data);
+                    
+                    this.addMessageToUI('bot', answer);
+                    this.history.push({ role: 'assistant', content: answer });
+                })
+                .catch(err => {
+                    console.error('Chat API Error:', err);
+                    this.addMessageToUI('bot', '抱歉，连接服务器失败，请检查后端是否启动。');
+                })
+                .finally(() => {
+                    this.setLoading(false);
+                });
+            },
+
+            setLoading: function(loading) {
+                this.isLoading = loading;
+                document.getElementById('chat-send-btn').disabled = loading;
+                document.getElementById('chat-input').disabled = loading;
+                document.getElementById('chat-upload-btn').disabled = loading;
+                
+                const statusText = document.getElementById('chat-loading-text');
+                if(loading) {
+                    statusText.classList.remove('hidden');
+                } else {
+                    statusText.classList.add('hidden');
+                }
+            },
+
+            addMessageToUI: function(role, text, imageSrc = null) {
+                const container = document.getElementById('chat-messages');
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `flex flex-col ${role === 'user' ? 'items-end' : 'items-start'}`;
+                
+                let contentHtml = '';
+                
+                // 如果有图片，先显示图片
+                if (imageSrc) {
+                    contentHtml += `<img src="${imageSrc}" class="mb-1 max-w-[150px] rounded-lg border border-gray-200">`;
+                }
+                
+                // 显示文本
+                if (text) {
+                    const bubbleClass = role === 'user' ? 'chat-msg-user' : 'chat-msg-bot';
+                    contentHtml += `<div class="${bubbleClass} p-3 max-w-[85%] shadow-sm break-words">${this.escapeHtml(text)}</div>`;
+                }
+
+                msgDiv.innerHTML = contentHtml;
+                container.appendChild(msgDiv);
+                
+                // 滚动到底部
+                container.scrollTop = container.scrollHeight;
+            },
+
+            escapeHtml: function(unsafe) {
+                return unsafe
+                     .replace(/&/g, "&amp;")
+                     .replace(/</g, "&lt;")
+                     .replace(/>/g, "&gt;")
+                     .replace(/"/g, "&quot;")
+                     .replace(/'/g, "&#039;");
+            }
+        };
+    </script>
+</body>
+</html>

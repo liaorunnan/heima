@@ -8,3 +8,4 @@ model/*
 *.pkl
 /.vscode
 data.jsonl
+.env

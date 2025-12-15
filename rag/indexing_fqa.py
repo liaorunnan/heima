@@ -4,10 +4,10 @@ import numpy as np
 
 from pymilvus import MilvusClient, DataType
 
-from items import QaItem
+from rag.items import QaItem
 
 from conf import settings
-from embedding import get_embedding
+from rag.embedding import get_embedding
 from typing import List
 
 dimension = 1024
@@ -87,7 +87,7 @@ class VecIndex(metaclass=Singleton):
 
     def load(self,data: List[QaItem]):
 
-        from embedding import get_embedding
+        from rag.embedding import get_embedding
        
         num = 0
         for item in data:

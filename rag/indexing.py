@@ -4,10 +4,10 @@ import numpy as np
 
 from pymilvus import MilvusClient, DataType
 
-from items import YinyutlItem
+from rag.items import YinyutlItem
 
 from conf import settings
-from embedding import get_embedding
+from rag.embedding import get_embedding
 
 dimension = 1024
 search_params = {"metric_type": "IP"}#, "params": {"nprobe": 10}}
@@ -88,7 +88,7 @@ class VecIndex(metaclass=Singleton):
     def load(self):
 
         from match_keyword import Yinyutl
-        from embedding import get_embedding
+        from rag.embedding import get_embedding
        
         num = 0
         for item in Yinyutl.scan():

@@ -9,6 +9,8 @@ from mianshi import get_random_question_logic
 from translate_baidu import baidu_ai_translate
 from wenzhang.wenzhang import SummarizeAgent
 from chat.chat import chat_text
+from rag.rag_api import rag_query
+from zhinengjiaowu.jwrag_api import jwrag_query
 
 from pydantic import BaseModel # 1. 引入 Pydantic
 import json # 引入 json 用于解析 AI 返回的结果
@@ -27,6 +29,11 @@ app.add_middleware(
 
 class ArticleRequest(BaseModel):
     article: str
+
+class JW_ChatRequest(BaseModel):
+    question: str
+    image: str = ""
+    history: List[Dict[str, str]] = [] 
 
 class ChatRequest(BaseModel):
     question: str
@@ -115,10 +122,41 @@ def chat_api(item: ChatRequest):
     return chat_content
 
 
+@app.get("/ragfont")
+def rag_font():
+    file_path = os.path.join(os.path.dirname(__file__), "rag/rag_chat.html")
+    return FileResponse(file_path)
+
+@app.post("/rag")
+def rag_api(item: ChatRequest): 
+    user_msg = item.question
+    user_history = item.history
+    # 注意：rag_query 目前没有使用 scenario 参数，但我们传递时忽略即可
+    answer = rag_query(query=user_msg, history=user_history)
+    # 返回结构需要与前端匹配，前端期望一个包含 answer 的 JSON 对象
+    return {"answer": answer}
+
 @app.get("/listeningfont")
 def listening_font():
     file_path = os.path.join(os.path.dirname(__file__), "listening/listening.html")
     return FileResponse(file_path)
+
+
+@app.get("/jiaowufont")
+def jiaowu_font():
+    file_path = os.path.join(os.path.dirname(__file__), "zhinengjiaowu/zhinengjiaowu.html")
+    
+    return FileResponse(file_path)
+
+@app.post("/jiaowuapi")
+def jiaowu_api(item: JW_ChatRequest): 
+
+    user_msg = item.question
+    user_history = item.history
+    # 注意：rag_query 目前没有使用 scenario 参数，但我们传递时忽略即可
+    answer = jwrag_query(query=user_msg, history=user_history)
+    # 返回结构需要与前端匹配，前端期望一个包含 answer 的 JSON 对象
+    return {"answer": answer}
 
 if __name__ == "__main__":
     import uvicorn

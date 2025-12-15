@@ -6,14 +6,14 @@ from elasticsearch_dsl import Document, Date, Integer, Keyword, Text, connection
 connections.create_connection(hosts=settings.es_host, http_auth=(settings.es_user, settings.es_password),
                               verify_certs=False, ssl_assert_hostname=False)
 
-from items import YinyutlItem
+from rag.items import YinyutlItem
 from elasticsearch_dsl.query import Script
 
 
 import urllib3
 import warnings
 import tqdm
-from pdf import PDF
+from rag.pdf import PDF
 from bs4 import BeautifulSoup
 from pathlib import Path
 import os
@@ -25,7 +25,7 @@ import os
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.filterwarnings("ignore", message="Connecting to 'https://localhost:9200' using TLS")
 
-from text_splitter import split_text, get_html
+from rag.text_splitter import split_text, get_html
 
 
 
