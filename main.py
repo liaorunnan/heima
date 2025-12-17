@@ -1,15 +1,18 @@
 
-from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse
+import uuid
+from fastapi import FastAPI, Request,WebSocket
+from fastapi.responses import FileResponse,StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import random
 
 from mianshi import get_random_question_logic
+
 from translate_baidu import baidu_ai_translate
 from wenzhang.wenzhang import SummarizeAgent
 from chat.chat import chat_text
 from rag.rag_api import rag_query
+from rag.rag_run_steam import rag_stream_run
 from zhinengjiaowu.jwrag_api import jwrag_query
 
 from pydantic import BaseModel # 1. 引入 Pydantic
@@ -39,6 +42,15 @@ class ChatRequest(BaseModel):
     question: str
     scenario: str = "general"
     history: List[Dict[str, str]] = [] 
+
+
+class QueryRequest(BaseModel):
+    query: str
+    history: list = []
+
+
+
+
 
     
 
@@ -127,6 +139,34 @@ def rag_font():
     file_path = os.path.join(os.path.dirname(__file__), "rag/rag_chat.html")
     return FileResponse(file_path)
 
+@app.post("/api/ragapi") #SSE
+async def rag_api_stream(item: QueryRequest):
+    sid = str(uuid.uuid4())
+    return StreamingResponse((f"data:{json.dumps(chunk)}\n\n" async for chunk in rag_stream_run(query=item.query, history=item.history, session_id=sid)), 
+                             media_type="text/event-stream", headers={"Cache-Control": "no-cache", "Connection": "keep-alive"})
+
+@app.websocket("/api/wsragapi") #SSE
+async def rag_api_stream_ws(websocket: WebSocket):
+    await websocket.accept()
+    while True:
+        data = await websocket.receive_text()
+        request = json.loads(data)
+        query = request.get("query","").strip()
+        if not query:
+            await websocket.send_json(json.dumps({"type": "error", "message": "Query is empty"}))
+            continue
+
+        sid = str(uuid.uuid4())
+        await websocket.send_json({"type": "start",  "session_id": sid})
+
+        async for answer in rag_stream_run(query,history=request.get("history",[]), session_id=sid):
+            if answer.get("complete"):
+                await websocket.send_json({"type":"end", "complete": True, "end_time": answer.get("end_time",0)})
+            else:
+                await websocket.send_json({"type":"token","token": answer.get("token", ""), "session_id": answer.get("session_id", ""), "query_type": answer.get("query_type", "unknown")})
+    
+    
+
 @app.post("/rag")
 def rag_api(item: ChatRequest): 
     user_msg = item.question
@@ -160,5 +200,5 @@ def jiaowu_api(item: JW_ChatRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8003)
 
