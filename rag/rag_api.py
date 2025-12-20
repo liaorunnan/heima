@@ -19,7 +19,7 @@ def get_num(n):
     result = list(range(0, n, 2)) + list(range(n-1, 0, -2))
     return result
 
-def rag_query(query: str, history: list = None) -> str:
+def rag_query(query: str, history: list = None,return_doc=False) -> str:
 
 
     """
@@ -36,21 +36,23 @@ def rag_query(query: str, history: list = None) -> str:
     update_query = chat(promptquery, [])
 
     # 第二步：检查缓存
-    response = QA.find(QA.query == update_query).all()
-    if response:
-        return response[0].answer
+    # response = QA.find(QA.query == update_query).all()
+    # if response:
+    #     return response[0].answer
 
     # 第三步：FAQ检索
-    fqa_docs = Fqa_Index.search(update_query)
-    if fqa_docs and float(fqa_docs[0].score) > 0.91:
-        answer = f"FAQ:" + fqa_docs[0].answer
-        save_qa(QA, update_query, answer)
-        return answer
+    # fqa_docs = Fqa_Index.search(update_query)
+    # if fqa_docs and float(fqa_docs[0].score) > 0.91:
+    #     answer = f"FAQ:" + fqa_docs[0].answer
+    #     save_qa(QA, update_query, answer)
+    #     return answer
 
     # 第四步：判断是否需要查询知识库
     is_search_database = chat(f"请判断我的问题是否需要查询知识库，我的知识库是关于英语作文和单词的，如果查询单词意思或者作文写法以及英语学习相关内容的时候，需要查询知识库，问题如下：{update_query}，如果需要查询知识库，请返回True，否则返回False。不要带多余的语句", history)
     
     prompt = f"请根据我们之前的对话回答问题：{update_query}\n"
+
+    docs=''
     
     if is_search_database.lower() == "true":
         Yinyutl_rag = Yinyutl()
@@ -78,8 +80,12 @@ def rag_query(query: str, history: list = None) -> str:
     
     # 保存到缓存
     save_qa(QA, update_query, response)
+
+    if return_doc:
+        return response, docs
+    else:
     
-    return response
+        return response,''
 
 if __name__ == "__main__":
     # 测试代码

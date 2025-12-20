@@ -8,7 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 from loguru import logger
 import math
 
-from prompts import *
+from rag.prompts import *
 
 
 
@@ -53,10 +53,14 @@ while True:
         save_qa(QA, update_query, fqa_docs[0].answer)
         continue
 
-    if chat(SEARCH_JUDGE_PROMPT.format(update_query=update_query), history).lower() != "true":
+    se_res = chat(SEARCH_JUDGE_PROMPT.format(update_query=update_query), history).lower()
+    
+    if  se_res == "false":
         response = chat(SMART_SPEAKER_PROMPT.format(update_query=update_query), history)
         logger.info(f"普通回复：{response}")
         continue
+
+    
 
     strategy = chat(STRATEGY_PROMPT.format(update_query=update_query), history, system_prompt="你是一个有用的助手，用于判断用户的问题需要采用哪种检索策略。").strip()
     query = update_query

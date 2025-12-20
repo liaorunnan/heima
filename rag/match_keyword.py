@@ -54,6 +54,12 @@ class Yinyutl(Document):
         
             yield item
 
+    @classmethod
+    def scan_moban(self):
+        s = self.search().query("match", source="英语作文模版")
+        for item in s.scan():
+            yield item
+
 
 if __name__ == '__main__':
 

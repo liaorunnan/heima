@@ -14,6 +14,16 @@ class Setting(BaseSettings):
     model_name: str
     base_url: str
 
+    # 数据库配置
+    qw_model: str
+    qw_api_key: str
+    qw_api_url: str
+
+    autodl_qw_model: str
+    autodl_qw_api_key: str
+    autodl_qw_api_url: str
+    
+
     db_host: str
     db_port: int
     db_user: str

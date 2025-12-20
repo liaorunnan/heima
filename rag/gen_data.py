@@ -60,13 +60,22 @@ def gen_and_crite_qa(context):
 
 
 # RAG（检索增强生成）函数，用于根据上下文回答问题
-def rag(query, context):
+def rag(query, context, return_doc=False,context_array=False):
 
     context = [{"role": "assistant", "content": context}]
-    answer = rag_query(query, context)
+    answer,doc = rag_query(query, context, return_doc=return_doc)
+
+    if context_array:
+        context_str = ''
+        for item in doc:
+
+            context_str += " "+item.parent
+
+        doc = context_str
+            
 
 
-    return answer
+    return answer,doc
 
 
 # 主程序入口
@@ -95,16 +104,37 @@ if __name__ == '__main__':
     #         sp.write_pickle(results, 'data_pinggu.pkl')
     
     # # 重新读取pickle文件（用于验证和后续处理）
-    results = sp.read_pickle('./data_pinggu.pkl')
-    # 将结果保存为JSONL格式（每行一个JSON对象）
-    with open('data_pinggu.jsonl', 'w', encoding='utf-8') as f:
-        for item in tqdm(results):
-            # 使用RAG为每个问题生成答案
+    # results = sp.read_pickle('./data_pinggu.pkl')
+    # # 将结果保存为JSONL格式（每行一个JSON对象）
+    # with open('data_pinggu.jsonl', 'w', encoding='utf-8') as f:
+    #     for item in tqdm(results):
+    #         # 使用RAG为每个问题生成答案
             
-            item.answer = rag(item.question, item.contexts)
+    #         item.answer = rag(item.question, item.contexts)
 
-            # 打印Item信息
-            logger.info(item.model_dump())
-            # 写入JSONL文件
+    #         # 打印Item信息
+    #         logger.info(item.model_dump())
+    #         # 写入JSONL文件
+    #         json.dump(item.model_dump(), f, ensure_ascii=False)
+    #         f.write('\n')
+
+    # 用于评估生成阶段的数据
+    results = sp.read_pickle('./data_pinggu.pkl')
+    with open('data_gen_eval.jsonl', 'w', encoding='utf-8') as f:
+        for item in tqdm(results):
+            
+            item.answer,_ = rag(item.question, item.contexts, return_doc=True)
+            print(item.model_dump())
+            json.dump(item.model_dump(), f, ensure_ascii=False)
+            f.write('\n')
+
+    # 用于评估检索阶段阶段
+
+
+    results = sp.read_pickle('./data_pinggu.pkl')
+    with open('data_search_eval.jsonl', 'w', encoding='utf-8') as f:
+        for item in tqdm(results):
+            item.answer,item.contexts = rag(item.question,item.contexts, return_doc=True,context_array=True)
+            print(item.model_dump())
             json.dump(item.model_dump(), f, ensure_ascii=False)
             f.write('\n')
