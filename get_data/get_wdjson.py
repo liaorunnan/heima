@@ -5,7 +5,9 @@ with open("./wendadui.json",'r') as file:
     data = json.loads(file_content)
     tmp_data =[]
     all_data = []
-    for item in data['conversations']:
+    
+
+    for item in data:
         if item['role'] =='user':
             tmp_data = []
             tmp_data.append(item)
@@ -13,4 +15,4 @@ with open("./wendadui.json",'r') as file:
             tmp_data.append(item)
             all_data.append(tmp_data)
 
-    print(all_data)
+    print(all_data[0])

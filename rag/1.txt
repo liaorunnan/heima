@@ -1,0 +1,790 @@
+vLLM 服务可用模型:
+  - gte-Qwen2
+处理文本: 这是一个测试句子
+嵌入维度: (1536,)
+前10个维度: [-0.03113251  0.03929059  0.0286101  -0.01911127  0.01896356 -0.0326096
+  0.02365616  0.00719797 -0.01589576  0.00174836]
+
+批量处理多个文本:
+  1. 人工智能: (1536,)
+  2. 机器学习: (1536,)
+  3. 深度学习: (1536,)
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/refine_emb.py
+vLLM 服务可用模型:
+  - gte-Qwen2
+处理文本: 这是一个测试句子
+嵌入维度: (1536,)
+前10个维度: [-0.03113251  0.03929059  0.0286101  -0.01911127  0.01896356 -0.0326096
+  0.02365616  0.00719797 -0.01589576  0.00174836]
+
+批量处理多个文本:
+  1. 人工智能: (1536,)
+  2. 机器学习: (1536,)
+  3. 深度学习: (1536,)
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/embedding.py
+vLLM 服务可用模型:
+  - bge-m3
+处理文本: 这是一个测试句子
+嵌入维度: (1024,)
+前10个维度: [-0.00953991  0.04957823 -0.03298709 -0.03757405 -0.01086232 -0.03331891
+  0.02713139  0.01572254 -0.00557267  0.00535308]
+
+批量处理多个文本:
+  1. 人工智能: (1024,)
+  2. 机器学习: (1024,)
+  3. 深度学习: (1024,)
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/embedding.py
+vLLM 服务可用模型:
+  - bge-m3
+处理文本: 这是一个测试句子
+嵌入维度: (1024,)
+前10个维度: [-0.00953991  0.04957823 -0.03298709 -0.03757405 -0.01086232 -0.03331891
+  0.02713139  0.01572254 -0.00557267  0.00535308]
+
+批量处理多个文本:
+  1. 人工智能: (1024,)
+  2. 机器学习: (1024,)
+  3. 深度学习: (1024,)
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/radis.py
+01KDHF4617RRSR97YSNWX5A9GH
+[QA(pk='01KDHF4617RRSR97YSNWX5A9GH', query='Andrew', answer='Brookins')]
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：freely
+开始时间： 2025-12-28 11:13:38
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_backends/sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 982, in request
+    response = self._client.send(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py", line 62, in <module>
+    se_res = chat(SEARCH_JUDGE_PROMPT.format(update_query=update_query), history).lower()
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/llm.py", line 11, in chat
+    response = client.chat.completions.create(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 1189, in create
+    return self._post(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1014, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：freely
+开始时间： 2025-12-28 11:14:06
+2
+123
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_backends/sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 982, in request
+    response = self._client.send(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py", line 64, in <module>
+    se_res = chat(SEARCH_JUDGE_PROMPT.format(update_query=update_query), history).lower()
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/llm.py", line 11, in chat
+    response = client.chat.completions.create(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 1189, in create
+    return self._post(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1014, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：freely
+开始时间： 2025-12-28 11:14:18
+2
+123
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_backends/sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 982, in request
+    response = self._client.send(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py", line 64, in <module>
+    se_res = chat(SEARCH_JUDGE_PROMPT.format(update_query=update_query), history).lower()
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/llm.py", line 11, in chat
+    response = client.chat.completions.create(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 1189, in create
+    return self._post(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1014, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：freely
+开始时间： 2025-12-28 11:14:31
+2
+123
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_backends/sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 982, in request
+    response = self._client.send(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py", line 64, in <module>
+    se_res = chat(SEARCH_JUDGE_PROMPT.format(update_query=update_query), history).lower()
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/llm.py", line 11, in chat
+    response = client.chat.completions.create(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 1189, in create
+    return self._post(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1014, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：freely
+开始时间： 2025-12-28 11:14:48
+2
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_backends/sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 982, in request
+    response = self._client.send(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py", line 64, in <module>
+    se_res = chat(SEARCH_JUDGE_PROMPT.format(update_query=update_query), history).lower()
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/llm.py", line 11, in chat
+    response = client.chat.completions.create(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 1189, in create
+    return self._post(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1014, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：freely
+开始时间： 2025-12-28 11:15:13
+2
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_backends/sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 982, in request
+    response = self._client.send(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py", line 64, in <module>
+    se_res = chat(SEARCH_JUDGE_PROMPT.format(update_query=update_query), history).lower()
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/llm.py", line 11, in chat
+    response = client.chat.completions.create(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 1189, in create
+    return self._post(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1014, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：freely
+开始时间： 2025-12-28 11:15:26
+2
+123
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_backends/sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 982, in request
+    response = self._client.send(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py", line 66, in <module>
+    se_res = chat(SEARCH_JUDGE_PROMPT.format(update_query=update_query), history).lower()
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/llm.py", line 11, in chat
+    response = client.chat.completions.create(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 1189, in create
+    return self._post(
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/openai/_base_client.py", line 1014, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/llm.py
+你好！我是你的英语学习助手，可以为你提供以下帮助：  
+1. **听力文章推荐**：根据主题、难度或场景为你寻找合适的英文听力材料。  
+2. **文章内容解答**：解释英文文章中的词汇、语法或背景知识。  
+3. **词汇查询**：提供单词的音标、释义、例句及用法。  
+4. **写作辅助**：根据你的要求撰写英文文章，并标注参考模板或结构。  
+
+如果有具体需求，请随时告诉我！例如：  
+- “我想找一篇关于环保的听力文章。”  
+- “请解释‘sustainability’这个词的用法。”  
+- “帮我写一篇150词的旅行日记。”
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：freely
+开始时间： 2025-12-28 11:16:02
+2
+123
+2025-12-28 11:16:09.714 | INFO     | __main__:<module>:84 - 原始问题：freely
+2025-12-28 11:16:09.716 | INFO     | __main__:<module>:85 - 检索策略：直接检索
+2025-12-28 11:16:09.716 | INFO     | __main__:<module>:86 - 修改后的问题：['freely']
+2025-12-28 11:16:09.716 | INFO     | __main__:<module>:95 - 修改后的问题：freely
+2025-12-28 11:16:10.142 | INFO     | __main__:<module>:104 - 关键词召回：[YinyutlItem(id='5326', child='freely adv. 自由地 免费地 直率地 大量地', parent="【单词】: freely\n【音标】: 'friːli\n【释义】: adv. 自由地 免费地 直率地 大量地", source=['四级单词']), YinyutlItem(id='2796', child='are good at reading or writing, they fail to express themselves freely in oral English.', parent='it is also difficult for them to understand rules of English grammar. In addition, though some are good at reading or writing, they fail to express themselves freely in oral English.  Then, how to get a good command of this language? I deem that practice makes perfect. ', source=['英语作文模版']), YinyutlItem(id='2761', child='though some are good at reading or writing, they fail to express themselves freely in oral', parent='3.Frequently, it is also difficult for them to understand rules of English grammar. In addition, though some are good at reading or writing, they fail to express themselves freely in oral English. ', source=['英语作文模版']), YinyutlItem(id='160', child='Finally, a group discussion and sharing session allowed students to talk freely about campus life, academic interests, and cultural experiences, leaving everyone with a deeper sense of connection.', parent=" The audience was amazed and responded with enthusiastic applause. Finally, a group discussion and sharing session allowed students to talk freely about campus life, academic interests, and cultural experiences, leaving everyone with a deeper sense of connection.The exchange event was both enjoyable and inspiring. It broadened students' horizons and fostered meaningful friendships. It also made our campus more open, inclusive, and globally connected. Everyone is looking forward to the next cultural exchange event.", source=['四级英语听力'])]
+2025-12-28 11:16:10.143 | INFO     | __main__:<module>:106 - 向量召回：[YinyutlItem(id='5326', child='freely adv. 自由地 免费地 直率地 大量地', parent="【单词】: freely\n【音标】: 'friːli\n【释义】: adv. 自由地 免费地 直率地 大量地", source=['四级单词']), YinyutlItem(id='6354', child='liberty n. 自由 释放 许可', parent="【单词】: liberty\n【音标】: 'libə'tɪbəriən\n【释义】: n. 自由 释放 许可", source=['四级单词']), YinyutlItem(id='1150', child='happy.', parent='that the lives of the elderly will be more convenient, comfortable, healthy and happy.\xa023年12⽉第三套', source=['英语范文']), YinyutlItem(id='1544', child='free trade zone.', parent="and people throughout the country,Hainan will become China's largest pilot free trade zone.2021年6⽉第⼆套", source=['英语范文']), YinyutlItem(id='5325', child='freedom n. 自由 自主', parent="【单词】: freedom\n【音标】: 'friːdam\n【释义】: n. 自由 自主", source=['四级单词']), YinyutlItem(id='2141', child='Opening Up.', parent='was just a fishing village with over 30,000 residents before the Reform and Opening Up.In the 1980s, the Chinese government established Shenzhen Special Economic ', source=['英语范文']), YinyutlItem(id='5323', child='frank adj. 坦白的 直率的 无误的 vt. 免费邮寄 使自由出入 n. 免费 邮寄', parent='【单词】: frank\n【音标】: fræŋk\n【释义】: adj. 坦白的 直率的 无误的 vt. 免费邮寄 使自由出入 n. 免费 邮寄', source=['四级单词']), YinyutlItem(id='5324', child='free adj. 自由的 空闲的 大方的 免费的 vt. 释放 解放 adv. 自由地 免费地', parent='【单词】: free\n【音标】: friː\n【释义】: adj. 自由的 空闲的 大方的 免费的 vt. 释放 解放 adv. 自由地 免费地', source=['四级单词']), YinyutlItem(id='5685', child='allow n.', parent="【单词】: allow\n【音标】: 'ə'laʊ\n【释义】: n.", source=['四级单词']), YinyutlItem(id='1923', child='sharing.', parent='In ternet technologies with bicycles and invented the business model of bike-sharing.\xa0The\xa0appearance\xa0of\xa0shared\xa0bikes\xa0has\xa0made\xa0it\xa0more\xa0convenient for people to get ', source=['英语范文'])]
+Traceback (most recent call last):
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py", line 115, in <module>
+    doc.score = rank(doc.parent, query)
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/pydantic/main.py", line 1032, in __setattr__
+    elif (setattr_handler := self._setattr_handler(name, value)) is not None:
+  File "/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/pydantic/main.py", line 1079, in _setattr_handler
+    raise ValueError(f'"{cls.__name__}" object has no field "{name}"')
+ValueError: "YinyutlItem" object has no field "score"
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest
+/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：^CTraceback (most recent call last):
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py", line 40, in <module>
+    update_query = input("请输入你的问题：")
+KeyboardInterrupt
+/opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py
+
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dock
+ertest/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：freely
+开始时间： 2025-12-28 11:18:12
+2
+123
+2025-12-28 11:18:21.998 | INFO     | __main__:<module>:84 - 原始问题：freely
+2025-12-28 11:18:21.999 | INFO     | __main__:<module>:85 - 检索策略：直接检索
+2025-12-28 11:18:21.999 | INFO     | __main__:<module>:86 - 修改后的问题：['freely']
+2025-12-28 11:18:21.999 | INFO     | __main__:<module>:95 - 修改后的问题：freely
+2025-12-28 11:18:22.310 | INFO     | __main__:<module>:104 - 关键词召回：[YinyutlItem(id='5326', child='freely adv. 自由地 免费地 直率地 大量地', parent="【单词】: freely\n【音标】: 'friːli\n【释义】: adv. 自由地 免费地 直率地 大量地", source=['四级单词'], score=0.0), YinyutlItem(id='2796', child='are good at reading or writing, they fail to express themselves freely in oral English.', parent='it is also difficult for them to understand rules of English grammar. In addition, though some are good at reading or writing, they fail to express themselves freely in oral English.  Then, how to get a good command of this language? I deem that practice makes perfect. ', source=['英语作文模版'], score=0.0), YinyutlItem(id='2761', child='though some are good at reading or writing, they fail to express themselves freely in oral', parent='3.Frequently, it is also difficult for them to understand rules of English grammar. In addition, though some are good at reading or writing, they fail to express themselves freely in oral English. ', source=['英语作文模版'], score=0.0), YinyutlItem(id='160', child='Finally, a group discussion and sharing session allowed students to talk freely about campus life, academic interests, and cultural experiences, leaving everyone with a deeper sense of connection.', parent=" The audience was amazed and responded with enthusiastic applause. Finally, a group discussion and sharing session allowed students to talk freely about campus life, academic interests, and cultural experiences, leaving everyone with a deeper sense of connection.The exchange event was both enjoyable and inspiring. It broadened students' horizons and fostered meaningful friendships. It also made our campus more open, inclusive, and globally connected. Everyone is looking forward to the next cultural exchange event.", source=['四级英语听力'], score=0.0)]
+2025-12-28 11:18:22.310 | INFO     | __main__:<module>:106 - 向量召回：[YinyutlItem(id='5326', child='freely adv. 自由地 免费地 直率地 大量地', parent="【单词】: freely\n【音标】: 'friːli\n【释义】: adv. 自由地 免费地 直率地 大量地", source=['四级单词'], score=0.739795446395874), YinyutlItem(id='6354', child='liberty n. 自由 释放 许可', parent="【单词】: liberty\n【音标】: 'libə'tɪbəriən\n【释义】: n. 自由 释放 许可", source=['四级单词'], score=0.6740531921386719), YinyutlItem(id='1150', child='happy.', parent='that the lives of the elderly will be more convenient, comfortable, healthy and happy.\xa023年12⽉第三套', source=['英语范文'], score=0.6594038009643555), YinyutlItem(id='1544', child='free trade zone.', parent="and people throughout the country,Hainan will become China's largest pilot free trade zone.2021年6⽉第⼆套", source=['英语范文'], score=0.6563047170639038), YinyutlItem(id='5325', child='freedom n. 自由 自主', parent="【单词】: freedom\n【音标】: 'friːdam\n【释义】: n. 自由 自主", source=['四级单词'], score=0.6548601388931274), YinyutlItem(id='2141', child='Opening Up.', parent='was just a fishing village with over 30,000 residents before the Reform and Opening Up.In the 1980s, the Chinese government established Shenzhen Special Economic ', source=['英语范文'], score=0.6417258977890015), YinyutlItem(id='5323', child='frank adj. 坦白的 直率的 无误的 vt. 免费邮寄 使自由出入 n. 免费 邮寄', parent='【单词】: frank\n【音标】: fræŋk\n【释义】: adj. 坦白的 直率的 无误的 vt. 免费邮寄 使自由出入 n. 免费 邮寄', source=['四级单词'], score=0.6374483108520508), YinyutlItem(id='5324', child='free adj. 自由的 空闲的 大方的 免费的 vt. 释放 解放 adv. 自由地 免费地', parent='【单词】: free\n【音标】: friː\n【释义】: adj. 自由的 空闲的 大方的 免费的 vt. 释放 解放 adv. 自由地 免费地', source=['四级单词'], score=0.6138713359832764), YinyutlItem(id='5685', child='allow n.', parent="【单词】: allow\n【音标】: 'ə'laʊ\n【释义】: n.", source=['四级单词'], score=0.6095374822616577), YinyutlItem(id='1923', child='sharing.', parent='In ternet technologies with bicycles and invented the business model of bike-sharing.\xa0The\xa0appearance\xa0of\xa0shared\xa0bikes\xa0has\xa0made\xa0it\xa0more\xa0convenient for people to get ', source=['英语范文'], score=0.6079567074775696)]
+2025-12-28 11:18:36.462 | INFO     | __main__:<module>:135 - 最终回答：根据您提供的参考内容，这看起来像是一组数值（可能来自词向量或某种模型输出），而不是一个可以直接查询的单词或文章。因此，我无法从这些数值中直接找到与“freely”相关的信息。
+
+不过，我可以为您详细解释单词“freely”：
+
+**freely** /ˈfriːli/  
+*adverb*  
+1.  **Without restriction or control; in a free manner.**  
+    *Example:* The information is freely available on the internet.  
+    *例句:* 这些信息在互联网上可以自由获取。  
+2.  **Willingly and readily; without hesitation.**  
+    *Example:* She freely admitted her mistake.  
+    *例句:* 她爽快地承认了自己的错误。  
+3.  **In abundant amounts; generously.**  
+    *Example:* The plant grows freely in this climate.  
+    *例句:* 这种植物在这种气候下生长茂盛。  
+4.  **Without charge or payment.**  
+    *Example:* The software is distributed freely.  
+    *例句:* 这款软件是免费分发的。  
+
+如果您需要基于某篇特定听力文章来回答关于“freely”的问题，或者有其他英语学习方面的疑问，请提供更多上下文，我很乐意帮助您。
+2025-12-28 11:18:36.463 | INFO     | __main__:<module>:136 - 处理耗时：24.29 秒
+根据您提供的参考内容，这看起来像是一组数值（可能来自词向量或某种模型输出），而不是一个可以直接查询的单词或文章。因此，我无法从这些数值中直接找到与“freely”相关的信息。
+
+不过，我可以为您详细解释单词“freely”：
+
+**freely** /ˈfriːli/  
+*adverb*  
+1.  **Without restriction or control; in a free manner.**  
+    *Example:* The information is freely available on the internet.  
+    *例句:* 这些信息在互联网上可以自由获取。  
+2.  **Willingly and readily; without hesitation.**  
+    *Example:* She freely admitted her mistake.  
+    *例句:* 她爽快地承认了自己的错误。  
+3.  **In abundant amounts; generously.**  
+    *Example:* The plant grows freely in this climate.  
+    *例句:* 这种植物在这种气候下生长茂盛。  
+4.  **Without charge or payment.**  
+    *Example:* The software is distributed freely.  
+    *例句:* 这款软件是免费分发的。  
+
+如果您需要基于某篇特定听力文章来回答关于“freely”的问题，或者有其他英语学习方面的疑问，请提供更多上下文，我很乐意帮助您。
+请输入你的问题：^CTraceback (most recent call last):
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py", line 40, in <module>
+    update_query = input("请输入你的问题：")
+KeyboardInterrupt
+/opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py
+
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dock
+ertest/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：freely
+开始时间： 2025-12-28 11:20:26
+2
+123
+2025-12-28 11:20:35.273 | INFO     | __main__:<module>:84 - 原始问题：freely
+2025-12-28 11:20:35.274 | INFO     | __main__:<module>:85 - 检索策略：直接检索
+2025-12-28 11:20:35.275 | INFO     | __main__:<module>:86 - 修改后的问题：['freely']
+2025-12-28 11:20:35.275 | INFO     | __main__:<module>:95 - 修改后的问题：freely
+2025-12-28 11:20:35.607 | INFO     | __main__:<module>:104 - 关键词召回：[YinyutlItem(id='5326', child='freely adv. 自由地 免费地 直率地 大量地', parent="【单词】: freely\n【音标】: 'friːli\n【释义】: adv. 自由地 免费地 直率地 大量地", source=['四级单词'], score=0.0), YinyutlItem(id='2796', child='are good at reading or writing, they fail to express themselves freely in oral English.', parent='it is also difficult for them to understand rules of English grammar. In addition, though some are good at reading or writing, they fail to express themselves freely in oral English.  Then, how to get a good command of this language? I deem that practice makes perfect. ', source=['英语作文模版'], score=0.0), YinyutlItem(id='2761', child='though some are good at reading or writing, they fail to express themselves freely in oral', parent='3.Frequently, it is also difficult for them to understand rules of English grammar. In addition, though some are good at reading or writing, they fail to express themselves freely in oral English. ', source=['英语作文模版'], score=0.0), YinyutlItem(id='160', child='Finally, a group discussion and sharing session allowed students to talk freely about campus life, academic interests, and cultural experiences, leaving everyone with a deeper sense of connection.', parent=" The audience was amazed and responded with enthusiastic applause. Finally, a group discussion and sharing session allowed students to talk freely about campus life, academic interests, and cultural experiences, leaving everyone with a deeper sense of connection.The exchange event was both enjoyable and inspiring. It broadened students' horizons and fostered meaningful friendships. It also made our campus more open, inclusive, and globally connected. Everyone is looking forward to the next cultural exchange event.", source=['四级英语听力'], score=0.0)]
+2025-12-28 11:20:35.607 | INFO     | __main__:<module>:106 - 向量召回：[YinyutlItem(id='5326', child='freely adv. 自由地 免费地 直率地 大量地', parent="【单词】: freely\n【音标】: 'friːli\n【释义】: adv. 自由地 免费地 直率地 大量地", source=['四级单词'], score=0.739795446395874), YinyutlItem(id='6354', child='liberty n. 自由 释放 许可', parent="【单词】: liberty\n【音标】: 'libə'tɪbəriən\n【释义】: n. 自由 释放 许可", source=['四级单词'], score=0.6740531921386719), YinyutlItem(id='1150', child='happy.', parent='that the lives of the elderly will be more convenient, comfortable, healthy and happy.\xa023年12⽉第三套', source=['英语范文'], score=0.6594038009643555), YinyutlItem(id='1544', child='free trade zone.', parent="and people throughout the country,Hainan will become China's largest pilot free trade zone.2021年6⽉第⼆套", source=['英语范文'], score=0.6563047170639038), YinyutlItem(id='5325', child='freedom n. 自由 自主', parent="【单词】: freedom\n【音标】: 'friːdam\n【释义】: n. 自由 自主", source=['四级单词'], score=0.6548601388931274), YinyutlItem(id='2141', child='Opening Up.', parent='was just a fishing village with over 30,000 residents before the Reform and Opening Up.In the 1980s, the Chinese government established Shenzhen Special Economic ', source=['英语范文'], score=0.6417258977890015), YinyutlItem(id='5323', child='frank adj. 坦白的 直率的 无误的 vt. 免费邮寄 使自由出入 n. 免费 邮寄', parent='【单词】: frank\n【音标】: fræŋk\n【释义】: adj. 坦白的 直率的 无误的 vt. 免费邮寄 使自由出入 n. 免费 邮寄', source=['四级单词'], score=0.6374483108520508), YinyutlItem(id='5324', child='free adj. 自由的 空闲的 大方的 免费的 vt. 释放 解放 adv. 自由地 免费地', parent='【单词】: free\n【音标】: friː\n【释义】: adj. 自由的 空闲的 大方的 免费的 vt. 释放 解放 adv. 自由地 免费地', source=['四级单词'], score=0.6138713359832764), YinyutlItem(id='5685', child='allow n.', parent="【单词】: allow\n【音标】: 'ə'laʊ\n【释义】: n.", source=['四级单词'], score=0.6095374822616577), YinyutlItem(id='1923', child='sharing.', parent='In ternet technologies with bicycles and invented the business model of bike-sharing.\xa0The\xa0appearance\xa0of\xa0shared\xa0bikes\xa0has\xa0made\xa0it\xa0more\xa0convenient for people to get ', source=['英语范文'], score=0.6079567074775696)]
+召回文档的程度： 4
+精炼后的参考内容： [ 0.04319615  0.08851537  0.02668798 ... -0.01541942  0.02411581
+ -0.00430737]
+2025-12-28 11:20:47.112 | INFO     | __main__:<module>:139 - 最终回答：根据您提供的参考内容，这看起来像是一组数值（可能是一个向量或数组），而不是一个单词或文本。因此，我无法从中直接找到与“freely”相关的信息。
+
+不过，作为您的英语老师，我可以为您详细解释单词“freely”：
+
+**freely**  
+音标：英 [ˈfriːli] 美 [ˈfriːli]  
+词性：副词  
+解释：  
+1. 自由地，无拘束地；不受限制地。  
+2. 慷慨地，大方地。  
+3. 坦率地，直率地。
+
+例句：  
+1. The birds fly **freely** in the sky.（鸟儿在天空中自由飞翔。）  
+2. She gives her time **freely** to help others.（她慷慨地付出时间帮助他人。）  
+3. He spoke **freely** about his experiences.（他坦率地谈论了自己的经历。）
+
+如果您需要基于特定文章内容回答问题，请提供相关文本，我会很乐意为您解答！
+2025-12-28 11:20:47.113 | INFO     | __main__:<module>:140 - 处理耗时：20.39 秒
+根据您提供的参考内容，这看起来像是一组数值（可能是一个向量或数组），而不是一个单词或文本。因此，我无法从中直接找到与“freely”相关的信息。
+
+不过，作为您的英语老师，我可以为您详细解释单词“freely”：
+
+**freely**  
+音标：英 [ˈfriːli] 美 [ˈfriːli]  
+词性：副词  
+解释：  
+1. 自由地，无拘束地；不受限制地。  
+2. 慷慨地，大方地。  
+3. 坦率地，直率地。
+
+例句：  
+1. The birds fly **freely** in the sky.（鸟儿在天空中自由飞翔。）  
+2. She gives her time **freely** to help others.（她慷慨地付出时间帮助他人。）  
+3. He spoke **freely** about his experiences.（他坦率地谈论了自己的经历。）
+
+如果您需要基于特定文章内容回答问题，请提供相关文本，我会很乐意为您解答！
+请输入你的问题：^CTraceback (most recent call last):
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py", line 40, in <module>
+    update_query = input("请输入你的问题：")
+KeyboardInterrupt
+/opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py
+
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dock
+ertest/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：freely
+开始时间： 2025-12-28 11:21:52
+2
+123
+2025-12-28 11:22:01.486 | INFO     | __main__:<module>:84 - 原始问题：freely
+2025-12-28 11:22:01.487 | INFO     | __main__:<module>:85 - 检索策略：直接检索
+2025-12-28 11:22:01.487 | INFO     | __main__:<module>:86 - 修改后的问题：['freely']
+2025-12-28 11:22:01.487 | INFO     | __main__:<module>:95 - 修改后的问题：freely
+2025-12-28 11:22:01.807 | INFO     | __main__:<module>:104 - 关键词召回：[YinyutlItem(id='5326', child='freely adv. 自由地 免费地 直率地 大量地', parent="【单词】: freely\n【音标】: 'friːli\n【释义】: adv. 自由地 免费地 直率地 大量地", source=['四级单词'], score=0.0), YinyutlItem(id='2796', child='are good at reading or writing, they fail to express themselves freely in oral English.', parent='it is also difficult for them to understand rules of English grammar. In addition, though some are good at reading or writing, they fail to express themselves freely in oral English.  Then, how to get a good command of this language? I deem that practice makes perfect. ', source=['英语作文模版'], score=0.0), YinyutlItem(id='2761', child='though some are good at reading or writing, they fail to express themselves freely in oral', parent='3.Frequently, it is also difficult for them to understand rules of English grammar. In addition, though some are good at reading or writing, they fail to express themselves freely in oral English. ', source=['英语作文模版'], score=0.0), YinyutlItem(id='160', child='Finally, a group discussion and sharing session allowed students to talk freely about campus life, academic interests, and cultural experiences, leaving everyone with a deeper sense of connection.', parent=" The audience was amazed and responded with enthusiastic applause. Finally, a group discussion and sharing session allowed students to talk freely about campus life, academic interests, and cultural experiences, leaving everyone with a deeper sense of connection.The exchange event was both enjoyable and inspiring. It broadened students' horizons and fostered meaningful friendships. It also made our campus more open, inclusive, and globally connected. Everyone is looking forward to the next cultural exchange event.", source=['四级英语听力'], score=0.0)]
+2025-12-28 11:22:01.808 | INFO     | __main__:<module>:106 - 向量召回：[YinyutlItem(id='5326', child='freely adv. 自由地 免费地 直率地 大量地', parent="【单词】: freely\n【音标】: 'friːli\n【释义】: adv. 自由地 免费地 直率地 大量地", source=['四级单词'], score=0.739795446395874), YinyutlItem(id='6354', child='liberty n. 自由 释放 许可', parent="【单词】: liberty\n【音标】: 'libə'tɪbəriən\n【释义】: n. 自由 释放 许可", source=['四级单词'], score=0.6740531921386719), YinyutlItem(id='1150', child='happy.', parent='that the lives of the elderly will be more convenient, comfortable, healthy and happy.\xa023年12⽉第三套', source=['英语范文'], score=0.6594038009643555), YinyutlItem(id='1544', child='free trade zone.', parent="and people throughout the country,Hainan will become China's largest pilot free trade zone.2021年6⽉第⼆套", source=['英语范文'], score=0.6563047170639038), YinyutlItem(id='5325', child='freedom n. 自由 自主', parent="【单词】: freedom\n【音标】: 'friːdam\n【释义】: n. 自由 自主", source=['四级单词'], score=0.6548601388931274), YinyutlItem(id='2141', child='Opening Up.', parent='was just a fishing village with over 30,000 residents before the Reform and Opening Up.In the 1980s, the Chinese government established Shenzhen Special Economic ', source=['英语范文'], score=0.6417258977890015), YinyutlItem(id='5323', child='frank adj. 坦白的 直率的 无误的 vt. 免费邮寄 使自由出入 n. 免费 邮寄', parent='【单词】: frank\n【音标】: fræŋk\n【释义】: adj. 坦白的 直率的 无误的 vt. 免费邮寄 使自由出入 n. 免费 邮寄', source=['四级单词'], score=0.6374483108520508), YinyutlItem(id='5324', child='free adj. 自由的 空闲的 大方的 免费的 vt. 释放 解放 adv. 自由地 免费地', parent='【单词】: free\n【音标】: friː\n【释义】: adj. 自由的 空闲的 大方的 免费的 vt. 释放 解放 adv. 自由地 免费地', source=['四级单词'], score=0.6138713359832764), YinyutlItem(id='5685', child='allow n.', parent="【单词】: allow\n【音标】: 'ə'laʊ\n【释义】: n.", source=['四级单词'], score=0.6095374822616577), YinyutlItem(id='1923', child='sharing.', parent='In ternet technologies with bicycles and invented the business model of bike-sharing.\xa0The\xa0appearance\xa0of\xa0shared\xa0bikes\xa0has\xa0made\xa0it\xa0more\xa0convenient for people to get ', source=['英语范文'], score=0.6079567074775696)]
+召回文档的程度： 64
+精炼后的参考内容： [ 0.04319615  0.08851537  0.02668798 ... -0.01541942  0.02411581
+ -0.00430737]
+精炼后的参考内容长度： 1536
+2025-12-28 11:22:14.040 | INFO     | __main__:<module>:139 - 最终回答：根据您提供的参考内容，我无法直接找到与单词“freely”相关的听力文章或具体解释，因为参考内容看起来像是一组数值数据，而非文本信息。
+
+不过，我可以为您详细解释单词“freely”：
+
+**freely**  
+**音标**：英 [ˈfriːli]；美 [ˈfriːli]  
+**词性**：副词  
+**解释**：  
+1. 自由地，无拘束地；不受限制地。  
+2. 慷慨地，大方地。  
+3. 坦率地，直率地。  
+
+**例句**：  
+1. Birds fly **freely** in the sky.（鸟儿在天空中自由飞翔。）  
+2. She gives **freely** to charity.（她慷慨地向慈善机构捐款。）  
+3. You can speak **freely** here.（在这里你可以畅所欲言。）  
+
+如果您需要关于“freely”的听力文章或有其他英语问题，请提供更多背景信息，我会尽力协助！
+2025-12-28 11:22:14.041 | INFO     | __main__:<module>:140 - 处理耗时：21.12 秒
+根据您提供的参考内容，我无法直接找到与单词“freely”相关的听力文章或具体解释，因为参考内容看起来像是一组数值数据，而非文本信息。
+
+不过，我可以为您详细解释单词“freely”：
+
+**freely**  
+**音标**：英 [ˈfriːli]；美 [ˈfriːli]  
+**词性**：副词  
+**解释**：  
+1. 自由地，无拘束地；不受限制地。  
+2. 慷慨地，大方地。  
+3. 坦率地，直率地。  
+
+**例句**：  
+1. Birds fly **freely** in the sky.（鸟儿在天空中自由飞翔。）  
+2. She gives **freely** to charity.（她慷慨地向慈善机构捐款。）  
+3. You can speak **freely** here.（在这里你可以畅所欲言。）  
+
+如果您需要关于“freely”的听力文章或有其他英语问题，请提供更多背景信息，我会尽力协助！
+请输入你的问题：^CTraceback (most recent call last):
+  File "/Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py", line 40, in <module>
+    update_query = input("请输入你的问题：")
+KeyboardInterrupt
+/opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dockertest/app/rag/rag_run_gaixiequery.py
+
+(large_model) (base) echo@EchodeMacBook-Pro app % /opt/anaconda3/envs/large_model/bin/python /Users/echo/Documents/cyb/test/dock
+ertest/app/rag/rag_run_gaixiequery.py
+/opt/anaconda3/envs/large_model/lib/python3.10/site-packages/elasticsearch/_sync/client/__init__.py:402: SecurityWarning: Connecting to 'https://localhost:9200' using TLS with verify_certs=False is insecure
+  _transport = transport_class(
+请输入你的问题：freely
+开始时间： 2025-12-28 11:23:00
+2
+123
+2025-12-28 11:23:08.688 | INFO     | __main__:<module>:84 - 原始问题：freely
+2025-12-28 11:23:08.689 | INFO     | __main__:<module>:85 - 检索策略：直接检索
+2025-12-28 11:23:08.689 | INFO     | __main__:<module>:86 - 修改后的问题：['freely']
+2025-12-28 11:23:08.690 | INFO     | __main__:<module>:95 - 修改后的问题：freely
+2025-12-28 11:23:09.035 | INFO     | __main__:<module>:104 - 关键词召回：[YinyutlItem(id='5326', child='freely adv. 自由地 免费地 直率地 大量地', parent="【单词】: freely\n【音标】: 'friːli\n【释义】: adv. 自由地 免费地 直率地 大量地", source=['四级单词'], score=0.0), YinyutlItem(id='2796', child='are good at reading or writing, they fail to express themselves freely in oral English.', parent='it is also difficult for them to understand rules of English grammar. In addition, though some are good at reading or writing, they fail to express themselves freely in oral English.  Then, how to get a good command of this language? I deem that practice makes perfect. ', source=['英语作文模版'], score=0.0), YinyutlItem(id='2761', child='though some are good at reading or writing, they fail to express themselves freely in oral', parent='3.Frequently, it is also difficult for them to understand rules of English grammar. In addition, though some are good at reading or writing, they fail to express themselves freely in oral English. ', source=['英语作文模版'], score=0.0), YinyutlItem(id='160', child='Finally, a group discussion and sharing session allowed students to talk freely about campus life, academic interests, and cultural experiences, leaving everyone with a deeper sense of connection.', parent=" The audience was amazed and responded with enthusiastic applause. Finally, a group discussion and sharing session allowed students to talk freely about campus life, academic interests, and cultural experiences, leaving everyone with a deeper sense of connection.The exchange event was both enjoyable and inspiring. It broadened students' horizons and fostered meaningful friendships. It also made our campus more open, inclusive, and globally connected. Everyone is looking forward to the next cultural exchange event.", source=['四级英语听力'], score=0.0)]
+2025-12-28 11:23:09.036 | INFO     | __main__:<module>:106 - 向量召回：[YinyutlItem(id='5326', child='freely adv. 自由地 免费地 直率地 大量地', parent="【单词】: freely\n【音标】: 'friːli\n【释义】: adv. 自由地 免费地 直率地 大量地", source=['四级单词'], score=0.739795446395874), YinyutlItem(id='6354', child='liberty n. 自由 释放 许可', parent="【单词】: liberty\n【音标】: 'libə'tɪbəriən\n【释义】: n. 自由 释放 许可", source=['四级单词'], score=0.6740531921386719), YinyutlItem(id='1150', child='happy.', parent='that the lives of the elderly will be more convenient, comfortable, healthy and happy.\xa023年12⽉第三套', source=['英语范文'], score=0.6594038009643555), YinyutlItem(id='1544', child='free trade zone.', parent="and people throughout the country,Hainan will become China's largest pilot free trade zone.2021年6⽉第⼆套", source=['英语范文'], score=0.6563047170639038), YinyutlItem(id='5325', child='freedom n. 自由 自主', parent="【单词】: freedom\n【音标】: 'friːdam\n【释义】: n. 自由 自主", source=['四级单词'], score=0.6548601388931274), YinyutlItem(id='2141', child='Opening Up.', parent='was just a fishing village with over 30,000 residents before the Reform and Opening Up.In the 1980s, the Chinese government established Shenzhen Special Economic ', source=['英语范文'], score=0.6417258977890015), YinyutlItem(id='5323', child='frank adj. 坦白的 直率的 无误的 vt. 免费邮寄 使自由出入 n. 免费 邮寄', parent='【单词】: frank\n【音标】: fræŋk\n【释义】: adj. 坦白的 直率的 无误的 vt. 免费邮寄 使自由出入 n. 免费 邮寄', source=['四级单词'], score=0.6374483108520508), YinyutlItem(id='5324', child='free adj. 自由的 空闲的 大方的 免费的 vt. 释放 解放 adv. 自由地 免费地', parent='【单词】: free\n【音标】: friː\n【释义】: adj. 自由的 空闲的 大方的 免费的 vt. 释放 解放 adv. 自由地 免费地', source=['四级单词'], score=0.6138713359832764), YinyutlItem(id='5685', child='allow n.', parent="【单词】: allow\n【音标】: 'ə'laʊ\n【释义】: n.", source=['四级单词'], score=0.6095374822616577), YinyutlItem(id='1923', child='sharing.', parent='In ternet technologies with bicycles and invented the business model of bike-sharing.\xa0The\xa0appearance\xa0of\xa0shared\xa0bikes\xa0has\xa0made\xa0it\xa0more\xa0convenient for people to get ', source=['英语范文'], score=0.6079567074775696)]
+2025-12-28 11:23:17.272 | INFO     | __main__:<module>:139 - 最终回答：**freely**  
+**音标**：/ˈfriːli/  
+**释义**：  
+1. **自由地**（without restriction）  
+   - 例句：You can move freely in this area.  
+2. **免费地**（without payment）  
+   - 例句：The app can be downloaded freely.  
+3. **直率地**（openly and honestly）  
+   - 例句：She spoke freely about her experiences.  
+4. **大量地**（in large amounts）  
+   - 例句：Water flowed freely from the spring.
+2025-12-28 11:23:17.272 | INFO     | __main__:<module>:140 - 处理耗时：16.89 秒
+**freely**  
+**音标**：/ˈfriːli/  
+**释义**：  
+1. **自由地**（without restriction）  
+   - 例句：You can move freely in this area.  
+2. **免费地**（without payment）  
+   - 例句：The app can be downloaded freely.  
+3. **直率地**（openly and honestly）  
+   - 例句：She spoke freely about her experiences.  
+4. **大量地**（in large amounts）  
+   - 例句：Water flowed freely from the spring.
+请输入你的问题：

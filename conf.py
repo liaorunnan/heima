@@ -57,6 +57,9 @@ class Setting(BaseSettings):
     local_model_device: str = "cpu"
     local_model_max_length: int = 512
 
+
+    refin_emb_url: str
+
     model_config = ConfigDict(
         extra='allow',
         env_file=f'{PATH}/.env',

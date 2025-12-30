@@ -8,6 +8,7 @@ class YinyutlItem(BaseModel):
     child: str
     parent: str
     source: List[str]
+    score: float = 0.0
 
     def __hash__(self):
         return hash(self.id)
