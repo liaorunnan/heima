@@ -2,7 +2,7 @@ import requests
 from conf import settings
 
 def rank(text_1, text_2, model="bge-reranker-v2-m3"):
-    url = settings.Rank_url
+    url = settings.Mu_Rank_url
     data = {
         "model": model,
         "encoding_format": "float",

@@ -1,4 +1,5 @@
 import os
+import signal
 from pydantic import ConfigDict
 from pydantic_settings import BaseSettings
 from typing import List
@@ -43,6 +44,7 @@ class Setting(BaseSettings):
     Emb_url: str
     Emb_token: str
     Rank_url: str
+    Mu_Rank_url: str
 
     redis_host: str
     redis_password: str
@@ -59,6 +61,7 @@ class Setting(BaseSettings):
 
 
     refin_emb_url: str
+    signal_emb_url: str
 
     model_config = ConfigDict(
         extra='allow',

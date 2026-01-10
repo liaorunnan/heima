@@ -35,3 +35,18 @@ class QaItem(BaseModel):
     #         return self.qid == other.qid
         
     #     return False
+
+
+class MuilPhotoItem(BaseModel):
+    qid: str
+    photo_name: str
+    photo_meta: str 
+    score: float = 0.0
+
+
+
+class MuilTextItem(BaseModel):
+    qid: str
+    text_name: str
+    text_meta: str 
+    score: float = 0.0
