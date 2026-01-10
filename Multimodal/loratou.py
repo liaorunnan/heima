@@ -13,11 +13,11 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# --- 配置 ---
-# 基础模型路径
+
+
 BASE_MODEL_PATH = "/root/autodl-tmp/.cache/modelscope/hub/models/Qwen/Qwen2.5-VL-7B-Instruct"
 
-# LoRA权重映射 (名称: 路径)
+
 LORA_MAPPING = {
     "default": "/root/autodl-tmp/output/qwen2.5-vl-7b-lora/v9-20260102-202609/checkpoint-63",  # 添加更多LoRA模型
     # "other_lora": "/path/to/other_lora",
@@ -27,9 +27,8 @@ LORA_MAPPING = {
 LORA_MODELS = {}
 
 # 初始化基础模型
-print(f"⏳ 正在加载基础模型: {BASE_MODEL_PATH} ...")
+print(f"正在加载基础模型: {BASE_MODEL_PATH} ...")
 try:
-    # 加载基础模型 (不合并LoRA)
     base_model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
         BASE_MODEL_PATH,
         torch_dtype=torch.bfloat16,
@@ -38,9 +37,9 @@ try:
     
     # 加载处理器
     processor = AutoProcessor.from_pretrained(BASE_MODEL_PATH)
-    print("✅ 基础模型加载完成！")
+    print("基础模型加载完成！")
 except Exception as e:
-    print(f"❌ 基础模型加载失败: {e}")
+    print(f"基础模型加载失败: {e}")
     base_model = None
     processor = None
 
