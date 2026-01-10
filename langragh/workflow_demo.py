@@ -3,19 +3,20 @@ from langgraph.types import RetryPolicy
 from langgraph.graph import StateGraph, START, END
 from typing import TypedDict
 from langgraph.types import RunnableConfig
+from langchain_core.messages import SystemMessage, HumanMessage
+
+
+
+from llm_input import model
+
 import random
 
 
 
 class EmailAgentState(TypedDict):
     email: str
-    intent: str
-    documentation: str
-    bug_tracking: str
-    response: str
-    human_review: str
-    reply: str
-    next_action: str
+    response: str = ""
+    next_action: str = ""
 
 
 def read_email(State: EmailAgentState):
@@ -30,7 +31,9 @@ def classify_intent(State: EmailAgentState):
         State["next_action"] = "send_reply"
     else:
         State["next_action"] = "send_reply_error"
-    return State['next_action']
+    return State
+def classify_intent_node(State: EmailAgentState):
+    return State["next_action"]
 
 def search_documentation(State: EmailAgentState):
     print("正在搜索文档...")
@@ -57,6 +60,20 @@ def send_reply_error(State: EmailAgentState):
     return State
 
 
+def error_handler(State: EmailAgentState):
+
+
+    message = [
+        SystemMessage(content="你是一个专业的电子邮件助手，负责处理用户的电子邮件问题，根据我给你的字符串判断是否发送成功了，如果是send_reply便是成功，如果是send_reply_error便是失败，发送成功返回success，否则返回error"),
+        HumanMessage(content=State["next_action"])
+    ]
+    
+    response = model.invoke(message)
+    State["response"] = response.content
+    print(f"回复: {response.content}")
+    return State
+    
+
 
 # 创建图
 workflow = StateGraph(EmailAgentState)
@@ -76,23 +93,22 @@ workflow.add_node("draft_response", draft_response)
 workflow.add_node("human_review", human_review)
 workflow.add_node("send_reply", send_reply)
 workflow.add_node("send_reply_error", send_reply_error)
+workflow.add_node("error_handler", error_handler)
+
 
 # 只添加必要的边
 workflow.add_edge(START, "read_email")
-# workflow.add_edge("read_email", "classify_intent")
+workflow.add_edge("read_email", "classify_intent")
 
-# workflow.add_conditional_edges(
-#     "classify_intent",
-#     lambda state: state["next_action"],
-#     {
-#         "send_reply": "send_reply",
-#         "send_reply_error": "send_reply_error"
-#     }
-# )
+workflow.add_conditional_edges(
+    "classify_intent",
+    classify_intent_node
+)
 
-workflow.add_conditional_edges("read_email", classify_intent)
-workflow.add_edge("send_reply", END)
-workflow.add_edge("send_reply_error", END)
+# workflow.add_conditional_edges("read_email", classify_intent)
+workflow.add_edge("send_reply", error_handler.__name__)
+workflow.add_edge("send_reply_error", error_handler.__name__)
+workflow.add_edge("error_handler", END)
 
 
 config1 = RunnableConfig(configurable={
@@ -102,4 +118,4 @@ config1 = RunnableConfig(configurable={
 # 使用检查点进行持久化编译
 memory = MemorySaver()
 app = workflow.compile(checkpointer=memory)
-app.invoke({"email": "test@example.com"}, config=config1)
+app.invoke({"email": "test@example.com", "next_action": "", "response": ""}, config=config1)
