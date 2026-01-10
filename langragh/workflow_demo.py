@@ -118,4 +118,4 @@ config1 = RunnableConfig(configurable={
 # 使用检查点进行持久化编译
 memory = MemorySaver()
 app = workflow.compile(checkpointer=memory)
-app.invoke({"email": "test@example.com", "next_action": "", "response": ""}, config=config1)
+app.invoke({"email": "test@example.com"}, config=config1)
