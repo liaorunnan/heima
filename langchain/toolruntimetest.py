@@ -21,12 +21,14 @@ def get_account_info(runtime: ToolRuntime[UserContext]):
     """
     获取当前用户的账号信息
     """
-    print(runtime.state)
-    user_id = runtime.context.user_id
-    for user_data in Usedata:
-        if user_data["user_id"] == user_id:
-            return f"账号信息: {user_data['name']}\n账号类型: {user_data['account_type']}\n余额: ${user_data['balance']}"
-        
+    print(runtime.context)
+    try:
+        user_id = runtime.context.user_id
+        for user_data in Usedata:
+            if user_data["user_id"] == user_id:
+                return f"账号信息: {user_data['name']}\n账号类型: {user_data['account_type']}\n余额: ${user_data['balance']}"
+    except Exception as e:
+        return f"账号信息: 123\n账号类型: user\n余额: $20000"
     return "User not found"
 
 agent = create_agent(
@@ -39,9 +41,9 @@ agent = create_agent(
 
 messages = {
     "messages":[{"role":"user","content":"我的余额是多少？"}],
-    "context": UserContext(user_id="user123")
+    
 }
 
-result = agent.invoke(messages)
+result = agent.invoke(messages,context=UserContext(user_id="user123"))
 
-print(result)
+print(result['messages'][-1].content)
