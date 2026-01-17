@@ -2,6 +2,12 @@ from typing import Any
 from langgraph.store.memory import InMemoryStore
 from langchain.agents import create_agent
 from langchain.tools import tool, ToolRuntime
+from langchain_openai import ChatOpenAI
+
+from conf import settings
+
+model = ChatOpenAI(temperature=0.7, model_name=settings.model_name,max_tokens=1024,timeout=60,api_key=settings.api_key, base_url=settings.base_url)
+
 
 
 # Access memory
@@ -28,11 +34,13 @@ agent = create_agent(
 )
 
 # First session: save user info
-agent.invoke({
+result1= agent.invoke({
     "messages": [{"role": "user", "content": "Save the following user: userid: abc123, name: Foo, age: 25, email: foo@langchain.dev"}]
 })
+print(result1["messages"][-1].content)
 
 # Second session: get user info
-agent.invoke({
+result2 = agent.invoke({
     "messages": [{"role": "user", "content": "Get user info for user with id 'abc123'"}]
 })
+print(result2["messages"][-1].content)
