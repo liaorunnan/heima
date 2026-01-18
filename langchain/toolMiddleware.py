@@ -35,4 +35,4 @@ agent = create_agent(
 message = agent.invoke(
     {"messages": [{"role": "user", "content": "你好,我的名字是什么"}]},
 )
-print(message['messages'][-1].content)
+print(message['messages'][-1].content) # 包含第一次一共四次调用了
