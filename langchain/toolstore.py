@@ -13,17 +13,62 @@ model = ChatOpenAI(temperature=0.7, model_name=settings.model_name,max_tokens=10
 # Access memory
 @tool
 def get_user_info(user_id: str, runtime: ToolRuntime) -> str:
-    """Look up user info."""
+    """
+    从内存存储中查询用户信息
+    
+    Args:
+        user_id (str): 用户的唯一标识符
+        runtime (ToolRuntime): 工具运行时对象，包含内存存储的访问接口
+        
+    Returns:
+        str: 查询到的用户信息字符串，如果用户不存在则返回"Unknown user"
+    
+    示例:
+        # 调用示例
+        result = get_user_info("abc123", runtime)
+        # 返回: "{'name': 'Foo', 'age': 25, 'email': 'foo@langchain.dev'}"
+    """
+    # 从运行时获取内存存储实例
     store = runtime.store
+    
+    # 使用复合键("users",)和user_id从存储中获取用户信息
+    # ("users",) 作为命名空间，user_id 作为具体的用户标识符
     user_info = store.get(("users",), user_id)
+    
+    # 如果找到用户信息，则返回其值的字符串表示；否则返回"Unknown user"
     return str(user_info.value) if user_info else "Unknown user"
 
 # Update memory
 @tool
 def save_user_info(user_id: str, user_info: dict[str, Any], runtime: ToolRuntime) -> str:
-    """Save user info."""
+    """
+    将用户信息保存到内存存储中
+    
+    Args:
+        user_id (str): 用户的唯一标识符
+        user_info (dict[str, Any]): 包含用户信息的字典
+        runtime (ToolRuntime): 工具运行时对象，包含内存存储的访问接口
+        
+    Returns:
+        str: 保存成功的提示信息
+    
+    示例:
+        # 调用示例
+        result = save_user_info(
+            "abc123", 
+            {"name": "Foo", "age": 25, "email": "foo@langchain.dev"}, 
+            runtime
+        )
+        # 返回: "Successfully saved user info."
+    """
+    # 从运行时获取内存存储实例
     store = runtime.store
+    
+    # 使用复合键("users",)和user_id将用户信息保存到存储中
+    # ("users",) 作为命名空间，user_id 作为具体的用户标识符
     store.put(("users",), user_id, user_info)
+    
+    # 返回保存成功的提示信息
     return "Successfully saved user info."
 
 store = InMemoryStore()
