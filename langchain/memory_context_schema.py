@@ -39,18 +39,18 @@ def main():
         base_url=settings.qw_api_url,
     )
 
-    agent = create_agent(
-        model=model,
+agent = create_agent(
+    model=model,
         context_schema=Context,
         middleware=[context_prompt],
-    )
+)
 
-    result = agent.invoke(
-        {"messages": [{"role": "user", "content": "what is my name?"}]},
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "what is my name?"}]},
         context=Context(name="Echo"),
-    )
+)
 
-    print(result["messages"][-1].content)
+print(result["messages"][-1].content)
 
 
 if __name__ == "__main__":
