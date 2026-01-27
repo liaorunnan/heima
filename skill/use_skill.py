@@ -28,7 +28,8 @@ result = client.chat.completions.create(
     model=settings.model_name,
     messages=[
         {"role": "system", "content": prompt},
-        {"role": "user", "content": "请利用skill完成以下任务：我想知道中国宋代的诗歌"}
+        {"role": "user", "content": "请利用skill完成以下任务：我想知道中国宋代的诗歌"}        
+        # {"role": "user", "content": "请利用skill完成以下任务：我想知道英语元代的诗歌"}
     ],
     max_tokens=100,
     temperature=0.5,
