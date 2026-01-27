@@ -13,7 +13,6 @@ with open(shuoming_dir, "r", encoding="utf-8") as f:
 
         
 for skill in manifest['skill']:
-    # 【这里是重点】：LLM 就是靠读这一行 description 来决定选谁的！
     prompt += f"- 工具名: {skill['name']}\n"
     prompt += f"  描述: {skill['description']}\n"
     prompt += f"  参数: {skill['schemas']}\n"
