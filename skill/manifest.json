@@ -1,0 +1,38 @@
+{
+    "skill": [
+        {
+            "name": "ChineseSkill",
+            "description": "用于查询中国各个朝代的诗词",
+            "version": "1.0.0",
+            "entry_point": "actions.chinese:ChineseSkill",
+            "schemas": {
+                "type": "object",
+                "properties": {
+                    "caodai": {
+                    "type": "string",
+                    "description": "需要查询的朝代，例如：'唐'、'宋'。"
+                    }
+                },
+                "required": ["caodai"]
+            }
+        },
+        {
+            "name": "EnglishSkill",
+            "description": "用于查询英文各个朝代的诗词",
+            "version": "1.0.0",
+            "entry_point": "actions.english:EnglishSkill",
+            "schemas": {
+                "type": "object",
+                "properties": {
+                    "caodai": {
+                    "type": "string",
+                    "description": "需要查询的朝代，例如：'yuan'、'qing'。"
+                    }
+                },
+                "required": ["caodai"]
+            }
+        }
+    ]
+
+  
+}
