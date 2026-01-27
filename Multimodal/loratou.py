@@ -15,11 +15,11 @@ logger = logging.getLogger(__name__)
 
 
 
-BASE_MODEL_PATH = "/root/autodl-tmp/.cache/modelscope/hub/models/Qwen/Qwen2.5-VL-7B-Instruct"
+BASE_MODEL_PATH = "/root/autodl-tmp/.cache/modelscope/hub/models/Qwen/Qwen3-0.6B"
 
 
 LORA_MAPPING = {
-    "default": "/root/autodl-tmp/output/qwen2.5-vl-7b-lora/v9-20260102-202609/checkpoint-63",  # 添加更多LoRA模型
+    "default": "/root/autodl-tmp/output/qwen306b-lora/v0-20260126-211639/checkpoint-1345",  # 添加更多LoRA模型
     # "other_lora": "/path/to/other_lora",
 }
 
