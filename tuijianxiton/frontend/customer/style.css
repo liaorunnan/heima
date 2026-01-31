@@ -1,0 +1,728 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background-color: var(--color-oat-white); /* 燕麦白 */
+}
+
+/* 字体引入 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
+
+/* 变量定义 */
+:root {
+    --color-oat-white: #f8f7f3;
+    --color-light-clay: #e8ded1;
+    --color-gray-wood: #a69c91;
+    --color-dark-gray: #5a554e;
+    --color-text-primary: #333;
+    --color-text-secondary: #666;
+    --color-text-tertiary: #999;
+    --color-accent: #d4a574;
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 认证界面样式 */
+#auth-container {
+    max-width: 400px;
+    margin: 100px auto;
+    background: white;
+    padding: 40px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+#auth-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--color-text-primary);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--color-light-clay);
+}
+
+.auth-tabs button {
+    flex: 1;
+    padding: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    transition: var(--transition);
+    position: relative;
+}
+
+.auth-tabs button:hover {
+    color: var(--color-text-primary);
+}
+
+.auth-tabs button.active {
+    color: var(--color-accent);
+}
+
+.auth-tabs button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: var(--transition);
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--color-light-clay);
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    transition: var(--transition);
+    background-color: var(--color-oat-white);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn:hover {
+    background-color: #c49564;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* 涟漪效果 */
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.submit-btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+#auth-message {
+    margin-top: 20px;
+    padding: 12px 16px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-size: 14px;
+}
+
+#auth-message.error {
+    background-color: rgba(220, 53, 69, 0.05);
+    color: #721c24;
+    border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+#auth-message.success {
+    background-color: rgba(40, 167, 69, 0.05);
+    color: #155724;
+    border: 1px solid rgba(40, 167, 69, 0.2);
+}
+
+/* 聊天界面样式 */
+#chat-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    max-width: 100%;
+    background-color: var(--color-oat-white);
+}
+
+.chat-header {
+    background-color: white;
+    color: var(--color-text-primary);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.chat-header h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+#logout-btn {
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-light-clay);
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#logout-btn:hover {
+    background-color: var(--color-light-clay);
+    color: var(--color-text-primary);
+}
+
+.chat-body {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.chat-sidebar {
+    width: 320px;
+    background-color: white;
+    border-right: 1px solid var(--color-light-clay);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--color-light-clay);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header h2 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+#create-chat-btn {
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 14px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+#create-chat-btn:hover {
+    background-color: #c49564;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+}
+
+#create-chat-btn:active {
+    transform: translateY(0);
+}
+
+/* 涟漪效果 */
+#create-chat-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+#create-chat-btn:active::before {
+    width: 200px;
+    height: 200px;
+}
+
+#chat-rooms-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+}
+
+.chat-room-item {
+    padding: 16px;
+    border-bottom: 1px solid var(--color-light-clay);
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    margin-bottom: 8px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.chat-room-item:hover {
+    background-color: var(--color-oat-white);
+    transform: translateX(4px);
+}
+
+.chat-room-item.active {
+    background-color: rgba(212, 165, 116, 0.1);
+    color: var(--color-text-primary);
+    border-left: 3px solid var(--color-accent);
+}
+
+.chat-room-name {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--color-text-primary);
+}
+
+.chat-room-last-message {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+}
+
+.chat-room-item.active .chat-room-last-message {
+    color: var(--color-text-secondary);
+}
+
+.chat-room-time {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    text-align: right;
+    margin-top: 4px;
+}
+
+.chat-room-item.active .chat-room-time {
+    color: var(--color-text-tertiary);
+}
+
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.empty-state {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text-secondary);
+    font-size: 16px;
+}
+
+#chat-window {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.chat-header-info {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--color-light-clay);
+    background-color: var(--color-oat-white);
+}
+
+.chat-header-info h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
+.messages-container {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--color-oat-white);
+}
+
+.message {
+    max-width: 70%;
+    padding: 16px 20px;
+    border-radius: var(--border-radius);
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    margin-bottom: 12px;
+}
+
+.message:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 发送的消息 - 右侧，使用强调色 */
+.message-sent {
+    align-self: flex-end !important;
+    background-color: var(--color-accent);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+/* 接收的消息 - 左侧，使用白色背景 */
+.message-received {
+    align-self: flex-start !important;
+    background-color: white;
+    border: 1px solid var(--color-light-clay);
+    border-bottom-left-radius: 4px;
+}
+
+.message-content {
+    word-wrap: break-word;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.message-time {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: right;
+    margin-top: 8px;
+}
+
+.message-received .message-time {
+    color: var(--color-text-tertiary);
+}
+
+/* 商品卡片消息样式 */
+.message .product-card {
+    margin: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.message-sent .product-card {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.message-received .product-card {
+    background-color: var(--color-oat-white);
+}
+
+/* 商品卡片样式 */
+.product-card {
+    background-color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin: 12px 0;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--color-text-primary);
+    line-height: 1.3;
+}
+
+.product-description {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-gray-wood);
+    margin-bottom: 8px;
+    transition: var(--transition);
+}
+
+.product-card:hover .product-price {
+    color: var(--color-accent);
+}
+
+.message-input-container {
+    padding: 20px;
+    border-top: 1px solid var(--color-light-clay);
+    display: flex;
+    gap: 12px;
+    background-color: var(--color-oat-white);
+    align-items: center;
+}
+
+#message-input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1px solid var(--color-light-clay);
+    border-radius: 25px;
+    font-size: 15px;
+    transition: var(--transition);
+    background-color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+#message-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+}
+
+#send-message-btn {
+    padding: 14px 24px;
+    background-color: var(--color-gray-wood);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+#send-message-btn:hover {
+    background-color: var(--color-accent);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+#send-message-btn:active {
+    transform: translateY(0);
+}
+
+/* 涟漪效果 */
+#send-message-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+#send-message-btn:active::before {
+    width: 200px;
+    height: 200px;
+}
+
+/* 商品详情模态框 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 32px;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: var(--shadow-md);
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-content h2 {
+    margin-bottom: 24px;
+    color: var(--color-text-primary);
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--color-text-tertiary);
+    transition: var(--transition);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-light-clay);
+    transform: scale(1.1);
+}
+
+#product-details {
+    line-height: 1.7;
+}
+
+#product-details h3 {
+    margin-top: 24px;
+    margin-bottom: 12px;
+    color: var(--color-text-primary);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#product-details p {
+    margin-bottom: 12px;
+    color: var(--color-text-secondary);
+    font-size: 15px;
+}
+
+#product-details .product-price {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin: 20px 0;
+    padding: 12px 0;
+    border-top: 1px solid var(--color-light-clay);
+    border-bottom: 1px solid var(--color-light-clay);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .chat-sidebar {
+        width: 250px;
+    }
+
+    .message {
+        max-width: 85%;
+    }
+}
+
+@media (max-width: 576px) {
+    .chat-sidebar {
+        width: 200px;
+    }
+
+    .chat-header h1 {
+        font-size: 16px;
+    }
+
+    .chat-header-info h2 {
+        font-size: 16px;
+    }
+
+    .messages-container {
+        padding: 10px;
+    }
+
+    .message-input-container {
+        padding: 10px;
+    }
+}
