@@ -69,19 +69,15 @@ def run_tag_extraction():
         # persona_system.long_term_profile = load_from_db(...)
         
         # 传入提取的标签进行更新
-        # 注意：extracted_tags 是一个列表，格式如 [{"name": "...", "tier": "..."}]
-        # UserPersonaSystem.update_persona 已经适配了这个格式
+        # 新版 update_persona 接收结构化对象: { "target_category": "...", "tags": [...] }
         if isinstance(extracted_tags, dict) and "tags" in extracted_tags:
-             # 有些 LLM 输出可能会包一层 {"tags": [...]}
-             tags_list = extracted_tags["tags"]
+             persona_system.update_persona(extracted_tags)
         elif isinstance(extracted_tags, list):
-             tags_list = extracted_tags
+             # 兼容旧版本格式，包装成新结构
+             persona_system.update_persona({"target_category": "unknown", "tags": extracted_tags})
         else:
-             tags_list = []
-             print("Warning: 无法识别的标签格式")
+             print("Warning: 无法识别的标签格式，跳过更新")
 
-        persona_system.update_persona(tags_list)
-        
         # 获取最终画像
         final_persona = persona_system.get_final_persona()
         print("\n--- 最终用户画像 (Short-term & Long-term) ---")

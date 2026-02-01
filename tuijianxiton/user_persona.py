@@ -7,166 +7,112 @@ class UserPersonaSystem:
     """
     用户画像管理系统
     基于 'Long-short term Interest Split' (长短期兴趣分离) 理论构建。
-    
-    Attributes:
-        short_term_profile (Dict): 短期画像 (Intent)，存储在内存/Redis，衰减快。
-        long_term_profile (Dict): 长期画像 (Preference)，存储在HBase/DB，衰减慢。
-        ALPHA_SHORT (float): 短期衰减系数。
-        ALPHA_LONG (float): 长期衰减系数。
     """
     
     def __init__(self):
-        # 模拟存储结构
-        # 实际生产中，这些应该存 Redis (short) 和 HBase (long)
-        self.short_term_profile: Dict[str, Dict[str, Any]] = {} 
-        self.long_term_profile: Dict[str, Dict[str, Any]] = {}
+        # 短期意图 (Intent): 侧重当下想买什么，包含类目约束
+        # 结构: { category: { tag_name: { value, score, ts } } }
+        self.short_term_intents: Dict[str, Dict[str, Any]] = {} 
+        
+        # 长期属性 (Trait/Preference): 侧重用户是什么样的人
+        # 结构: { tag_name: { value, score, ts } }
+        self.long_term_traits: Dict[str, Dict[str, Any]] = {}
         
         # 定义衰减系数 (Lambda)
-        # 短期衰减快 (单位: 小时)，例如 0.1 表示每小时衰减约 10% (e^-0.1 ≈ 0.90)
-        self.ALPHA_SHORT = 0.1  
-        # 长期衰减慢 (单位: 小时)，例如 0.005 表示每小时衰减约 0.5% (e^-0.005 ≈ 0.995)
-        self.ALPHA_LONG = 0.005 
+        self.ALPHA_INTENT = 0.2  # 意图衰减极快 (小时)
+        self.ALPHA_TRAIT = 0.005 # 属性衰减极慢 (小时)
 
     def _calculate_decay(self, last_update_ts: float, lambda_factor: float) -> float:
-        """
-        计算时间衰减系数 (0~1之间)
-        
-        Formula: Score(t) = Score_initial * e^(-lambda * delta_t)
-        
-        Args:
-            last_update_ts (float): 上次更新的时间戳。
-            lambda_factor (float): 衰减系数。
-            
-        Returns:
-            float: 衰减因子。
-        """
-        if not last_update_ts:
-            return 1.0
-        
-        current_time = time.time()
-        # 避免时间回溯导致的问题
-        if current_time < last_update_ts:
-            return 1.0
-            
-        hours_diff = (current_time - last_update_ts) / 3600
-        # 指数衰减公式
-        decay = math.exp(-lambda_factor * hours_diff)
-        return decay
+        """计算指数衰减因子"""
+        if not last_update_ts: return 1.0
+        hours_diff = (time.time() - last_update_ts) / 3600
+        return math.exp(-lambda_factor * max(0, hours_diff))
 
     def _convert_tier_to_score(self, tier: str) -> float:
-        """
-        将 Tier 等级转换为数值分数。
-        """
-        tier_map = {
-            "Tier S": 1.0,
-            "Tier A": 0.8,
-            "Tier B": 0.5
-        }
+        tier_map = {"Tier S": 1.0, "Tier A": 0.8, "Tier B": 0.5}
         return tier_map.get(tier, 0.5)
 
-    def update_persona(self, llm_tags_output: List[Dict[str, Any]]):
+    def update_persona(self, llm_output: Dict[str, Any]):
         """
-        核心方法：接收 LLM 的标签，更新画像
-        
-        Args:
-            llm_tags_output (List[Dict]): LLM 提取的标签列表，格式参考 extracted_tags.json
-            例如: [{"name": "极致性价比", "tier": "Tier A", ...}, ...]
+        根据 LLM 结构化输出更新画像
+        llm_output 格式: { "target_category": "...", "tags": [...] }
         """
         current_time = time.time()
-        
-        print(f"--- 接收到新信号 (Tags Count: {len(llm_tags_output)}) ---")
+        target_category = llm_output.get("target_category", "unknown")
+        tags = llm_output.get("tags", [])
 
-        # ===========================
-        # 1. 更新短期画像 (侧重意图捕捉)
-        # 策略：激进更新，甚至直接覆盖
-        # ===========================
-        
-        # 1.1 先对现有短期标签做一次衰减
-        tags_to_remove = []
-        for tag, data in self.short_term_profile.items():
-            decay = self._calculate_decay(data['ts'], self.ALPHA_SHORT)
-            data['score'] *= decay
-            # 如果分数太低，直接清洗掉 (阈值可调)
-            if data['score'] < 0.1:
-                tags_to_remove.append(tag)
-        
-        for tag in tags_to_remove:
-            del self.short_term_profile[tag]
+        # 定义哪些标签属于“短期意图”(与商品直接相关)
+        # 只有这些标签会进入 short_term_intents 并带有类目约束
+        INTENT_TAG_NAMES = [
+            "极致性价比", "参数党", "物流焦虑", "价格敏感度", 
+            "决策风格", "品牌倾向", "促销反应", "颜值主义", "功能实用派"
+        ]
 
-        # 1.2 插入新标签 (短期画像直接给高权重)
-        for item in llm_tags_output:
-            tag_name = item.get('name')
-            if not tag_name:
-                continue
+        print(f"--- 正在处理类目: [{target_category}] 的新信号 (Tags: {len(tags)}) ---")
+
+        # 1. 更新短期意图 (Short-term Intent)
+        if target_category != "unknown":
+            if target_category not in self.short_term_intents:
+                self.short_term_intents[target_category] = {}
+            
+            cat_intents = self.short_term_intents[target_category]
+            
+            # 衰减旧意图
+            for t_name, data in list(cat_intents.items()):
+                decay = self._calculate_decay(data['ts'], self.ALPHA_INTENT)
+                data['score'] *= decay
+                if data['score'] < 0.1: del cat_intents[t_name]
+
+            # 插入新意图 (过滤非意图标签)
+            for item in tags:
+                tag_name = item.get('tag_name')
+                attr_value = item.get('attribute_value')
+                base_score = self._convert_tier_to_score(item.get('tier', 'Tier B'))
                 
-            # 获取基础分数
-            base_score = item.get('score')
-            if base_score is None:
-                base_score = self._convert_tier_to_score(item.get('tier', 'Tier B'))
-            
-            # 短期策略：新来的意图，权重直接拉满，覆盖旧意图
-            # 这里乘以 1.5 是为了强调当前的实时意图
-            self.short_term_profile[tag_name] = {
-                'score': base_score * 1.5, 
-                'ts': current_time,
-                'tier': item.get('tier', 'Unknown'),
-                'source': 'realtime_chat'
-            }
+                if tag_name in INTENT_TAG_NAMES:
+                    cat_intents[tag_name] = {
+                        "value": attr_value,
+                        "score": base_score * 1.5,
+                        "ts": current_time
+                    }
 
-        # ===========================
-        # 2. 更新长期画像 (侧重累积偏好)
-        # 策略：平滑累加，不会剧烈波动
-        # ===========================
-        
-        # 2.1 先衰减
-        for tag, data in self.long_term_profile.items():
-            decay = self._calculate_decay(data['ts'], self.ALPHA_LONG)
-            data['score'] *= decay
-        
-        # 2.2 累加新标签
-        for item in llm_tags_output:
-            tag_name = item.get('name')
-            if not tag_name:
-                continue
-            
-            base_score = item.get('score')
-            if base_score is None:
-                base_score = self._convert_tier_to_score(item.get('tier', 'Tier B'))
-            
-            if tag_name in self.long_term_profile:
-                # 长期策略：旧分值 + 新分值 * 权重 (平滑更新)
-                # 0.2 的系数意味着单次行为对长期画像影响较小
-                new_score = self.long_term_profile[tag_name]['score'] + (base_score * 0.2)
-                # 封顶 5.0 分，防止无限膨胀
-                self.long_term_profile[tag_name]['score'] = min(new_score, 5.0) 
-                self.long_term_profile[tag_name]['ts'] = current_time
+        # 2. 更新长期特质 (Long-term Trait)
+        # 所有标签都进入长期特质，作为用户画像的基石
+        for item in tags:
+            tag_name = item.get('tag_name')
+            attr_value = item.get('attribute_value')
+            base_score = self._convert_tier_to_score(item.get('tier', 'Tier B'))
+
+            if tag_name in self.long_term_traits:
+                data = self.long_term_traits[tag_name]
+                decay = self._calculate_decay(data['ts'], self.ALPHA_TRAIT)
+                new_score = (data['score'] * decay) + (base_score * 0.1)
+                self.long_term_traits[tag_name] = {
+                    "value": attr_value,
+                    "score": min(new_score, 5.0),
+                    "ts": current_time
+                }
             else:
-                # 新兴趣进入长期画像时，起步分要低
-                self.long_term_profile[tag_name] = {
-                    'score': base_score * 0.2, 
-                    'ts': current_time,
-                    'first_seen': current_time
+                self.long_term_traits[tag_name] = {
+                    "value": attr_value,
+                    "score": base_score * 0.2,
+                    "ts": current_time
                 }
 
-    def get_final_persona(self) -> Dict[str, Dict[str, Any]]:
-        """
-        获取当前用于推荐的混合画像
-        可以在这里实现 Conflict Resolution (冲突处理)
-        """
+    def get_final_persona(self) -> Dict[str, Any]:
         return {
-            "short_term_intent": self.short_term_profile,
-            "long_term_preference": self.long_term_profile
+            "short_term_intents": self.short_term_intents,
+            "long_term_traits": self.long_term_traits
         }
 
     def debug_print(self):
-        """辅助打印当前画像状态"""
         import pprint
-        print("\n=== Current Persona State ===")
-        print(">> Short Term (Intent):")
-        pprint.pprint(self.short_term_profile)
-        print("\n>> Long Term (Preference):")
-        pprint.pprint(self.long_term_profile)
-        print("=============================\n")
+        print("\n=== 用户画像当前状态 ===")
+        print(">> 短期意图 (Intents by Category):")
+        pprint.pprint(self.short_term_intents)
+        print("\n>> 长期特质 (User Traits):")
+        pprint.pprint(self.long_term_traits)
+        print("========================\n")
 
 if __name__ == "__main__":
     # 测试代码
