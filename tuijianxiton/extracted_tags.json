@@ -12,7 +12,7 @@
         "tag_code": "decision_style",
         "value": "纠结大师",
         "type": "concern",
-        "confidence": "Tier S",
+        "confidence": "Tier A",
         "source_quote": "那个哭声检测灵敏吗？我主要怕晚上睡太死听不见。云端安全吗？我看新闻说有的摄像头会被黑客破解，隐私泄露太可怕了。毕竟是放在卧室拍床上的，这个你们有加密吗？物理遮蔽有吗？就是我不想要它拍的时候能自动关上镜头。"
       },
       {
@@ -20,51 +20,86 @@
         "value": "参数党",
         "type": "inquiry",
         "confidence": "Tier S",
-        "source_quote": "壶底是316不锈钢的还是304的？主要别有异味，之前买过一个煮水一股塑料味，吓得我直接扔了。给孩子入口的东西不敢马虎。"
+        "source_quote": "壶底是316不锈钢的还是304的？"
       },
       {
         "tag_code": "decision_style",
         "value": "保守主义",
         "type": "concern",
+        "confidence": "Tier A",
+        "source_quote": "主要别有异味，之前买过一个煮水一股塑料味，吓得我直接扔了。给孩子入口的东西不敢马虎。"
+      },
+      {
+        "tag_code": "brand_tendency",
+        "value": "成分党",
+        "type": "inquiry",
         "confidence": "Tier S",
-        "source_quote": "要是水壶有味道，或者摄像头连不上网，我可是要退货的啊。你们这个有运费险吗？"
+        "source_quote": "壶底是316不锈钢的还是304的？"
+      },
+      {
+        "tag_code": "promotion_response",
+        "value": "凑单达人",
+        "type": "requirement",
+        "confidence": "Tier S",
+        "source_quote": "如果我摄像头和水壶一起买，能不能给我便宜100？我是真心想买，凑个单你们也省运费不是。"
       },
       {
         "tag_code": "promotion_response",
         "value": "砍价高手",
         "type": "requirement",
         "confidence": "Tier S",
-        "source_quote": "才20？这也太少了，不够诚意啊。50吧，50我就直接拍了，不罗嗦。如果我摄像头和水壶一起买，能不能给我便宜100？我是真心想买，凑个单你们也省运费不是。"
+        "source_quote": "才20？这也太少了，不够诚意啊。50吧，50我就直接拍了，不罗嗦。"
       },
       {
         "tag_code": "after_sales_service",
         "value": "物流焦虑",
+        "type": "concern",
+        "confidence": "Tier S",
+        "source_quote": "我家这边中通老是把快递扔驿站，根本不送上门，带着孩子不方便下去拿。"
+      },
+      {
+        "tag_code": "after_sales_service",
+        "value": "风险厌恶",
+        "type": "concern",
+        "confidence": "Tier S",
+        "source_quote": "要是水壶有味道，或者摄像头连不上网，我可是要退货的啊。你们这个有运费险吗？"
+      },
+      {
+        "tag_code": "demographic_attributes",
+        "value": "parent_of_infant",
         "type": "requirement",
         "confidence": "Tier S",
-        "source_quote": "一定要发顺丰啊。我家这边中通老是把快递扔驿站，根本不送上门，带着孩子不方便下去拿。大概几天能到？"
+        "source_quote": "最近刚生完二胎，实在太累了，有时候宝宝哭都醒不过来。我们要养两个吞金兽，奶粉钱都快不够了，能省一点是一点。家里老人带孩子，怕他们不会用。"
       },
       {
         "tag_code": "life_stage",
-        "value": "有婴幼儿家庭",
+        "value": "young_family",
+        "type": "requirement",
+        "confidence": "Tier S",
+        "source_quote": "最近刚生完二胎，实在太累了，有时候宝宝哭都醒不过来。我们要养两个吞金兽，奶粉钱都快不够了，能省一点是一点。家里老人带孩子，怕他们不会用。"
+      },
+      {
+        "tag_code": "lifestyle",
+        "value": "caregiver",
         "type": "requirement",
         "confidence": "Tier S",
         "source_quote": "最近刚生完二胎，实在太累了，有时候宝宝哭都醒不过来。我们要养两个吞金兽，奶粉钱都快不够了，能省一点是一点。家里老人带孩子，怕他们不会用。"
       },
       {
         "tag_code": "personality_traits",
-        "value": "风险厌恶",
+        "value": "cautious",
         "type": "concern",
         "confidence": "Tier S",
-        "source_quote": "要是水壶有味道，或者摄像头连不上网，我可是要退货的啊。"
+        "source_quote": "主要别有异味，之前买过一个煮水一股塑料味，吓得我直接扔了。给孩子入口的东西不敢马虎。要是水壶有味道，或者摄像头连不上网，我可是要退货的啊。"
       }
     ]
   },
   "instructions": [
     {
       "type": "logistics",
-      "action": "指定快递",
+      "action": "指定快递公司",
       "value": "顺丰标快",
-      "source_quote": "一定要发顺丰啊。"
+      "source_quote": "一定要发顺丰啊。我家这边中通老是把快递扔驿站，根本不送上门，带着孩子不方便下去拿。"
     },
     {
       "type": "packaging",
@@ -85,22 +120,22 @@
           "source_quote": "那个哭声检测灵敏吗？我主要怕晚上睡太死听不见。"
         },
         {
-          "tag_code": "storage_requirement",
-          "value": "云端或本地",
-          "type": "inquiry",
-          "source_quote": "那这个视频是存云端还是本地卡？"
-        },
-        {
-          "tag_code": "security_requirement",
+          "tag_code": "function_requirement",
           "value": "隐私安全",
           "type": "concern",
           "source_quote": "云端安全吗？我看新闻说有的摄像头会被黑客破解，隐私泄露太可怕了。毕竟是放在卧室拍床上的，这个你们有加密吗？"
         },
         {
-          "tag_code": "privacy_requirement",
+          "tag_code": "function_requirement",
           "value": "物理遮蔽",
           "type": "requirement",
           "source_quote": "物理遮蔽有吗？就是我不想要它拍的时候能自动关上镜头。"
+        },
+        {
+          "tag_code": "price_concern",
+          "value": "high",
+          "type": "concern",
+          "source_quote": "就是价格有点贵啊，499都能买个低端手机了。我看隔壁某米才卖299，你们这溢价太高了。"
         }
       ]
     },
@@ -115,7 +150,7 @@
           "source_quote": "壶底是316不锈钢的还是304的？"
         },
         {
-          "tag_code": "safety_requirement",
+          "tag_code": "safety_concern",
           "value": "无异味",
           "type": "concern",
           "source_quote": "主要别有异味，之前买过一个煮水一股塑料味，吓得我直接扔了。给孩子入口的东西不敢马虎。"

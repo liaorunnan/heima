@@ -1,102 +1,223 @@
 {
   "global_traits": {
     "price_sensitivity": {
-      "value": "high",
-      "score": 0.2,
-      "ts": 1769939907.422574,
-      "type": "concern"
+      "values": [
+        {
+          "value": "high",
+          "score": 2.0,
+          "ts": 1769945012.6548555,
+          "type": "concern",
+          "confidence": "Tier S"
+        }
+      ]
     },
     "decision_style": {
-      "value": "保守主义",
-      "score": 0.36,
-      "ts": 1769939907.422574,
-      "type": "concern"
+      "values": [
+        {
+          "value": "纠结大师",
+          "score": 1.4,
+          "ts": 1769945012.6548555,
+          "type": "concern",
+          "confidence": "Tier A"
+        },
+        {
+          "value": "参数党",
+          "score": 1.0,
+          "ts": 1769945012.6548555,
+          "type": "inquiry",
+          "confidence": "Tier S"
+        },
+        {
+          "value": "保守主义",
+          "score": 1.4,
+          "ts": 1769945012.6548555,
+          "type": "concern",
+          "confidence": "Tier A"
+        }
+      ]
+    },
+    "brand_tendency": {
+      "values": [
+        {
+          "value": "成分党",
+          "score": 1.0,
+          "ts": 1769945012.6548555,
+          "type": "inquiry",
+          "confidence": "Tier S"
+        }
+      ]
     },
     "promotion_response": {
-      "value": "砍价高手",
-      "score": 0.24,
-      "ts": 1769939907.422574,
-      "type": "requirement"
+      "values": [
+        {
+          "value": "凑单达人",
+          "score": 3.0,
+          "ts": 1769945012.6548555,
+          "type": "requirement",
+          "confidence": "Tier S"
+        },
+        {
+          "value": "砍价高手",
+          "score": 3.0,
+          "ts": 1769945012.6548555,
+          "type": "requirement",
+          "confidence": "Tier S"
+        }
+      ]
     },
     "after_sales_service": {
-      "value": "物流焦虑",
-      "score": 0.24,
-      "ts": 1769939907.422574,
-      "type": "requirement"
+      "values": [
+        {
+          "value": "物流焦虑",
+          "score": 2.0,
+          "ts": 1769945012.6548555,
+          "type": "concern",
+          "confidence": "Tier S"
+        },
+        {
+          "value": "风险厌恶",
+          "score": 2.0,
+          "ts": 1769945012.6548555,
+          "type": "concern",
+          "confidence": "Tier S"
+        }
+      ]
+    },
+    "demographic_attributes": {
+      "values": [
+        {
+          "value": "parent_of_infant",
+          "score": 3.0,
+          "ts": 1769945012.6548555,
+          "type": "requirement",
+          "confidence": "Tier S"
+        }
+      ]
     },
     "life_stage": {
-      "value": "有婴幼儿家庭",
-      "score": 0.24,
-      "ts": 1769939907.422574,
-      "type": "requirement"
+      "values": [
+        {
+          "value": "young_family",
+          "score": 3.0,
+          "ts": 1769945012.6548555,
+          "type": "requirement",
+          "confidence": "Tier S"
+        }
+      ]
+    },
+    "lifestyle": {
+      "values": [
+        {
+          "value": "caregiver",
+          "score": 3.0,
+          "ts": 1769945012.6548555,
+          "type": "requirement",
+          "confidence": "Tier S"
+        }
+      ]
     },
     "personality_traits": {
-      "value": "风险厌恶",
-      "score": 0.2,
-      "ts": 1769939907.422574,
-      "type": "concern"
+      "values": [
+        {
+          "value": "cautious",
+          "score": 2.0,
+          "ts": 1769945012.6548555,
+          "type": "concern",
+          "confidence": "Tier S"
+        }
+      ]
     }
   },
   "category_intents": {
     "摄像头": {
       "function_requirement": {
-        "value": "哭声检测灵敏",
-        "score": 2.0,
-        "ts": 1769939907.422574,
-        "type": "requirement"
+        "values": [
+          {
+            "value": "哭声检测灵敏",
+            "score": 2.0999999999999996,
+            "ts": 1769945012.6548555,
+            "type": "requirement"
+          },
+          {
+            "value": "隐私安全",
+            "score": 1.4,
+            "ts": 1769945012.6548555,
+            "type": "concern"
+          },
+          {
+            "value": "物理遮蔽",
+            "score": 2.0999999999999996,
+            "ts": 1769945012.6548555,
+            "type": "requirement"
+          }
+        ]
       },
-      "storage_requirement": {
-        "value": "云端或本地",
-        "score": 0.8,
-        "ts": 1769939907.422574,
-        "type": "inquiry"
-      },
-      "security_requirement": {
-        "value": "隐私安全",
-        "score": 1.5,
-        "ts": 1769939907.422574,
-        "type": "concern"
-      },
-      "privacy_requirement": {
-        "value": "物理遮蔽",
-        "score": 2.0,
-        "ts": 1769939907.422574,
-        "type": "requirement"
+      "price_concern": {
+        "values": [
+          {
+            "value": "high",
+            "score": 1.4,
+            "ts": 1769945012.6548555,
+            "type": "concern"
+          }
+        ]
       }
     },
     "恒温水壶": {
       "material_requirement": {
-        "value": "316不锈钢",
-        "score": 2.0,
-        "ts": 1769939907.422574,
-        "type": "requirement"
+        "values": [
+          {
+            "value": "316不锈钢",
+            "score": 2.0999999999999996,
+            "ts": 1769945012.6548555,
+            "type": "requirement"
+          }
+        ]
       },
-      "safety_requirement": {
-        "value": "无异味",
-        "score": 1.5,
-        "ts": 1769939907.422574,
-        "type": "concern"
+      "safety_concern": {
+        "values": [
+          {
+            "value": "无异味",
+            "score": 1.4,
+            "ts": 1769945012.6548555,
+            "type": "concern"
+          }
+        ]
       },
       "function_requirement": {
-        "value": "除氯功能",
-        "score": 0.8,
-        "ts": 1769939907.422574,
-        "type": "inquiry"
+        "values": [
+          {
+            "value": "烧水快",
+            "score": 0.7,
+            "ts": 1769945012.6548555,
+            "type": "inquiry"
+          },
+          {
+            "value": "除氯功能",
+            "score": 0.7,
+            "ts": 1769945012.6548555,
+            "type": "inquiry"
+          }
+        ]
       },
       "usability_requirement": {
-        "value": "简单易用",
-        "score": 2.0,
-        "ts": 1769939907.422574,
-        "type": "requirement"
+        "values": [
+          {
+            "value": "简单易用",
+            "score": 2.0999999999999996,
+            "ts": 1769945012.6548555,
+            "type": "requirement"
+          }
+        ]
       }
     }
   },
   "recent_instructions": [
     {
       "type": "logistics",
-      "action": "指定快递",
+      "action": "指定快递公司",
       "value": "顺丰标快",
-      "source_quote": "一定要发顺丰啊。"
+      "source_quote": "一定要发顺丰啊。我家这边中通老是把快递扔驿站，根本不送上门，带着孩子不方便下去拿。"
     },
     {
       "type": "packaging",
@@ -104,5 +225,6 @@
       "value": "支架和32G卡",
       "source_quote": "别忘了送支架和那个32G卡。"
     }
-  ]
+  ],
+  "persona_summary": "这是一个young_family、价格敏感的用户。"
 }
