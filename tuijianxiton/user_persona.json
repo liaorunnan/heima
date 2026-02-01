@@ -1,73 +1,119 @@
 {
-  "short_term_intents": {
-    "智能摄像头": {
-      "极致性价比": {
-        "value": "追求实用/不买贵",
-        "score": 1.2000000000000002,
-        "ts": 1769937955.2693918
-      },
-      "物流焦虑": {
-        "value": "掌控欲或急需",
-        "score": 1.2000000000000002,
-        "ts": 1769937955.2693918
-      },
-      "参数党": {
-        "value": "理性分析，数据驱动",
-        "score": 0.75,
-        "ts": 1769937955.2693918
-      }
-    }
-  },
-  "long_term_traits": {
-    "人生阶段": {
+  "global_traits": {
+    "life_stage": {
       "value": "二胎宝妈",
       "score": 0.2,
-      "ts": 1769937955.2693918
+      "ts": 1769938753.629515,
+      "is_instruction": false
     },
-    "极致性价比": {
-      "value": "追求实用/不买贵",
+    "price_sensitivity": {
+      "value": "极致性价比",
+      "score": 0.2,
+      "ts": 1769938753.629515,
+      "is_instruction": false
+    },
+    "decision_style": {
+      "value": "纠结大师",
       "score": 0.16000000000000003,
-      "ts": 1769937955.2693918
+      "ts": 1769938753.629515,
+      "is_instruction": false
     },
-    "砍价高手": {
-      "value": "谈判型人格",
+    "brand_tendency": {
+      "value": "成分党",
+      "score": 0.2,
+      "ts": 1769938753.629515,
+      "is_instruction": false
+    },
+    "promotion_response": {
+      "value": "砍价高手",
+      "score": 0.2,
+      "ts": 1769938753.629515,
+      "is_instruction": false
+    },
+    "after_sales_service": {
+      "value": "退货常客",
       "score": 0.16000000000000003,
-      "ts": 1769937955.2693918
+      "ts": 1769938753.629515,
+      "is_instruction": false
     },
-    "成分党": {
-      "value": "配方还原论者",
+    "logistics_preference": {
+      "value": "顺丰快递",
+      "score": 0.2,
+      "ts": 1769938753.629515,
+      "is_instruction": true
+    },
+    "delivery_speed": {
+      "value": "加急",
       "score": 0.16000000000000003,
-      "ts": 1769937955.2693918
+      "ts": 1769938753.629515,
+      "is_instruction": false
     },
-    "权威信徒": {
-      "value": "信任背书转移",
-      "score": 0.16000000000000003,
-      "ts": 1769937955.2693918
+    "language_preference": {
+      "value": "中文说明书",
+      "score": 0.2,
+      "ts": 1769938753.629515,
+      "is_instruction": true
+    }
+  },
+  "category_intents": {
+    "摄像头": {
+      "usage_scenario": {
+        "value": "母婴看护",
+        "score": 1.5,
+        "ts": 1769938753.629515
+      },
+      "function_requirement": {
+        "value": "物理遮蔽",
+        "score": 1.5,
+        "ts": 1769938753.629515
+      },
+      "storage_preference": {
+        "value": "本地存储",
+        "score": 1.5,
+        "ts": 1769938753.629515
+      },
+      "security_requirement": {
+        "value": "金融级加密",
+        "score": 1.5,
+        "ts": 1769938753.629515
+      },
+      "price_comparison": {
+        "value": "价格偏高",
+        "score": 1.5,
+        "ts": 1769938753.629515
+      }
     },
-    "退货常客": {
-      "value": "试错成本转嫁",
-      "score": 0.16000000000000003,
-      "ts": 1769937955.2693918
-    },
-    "物流焦虑": {
-      "value": "掌控欲或急需",
-      "score": 0.16000000000000003,
-      "ts": 1769937955.2693918
-    },
-    "凑单达人": {
-      "value": "精于计算规则",
-      "score": 0.16000000000000003,
-      "ts": 1769937955.2693918
-    },
-    "服务依赖": {
-      "value": "缺乏独立解决问题能力",
-      "score": 0.1,
-      "ts": 1769937955.2693918
-    },
-    "参数党": {
-      "value": "理性分析，数据驱动",
-      "score": 0.1,
-      "ts": 1769937955.2693918
+    "恒温水壶": {
+      "material_requirement": {
+        "value": "316不锈钢",
+        "score": 1.5,
+        "ts": 1769938753.629515
+      },
+      "quality_requirement": {
+        "value": "无异味",
+        "score": 1.5,
+        "ts": 1769938753.629515
+      },
+      "usage_scenario": {
+        "value": "冲奶粉",
+        "score": 1.5,
+        "ts": 1769938753.629515
+      },
+      "function_requirement": {
+        "value": "除氯功能",
+        "score": 1.5,
+        "ts": 1769938753.629515
+      },
+      "power_requirement": {
+        "value": "1200W",
+        "score": 1.5,
+        "ts": 1769938753.629515
+      },
+      "user_friendliness": {
+        "value": "老人易用",
+        "score": 1.5,
+        "ts": 1769938753.629515
+      }
     }
   }
 }

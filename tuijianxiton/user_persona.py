@@ -6,21 +6,21 @@ from typing import Dict, List, Any, Optional
 class UserPersonaSystem:
     """
     用户画像管理系统
-    基于 'Long-short term Interest Split' (长短期兴趣分离) 理论构建。
+    实现了全局特质与品类意图的分离存储，并支持多意图并行更新。
     """
     
     def __init__(self):
-        # 短期意图 (Intent): 侧重当下想买什么，包含类目约束
-        # 结构: { category: { tag_name: { value, score, ts } } }
-        self.short_term_intents: Dict[str, Dict[str, Any]] = {} 
+        # 全局特质 (Global Traits): 长期稳定的属性，如身份、性格、整体消费观
+        # 结构: { tag_code: { value, score, ts, is_instruction } }
+        self.global_traits: Dict[str, Dict[str, Any]] = {}
         
-        # 长期属性 (Trait/Preference): 侧重用户是什么样的人
-        # 结构: { tag_name: { value, score, ts } }
-        self.long_term_traits: Dict[str, Dict[str, Any]] = {}
+        # 品类意图 (Category Intents): 针对特定品类的短期需求
+        # 结构: { category: { tag_code: { value, score, ts } } }
+        self.category_intents: Dict[str, Dict[str, Any]] = {}
         
-        # 定义衰减系数 (Lambda)
-        self.ALPHA_INTENT = 0.2  # 意图衰减极快 (小时)
-        self.ALPHA_TRAIT = 0.005 # 属性衰减极慢 (小时)
+        # 衰减系数
+        self.ALPHA_GLOBAL = 0.005 # 全局特质衰减慢 (小时)
+        self.ALPHA_INTENT = 0.2   # 品类意图衰减极快 (小时)
 
     def _calculate_decay(self, last_update_ts: float, lambda_factor: float) -> float:
         """计算指数衰减因子"""
@@ -29,117 +29,125 @@ class UserPersonaSystem:
         return math.exp(-lambda_factor * max(0, hours_diff))
 
     def _convert_tier_to_score(self, tier: str) -> float:
+        """将 Tier 等级转换为数值分数"""
         tier_map = {"Tier S": 1.0, "Tier A": 0.8, "Tier B": 0.5}
         return tier_map.get(tier, 0.5)
 
     def update_persona(self, llm_output: Dict[str, Any]):
         """
-        根据 LLM 结构化输出更新画像
-        llm_output 格式: { "target_category": "...", "tags": [...] }
+        根据 LLM 的多维度结构化输出更新画像
+        llm_output 格式: { "user_profile_update": { "global_traits": [...] }, "intents": [...] }
         """
         current_time = time.time()
-        target_category = llm_output.get("target_category", "unknown")
-        tags = llm_output.get("tags", [])
-
-        # 定义哪些标签属于“短期意图”(与商品直接相关)
-        # 只有这些标签会进入 short_term_intents 并带有类目约束
-        INTENT_TAG_NAMES = [
-            "极致性价比", "参数党", "物流焦虑", "价格敏感度", 
-            "决策风格", "品牌倾向", "促销反应", "颜值主义", "功能实用派"
-        ]
-
-        print(f"--- 正在处理类目: [{target_category}] 的新信号 (Tags: {len(tags)}) ---")
-
-        # 1. 更新短期意图 (Short-term Intent)
-        if target_category != "unknown":
-            if target_category not in self.short_term_intents:
-                self.short_term_intents[target_category] = {}
+        
+        # 1. 更新全局特质
+        profile_update = llm_output.get("user_profile_update", {})
+        new_global_traits = profile_update.get("global_traits", [])
+        
+        for item in new_global_traits:
+            code = item.get("tag_code")
+            val = item.get("value")
+            conf = item.get("confidence", "Tier B")
+            is_inst = item.get("is_instruction", False)
+            base_score = self._convert_tier_to_score(conf)
             
-            cat_intents = self.short_term_intents[target_category]
-            
-            # 衰减旧意图
-            for t_name, data in list(cat_intents.items()):
-                decay = self._calculate_decay(data['ts'], self.ALPHA_INTENT)
-                data['score'] *= decay
-                if data['score'] < 0.1: del cat_intents[t_name]
-
-            # 插入新意图 (过滤非意图标签)
-            for item in tags:
-                tag_name = item.get('tag_name')
-                attr_value = item.get('attribute_value')
-                base_score = self._convert_tier_to_score(item.get('tier', 'Tier B'))
-                
-                if tag_name in INTENT_TAG_NAMES:
-                    cat_intents[tag_name] = {
-                        "value": attr_value,
-                        "score": base_score * 1.5,
-                        "ts": current_time
-                    }
-
-        # 2. 更新长期特质 (Long-term Trait)
-        # 所有标签都进入长期特质，作为用户画像的基石
-        for item in tags:
-            tag_name = item.get('tag_name')
-            attr_value = item.get('attribute_value')
-            base_score = self._convert_tier_to_score(item.get('tier', 'Tier B'))
-
-            if tag_name in self.long_term_traits:
-                data = self.long_term_traits[tag_name]
-                decay = self._calculate_decay(data['ts'], self.ALPHA_TRAIT)
+            if code in self.global_traits:
+                # 衰减后累加
+                data = self.global_traits[code]
+                decay = self._calculate_decay(data['ts'], self.ALPHA_GLOBAL)
                 new_score = (data['score'] * decay) + (base_score * 0.1)
-                self.long_term_traits[tag_name] = {
-                    "value": attr_value,
+                self.global_traits[code] = {
+                    "value": val,
                     "score": min(new_score, 5.0),
-                    "ts": current_time
+                    "ts": current_time,
+                    "is_instruction": is_inst
                 }
             else:
-                self.long_term_traits[tag_name] = {
-                    "value": attr_value,
+                self.global_traits[code] = {
+                    "value": val,
                     "score": base_score * 0.2,
+                    "ts": current_time,
+                    "is_instruction": is_inst
+                }
+            
+            if is_inst:
+                print(f"  [指令识别] 发现运营指令: {code} -> {val}")
+
+        # 2. 更新品类意图
+        new_intents = llm_output.get("intents", [])
+        for intent in new_intents:
+            cat = intent.get("category", "unknown")
+            if cat == "unknown": continue
+            
+            if cat not in self.category_intents:
+                self.category_intents[cat] = {}
+            
+            cat_data = self.category_intents[cat]
+            # 对该类目下的现有意图进行衰减
+            for code, data in list(cat_data.items()):
+                decay = self._calculate_decay(data['ts'], self.ALPHA_INTENT)
+                data['score'] *= decay
+                if data['score'] < 0.1: del cat_data[code]
+            
+            # 插入新意图
+            specific_tags = intent.get("specific_tags", [])
+            for tag in specific_tags:
+                code = tag.get("tag_code")
+                val = tag.get("value")
+                # 意图默认为高权重更新
+                cat_data[code] = {
+                    "value": val,
+                    "score": 1.5, # 意图分值加权
                     "ts": current_time
                 }
+            print(f"  [意图更新] 已更新品类 [{cat}] 的意图标签 (Count: {len(specific_tags)})")
 
     def get_final_persona(self) -> Dict[str, Any]:
+        """获取最终合并画像"""
         return {
-            "short_term_intents": self.short_term_intents,
-            "long_term_traits": self.long_term_traits
+            "global_traits": self.global_traits,
+            "category_intents": self.category_intents
         }
 
     def debug_print(self):
+        """调试打印画像状态"""
         import pprint
-        print("\n=== 用户画像当前状态 ===")
-        print(">> 短期意图 (Intents by Category):")
-        pprint.pprint(self.short_term_intents)
-        print("\n>> 长期特质 (User Traits):")
-        pprint.pprint(self.long_term_traits)
+        print("\n=== 用户画像深度侧写 ===")
+        print(">> 全局特质 (Global Traits):")
+        pprint.pprint(self.global_traits)
+        print("\n>> 品类意图 (Category Intents):")
+        pprint.pprint(self.category_intents)
         print("========================\n")
 
 if __name__ == "__main__":
-    # 测试代码
+    # 模拟运行
     system = UserPersonaSystem()
-
-    # 模拟场景：
-    # 1. 历史数据：用户长期关注"极致性价比"和"参数党" (假设一天前更新)
-    print("Initialize with history...")
-    yesterday = time.time() - 86400
-    system.long_term_profile = {
-        '极致性价比': {'score': 4.5, 'ts': yesterday},
-        '参数党': {'score': 3.0, 'ts': yesterday}
+    
+    # 模拟一次更新
+    mock_llm_output = {
+        "user_profile_update": {
+            "global_traits": [
+                {"tag_code": "life_stage", "value": "second_child_mom", "confidence": "Tier S"},
+                {"tag_code": "logistics_preference", "value": "sf_express", "is_instruction": True}
+            ]
+        },
+        "intents": [
+            {
+                "category": "smart_camera",
+                "action": "buy",
+                "specific_tags": [
+                    {"tag_code": "security_concern", "value": "data_privacy"}
+                ]
+            },
+            {
+                "category": "electric_kettle",
+                "action": "buy",
+                "specific_tags": [
+                    {"tag_code": "material_preference", "value": "316_stainless_steel"}
+                ]
+            }
+        ]
     }
     
-    # 2. 实时数据：用户今天突然表现出"颜值主义"和"冲动消费"
-    # 假设这是从 llm_tagger.py 或 extracted_tags.json 读入的数据
-    new_tags = [
-        {"name": "颜值主义", "tier": "Tier S"},
-        {"name": "冲动消费", "tier": "Tier A"},
-        # 用户同时也提到了性价比，但这次是实时的
-        {"name": "极致性价比", "tier": "Tier B"} 
-    ]
-    
-    system.update_persona(new_tags)
-    
-    # 3. 打印结果
-    # 预期：
-    # - "颜值主义" 在短期画像中分数很高 (1.5)，长期画像中刚起步 (0.2)。
-    # - "极致性价比" 在短期画像中有分数 (0.75)，在长期画像中依然很高 (但会略微衰减后累加)。
+    system.update_persona(mock_llm_output)
     system.debug_print()

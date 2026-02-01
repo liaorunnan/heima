@@ -65,16 +65,9 @@ def run_tag_extraction():
         print("\n--- 正在更新用户画像 ---")
         persona_system = UserPersonaSystem()
         
-        # 模拟加载历史画像 (可选)
-        # persona_system.long_term_profile = load_from_db(...)
-        
-        # 传入提取的标签进行更新
-        # 新版 update_persona 接收结构化对象: { "target_category": "...", "tags": [...] }
-        if isinstance(extracted_tags, dict) and "tags" in extracted_tags:
+        # 传入提取的结构化数据进行更新
+        if isinstance(extracted_tags, dict):
              persona_system.update_persona(extracted_tags)
-        elif isinstance(extracted_tags, list):
-             # 兼容旧版本格式，包装成新结构
-             persona_system.update_persona({"target_category": "unknown", "tags": extracted_tags})
         else:
              print("Warning: 无法识别的标签格式，跳过更新")
 

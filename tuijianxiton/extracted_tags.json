@@ -1,85 +1,143 @@
 {
-  "target_category": "智能摄像头",
-  "tags": [
+  "user_profile_update": {
+    "global_traits": [
+      {
+        "tag_code": "life_stage",
+        "value": "二胎宝妈",
+        "confidence": "Tier S",
+        "is_instruction": false,
+        "source_quote": "最近刚生完二胎，实在太累了"
+      },
+      {
+        "tag_code": "price_sensitivity",
+        "value": "极致性价比",
+        "confidence": "Tier S",
+        "is_instruction": false,
+        "source_quote": "我们要养两个吞金兽，奶粉钱都快不够了，能省一点是一点"
+      },
+      {
+        "tag_code": "decision_style",
+        "value": "纠结大师",
+        "confidence": "Tier A",
+        "is_instruction": false,
+        "source_quote": "行吧行吧，也不差那20块了"
+      },
+      {
+        "tag_code": "brand_tendency",
+        "value": "成分党",
+        "confidence": "Tier S",
+        "is_instruction": false,
+        "source_quote": "壶底是316不锈钢的还是304的？"
+      },
+      {
+        "tag_code": "promotion_response",
+        "value": "砍价高手",
+        "confidence": "Tier S",
+        "is_instruction": false,
+        "source_quote": "能不能给个优惠券？或者便宜点？"
+      },
+      {
+        "tag_code": "after_sales_service",
+        "value": "退货常客",
+        "confidence": "Tier A",
+        "is_instruction": false,
+        "source_quote": "要是水壶有味道，或者摄像头连不上网，我可是要退货的啊"
+      },
+      {
+        "tag_code": "logistics_preference",
+        "value": "顺丰快递",
+        "confidence": "Tier S",
+        "is_instruction": true,
+        "source_quote": "一定要发顺丰啊"
+      },
+      {
+        "tag_code": "delivery_speed",
+        "value": "加急",
+        "confidence": "Tier A",
+        "is_instruction": false,
+        "source_quote": "大概几天能到？"
+      },
+      {
+        "tag_code": "language_preference",
+        "value": "中文说明书",
+        "confidence": "Tier S",
+        "is_instruction": true,
+        "source_quote": "说明书有中文的吧？"
+      }
+    ]
+  },
+  "intents": [
     {
-      "tag_id": 17,
-      "tag_name": "人生阶段",
-      "attribute_value": "二胎宝妈",
-      "tier": "Tier S",
-      "quote": "最近刚生完二胎，实在太累了，有时候宝宝哭都醒不过来。",
-      "reason": "用户明确自述刚生完二胎，身份属性极度明确。"
+      "category": "摄像头",
+      "action": "buy",
+      "specific_tags": [
+        {
+          "tag_code": "usage_scenario",
+          "value": "母婴看护",
+          "source_quote": "专门针对看护宝宝设计的"
+        },
+        {
+          "tag_code": "function_requirement",
+          "value": "哭声检测",
+          "source_quote": "有哭声检测功能"
+        },
+        {
+          "tag_code": "function_requirement",
+          "value": "物理遮蔽",
+          "source_quote": "物理遮蔽有吗？"
+        },
+        {
+          "tag_code": "storage_preference",
+          "value": "本地存储",
+          "source_quote": "送32G卡"
+        },
+        {
+          "tag_code": "security_requirement",
+          "value": "金融级加密",
+          "source_quote": "我们是金融级AES加密的"
+        },
+        {
+          "tag_code": "price_comparison",
+          "value": "价格偏高",
+          "source_quote": "我看隔壁某米才卖299，你们这溢价太高了"
+        }
+      ]
     },
     {
-      "tag_id": 20,
-      "tag_name": "极致性价比",
-      "attribute_value": "追求实用/不买贵",
-      "tier": "Tier A",
-      "quote": "就是价格有点贵啊，499都能买个低端手机了。我看隔壁某米才卖299，你们这溢价太高了。",
-      "reason": "用户明确表达了对价格的不满，并对比竞品价格，强调性价比，符合极致性价比特征。"
-    },
-    {
-      "tag_id": 57,
-      "tag_name": "砍价高手",
-      "attribute_value": "谈判型人格",
-      "tier": "Tier A",
-      "quote": "能不能给个优惠券？或者便宜点？... 50吧，50我就直接拍了，不罗嗦。... 如果我摄像头和水壶一起买，能不能给我便宜100？",
-      "reason": "用户多次主动要求优惠，并给出具体砍价金额，表现出强烈的谈判倾向。"
-    },
-    {
-      "tag_id": 48,
-      "tag_name": "成分党",
-      "attribute_value": "配方还原论者",
-      "tier": "Tier A",
-      "quote": "壶底是316不锈钢的还是304的？",
-      "reason": "用户询问具体材质成分（316 vs 304不锈钢），关注产品本质，符合成分党特征。"
-    },
-    {
-      "tag_id": 38,
-      "tag_name": "权威信徒",
-      "attribute_value": "信任背书转移",
-      "tier": "Tier A",
-      "quote": "云端安全吗？我看新闻说有的摄像头会被黑客破解，隐私泄露太可怕了。... 品质您放心，都有检测报告的。",
-      "reason": "用户关注安全认证（金融级AES加密、阿里云服务器）和检测报告，表现出对权威背书的依赖。"
-    },
-    {
-      "tag_id": 60,
-      "tag_name": "退货常客",
-      "attribute_value": "试错成本转嫁",
-      "tier": "Tier A",
-      "quote": "要是水壶有味道，或者摄像头连不上网，我可是要退货的啊。你们这个有运费险吗？",
-      "reason": "用户明确表示可能退货，并询问运费险，表现出较高的退货倾向。"
-    },
-    {
-      "tag_id": 64,
-      "tag_name": "物流焦虑",
-      "attribute_value": "掌控欲或急需",
-      "tier": "Tier A",
-      "quote": "一定要发顺丰啊。我家这边中通老是把快递扔驿站，根本不送上门，带着孩子不方便下去拿。大概几天能到？",
-      "reason": "用户指定快递公司，抱怨物流问题，并询问到货时间，表现出对物流的焦虑和掌控欲。"
-    },
-    {
-      "tag_id": 50,
-      "tag_name": "凑单达人",
-      "attribute_value": "精于计算规则",
-      "tier": "Tier A",
-      "quote": "如果我摄像头和水壶一起买，能不能给我便宜100？我是真心想买，凑个单你们也省运费不是。",
-      "reason": "用户主动提出凑单购买以获取优惠，并计算具体金额，表现出精于计算规则的特征。"
-    },
-    {
-      "tag_id": 65,
-      "tag_name": "服务依赖",
-      "attribute_value": "缺乏独立解决问题能力",
-      "tier": "Tier B",
-      "quote": "说明书有中文的吧？家里老人带孩子，怕他们不会用。",
-      "reason": "用户询问说明书语言和操作简易性，表现出对客服和说明的依赖，但特征不稳固（可能只是为老人考虑）。"
-    },
-    {
-      "tag_id": 32,
-      "tag_name": "参数党",
-      "attribute_value": "理性分析，数据驱动",
-      "tier": "Tier B",
-      "quote": "那个水壶烧水快吗？功率是1200W的，烧开大概3-5分钟。有没有除氯功能？",
-      "reason": "用户询问具体参数（功率、除氯功能），表现出数据驱动的倾向，但特征不稳固（可能只是常规咨询）。"
+      "category": "恒温水壶",
+      "action": "buy",
+      "specific_tags": [
+        {
+          "tag_code": "material_requirement",
+          "value": "316不锈钢",
+          "source_quote": "壶底是316不锈钢的还是304的？"
+        },
+        {
+          "tag_code": "quality_requirement",
+          "value": "无异味",
+          "source_quote": "主要别有异味"
+        },
+        {
+          "tag_code": "usage_scenario",
+          "value": "冲奶粉",
+          "source_quote": "冲奶粉神器"
+        },
+        {
+          "tag_code": "function_requirement",
+          "value": "除氯功能",
+          "source_quote": "有没有除氯功能？"
+        },
+        {
+          "tag_code": "power_requirement",
+          "value": "1200W",
+          "source_quote": "功率是1200W的"
+        },
+        {
+          "tag_code": "user_friendliness",
+          "value": "老人易用",
+          "source_quote": "家里老人带孩子，怕他们不会用"
+        }
+      ]
     }
   ]
 }
