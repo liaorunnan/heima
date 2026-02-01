@@ -47,12 +47,16 @@ class UserPersonaSystem:
         for item in new_global_traits:
             code = item.get("tag_code")
             val = item.get("value")
+            tag_type = item.get("type", "concern")
             conf = item.get("confidence", "Tier B")
             is_inst = item.get("is_instruction", False)
-            base_score = self._convert_tier_to_score(conf)
+            
+            # 基础分数受 Type 影响
+            # requirement 给更高分，inquiry 给较低分
+            type_weight = {"requirement": 1.2, "concern": 1.0, "inquiry": 0.6}.get(tag_type, 1.0)
+            base_score = self._convert_tier_to_score(conf) * type_weight
             
             if code in self.global_traits:
-                # 衰减后累加
                 data = self.global_traits[code]
                 decay = self._calculate_decay(data['ts'], self.ALPHA_GLOBAL)
                 new_score = (data['score'] * decay) + (base_score * 0.1)
@@ -60,6 +64,7 @@ class UserPersonaSystem:
                     "value": val,
                     "score": min(new_score, 5.0),
                     "ts": current_time,
+                    "type": tag_type,
                     "is_instruction": is_inst
                 }
             else:
@@ -67,6 +72,7 @@ class UserPersonaSystem:
                     "value": val,
                     "score": base_score * 0.2,
                     "ts": current_time,
+                    "type": tag_type,
                     "is_instruction": is_inst
                 }
             
@@ -83,22 +89,25 @@ class UserPersonaSystem:
                 self.category_intents[cat] = {}
             
             cat_data = self.category_intents[cat]
-            # 对该类目下的现有意图进行衰减
             for code, data in list(cat_data.items()):
                 decay = self._calculate_decay(data['ts'], self.ALPHA_INTENT)
                 data['score'] *= decay
                 if data['score'] < 0.1: del cat_data[code]
             
-            # 插入新意图
             specific_tags = intent.get("specific_tags", [])
             for tag in specific_tags:
                 code = tag.get("tag_code")
                 val = tag.get("value")
-                # 意图默认为高权重更新
+                tag_type = tag.get("type", "concern")
+                
+                # 意图权重受 Type 影响
+                intent_weight = {"requirement": 2.0, "concern": 1.5, "inquiry": 0.8}.get(tag_type, 1.5)
+                
                 cat_data[code] = {
                     "value": val,
-                    "score": 1.5, # 意图分值加权
-                    "ts": current_time
+                    "score": intent_weight,
+                    "ts": current_time,
+                    "type": tag_type
                 }
             print(f"  [意图更新] 已更新品类 [{cat}] 的意图标签 (Count: {len(specific_tags)})")
 

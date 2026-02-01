@@ -1,111 +1,163 @@
 {
   "global_traits": {
-    "life_stage": {
-      "value": "二胎宝妈",
-      "score": 0.2,
-      "ts": 1769939094.654272,
-      "is_instruction": false
-    },
     "price_sensitivity": {
       "value": "high",
       "score": 0.2,
-      "ts": 1769939094.654272,
+      "ts": 1769939515.2942438,
+      "type": "concern",
       "is_instruction": false
     },
-    "bargaining_behavior": {
-      "value": "high",
-      "score": 0.2,
-      "ts": 1769939094.654272,
+    "decision_style": {
+      "value": "conservative",
+      "score": 0.28,
+      "ts": 1769939515.2942438,
+      "type": "concern",
       "is_instruction": false
     },
-    "logistics_preference": {
-      "value": "sf_express",
+    "promotion_response": {
+      "value": "bargaining_expert",
       "score": 0.2,
-      "ts": 1769939094.654272,
-      "is_instruction": true
-    },
-    "risk_aversion": {
-      "value": "high",
-      "score": 0.2,
-      "ts": 1769939094.654272,
+      "ts": 1769939515.2942438,
+      "type": "concern",
       "is_instruction": false
     },
-    "quality_conscious": {
-      "value": "high",
+    "after_sales_service": {
+      "value": "return_frequent_customer",
       "score": 0.2,
-      "ts": 1769939094.654272,
+      "ts": 1769939515.2942438,
+      "type": "concern",
       "is_instruction": false
     },
-    "family_caregiver": {
-      "value": "true",
+    "demographic_attributes": {
+      "value": "parent_of_infants",
       "score": 0.2,
-      "ts": 1769939094.654272,
+      "ts": 1769939515.2942438,
+      "type": "concern",
+      "is_instruction": false
+    },
+    "life_stage": {
+      "value": "family_with_young_children",
+      "score": 0.2,
+      "ts": 1769939515.2942438,
+      "type": "concern",
+      "is_instruction": false
+    },
+    "lifestyle": {
+      "value": "homebound_parent",
+      "score": 0.16000000000000003,
+      "ts": 1769939515.2942438,
+      "type": "concern",
+      "is_instruction": false
+    },
+    "personality_traits": {
+      "value": "risk_averse",
+      "score": 0.2,
+      "ts": 1769939515.2942438,
+      "type": "concern",
       "is_instruction": false
     }
   },
   "category_intents": {
-    "摄像头": {
-      "use_case": {
-        "value": "baby_monitoring",
-        "score": 1.5,
-        "ts": 1769939094.654272
-      },
-      "feature_requirement": {
-        "value": "physical_shutter",
-        "score": 1.5,
-        "ts": 1769939094.654272
-      },
-      "storage_preference": {
-        "value": "cloud_and_local",
-        "score": 1.5,
-        "ts": 1769939094.654272
-      },
-      "privacy_concern": {
+    "智能摄像头": {
+      "cry_detection_sensitivity": {
         "value": "high",
-        "score": 1.5,
-        "ts": 1769939094.654272
+        "score": 2.0,
+        "ts": 1769939515.2942438,
+        "type": "requirement"
       },
-      "image_quality_requirement": {
-        "value": "high",
-        "score": 1.5,
-        "ts": 1769939094.654272
+      "storage_type": {
+        "value": "both_cloud_and_local",
+        "score": 0.8,
+        "ts": 1769939515.2942438,
+        "type": "inquiry"
       },
-      "connectivity_concern": {
-        "value": "high",
+      "encryption_security": {
+        "value": "AES",
+        "score": 2.0,
+        "ts": 1769939515.2942438,
+        "type": "requirement"
+      },
+      "physical_privacy_shutter": {
+        "value": "yes",
+        "score": 2.0,
+        "ts": 1769939515.2942438,
+        "type": "requirement"
+      },
+      "resolution": {
+        "value": "4K",
+        "score": 2.0,
+        "ts": 1769939515.2942438,
+        "type": "requirement"
+      },
+      "price": {
+        "value": "499",
         "score": 1.5,
-        "ts": 1769939094.654272
+        "ts": 1769939515.2942438,
+        "type": "concern"
+      },
+      "included_accessories": {
+        "value": "32G卡",
+        "score": 2.0,
+        "ts": 1769939515.2942438,
+        "type": "requirement"
       }
     },
     "恒温水壶": {
-      "use_case": {
-        "value": "baby_feeding",
-        "score": 1.5,
-        "ts": 1769939094.654272
+      "material_bottom": {
+        "value": "316不锈钢",
+        "score": 2.0,
+        "ts": 1769939515.2942438,
+        "type": "requirement"
       },
-      "material_concern": {
-        "value": "high",
-        "score": 1.5,
-        "ts": 1769939094.654272
+      "odor_free": {
+        "value": "yes",
+        "score": 2.0,
+        "ts": 1769939515.2942438,
+        "type": "requirement"
       },
-      "odor_sensitivity": {
-        "value": "high",
+      "price": {
+        "value": "169",
         "score": 1.5,
-        "ts": 1769939094.654272
+        "ts": 1769939515.2942438,
+        "type": "concern"
       },
-      "heating_speed_requirement": {
-        "value": "fast",
-        "score": 1.5,
-        "ts": 1769939094.654272
+      "power": {
+        "value": "1200W",
+        "score": 0.8,
+        "ts": 1769939515.2942438,
+        "type": "inquiry"
       },
-      "feature_requirement": {
-        "value": "dechlorination",
-        "score": 1.5,
-        "ts": 1769939094.654272
+      "dechlorination_function": {
+        "value": "yes",
+        "score": 0.8,
+        "ts": 1769939515.2942438,
+        "type": "inquiry"
       },
-      "ease_of_use_requirement": {
-        "value": "high",
+      "manual_language": {
+        "value": "中文",
+        "score": 2.0,
+        "ts": 1769939515.2942438,
+        "type": "requirement"
+      },
+      "ease_of_use": {
+        "value": "simple",
         "score": 1.5,
-        "ts": 1769939094.654272
+        "ts": 1769939515.2942438,
+        "type": "concern"
+      }
+    },
+    "物流": {
+      "shipping_courier": {
+        "value": "顺丰",
+        "score": 2.0,
+        "ts": 1769939515.2942438,
+        "type": "requirement"
+      },
+      "delivery_time": {
+        "value": "明天",
+        "score": 0.8,
+        "ts": 1769939515.2942438,
+        "type": "inquiry"
       }
     }
   }
