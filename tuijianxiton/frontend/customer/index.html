@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>客户聊天系统</title>
     <link rel="stylesheet" href="style.css">
+    <script src="lucide.min.js"></script>
 </head>
 <body>
     <div id="app">
         <!-- 登录/注册界面 -->
         <div id="auth-container" class="container">
-            <h1>客户聊天系统</h1>
+            <h1><i data-lucide="message-square" style="margin-right: 10px; vertical-align: middle;"></i>客户聊天系统</h1>
             
             <div class="auth-tabs">
-                <button id="login-tab" class="active">登录</button>
-                <button id="register-tab">注册</button>
+                <button id="login-tab" class="active"><i data-lucide="log-in" style="width: 16px; height: 16px; margin-right: 6px; vertical-align: middle;"></i>登录</button>
+                <button id="register-tab"><i data-lucide="user-plus" style="width: 16px; height: 16px; margin-right: 6px; vertical-align: middle;"></i>注册</button>
             </div>
 
             <!-- 登录表单 -->
@@ -42,15 +43,15 @@
                     <input type="password" id="register-password" required>
                 </div>
                 <button id="register-btn" class="submit-btn">注册</button>
-                <div id="auth-message"></div>
+             
             </div>
         </div>
 
         <!-- 聊天界面 -->
         <div id="chat-container" class="container hidden">
             <div class="chat-header">
-                <h1>客户聊天系统</h1>
-                <button id="logout-btn">退出</button>
+                <h1><i data-lucide="message-circle" style="margin-right: 8px; vertical-align: middle;"></i>客户聊天系统</h1>
+                <button id="logout-btn"><i data-lucide="log-out" style="width: 16px; height: 16px; margin-right: 6px; vertical-align: middle;"></i>退出</button>
             </div>
 
             <div class="chat-body">
@@ -58,7 +59,7 @@
                 <div class="chat-sidebar">
                     <div class="sidebar-header">
                         <h2>聊天列表</h2>
-                        <button id="create-chat-btn">+ 新聊天</button>
+                        <button id="create-chat-btn"><i data-lucide="plus" style="width: 14px; height: 14px; margin-right: 4px; vertical-align: middle;"></i>新聊天</button>
                     </div>
                     <div id="chat-rooms-list"></div>
                 </div>
@@ -82,11 +83,13 @@
                 <!-- 聊天窗口 -->
                 <div class="chat-main">
                     <div id="chat-empty" class="empty-state">
+                        <i data-lucide="messages-square" style="width: 48px; height: 48px; margin-bottom: 16px; opacity: 0.2;"></i>
                         <p>请选择一个聊天室开始聊天</p>
                     </div>
 
                     <div id="chat-window" class="hidden">
                         <div class="chat-header-info">
+                            <i data-lucide="user" style="width: 20px; height: 20px; margin-right: 12px; color: var(--color-accent);"></i>
                             <h2 id="chat-room-title">商家名称</h2>
                         </div>
 
@@ -94,7 +97,7 @@
 
                         <div class="message-input-container">
                             <input type="text" id="message-input" placeholder="输入消息...">
-                            <button id="send-message-btn">发送</button>
+                            <button id="send-message-btn"><i data-lucide="send" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;"></i>发送</button>
                         </div>
                     </div>
                 </div>
@@ -104,13 +107,23 @@
         <!-- 商品详情模态框 -->
         <div id="product-modal" class="modal hidden">
             <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>商品详情</h2>
+                <span class="close"><i data-lucide="x"></i></span>
+                <h2><i data-lucide="info" style="margin-right: 10px; vertical-align: middle;"></i>商品详情</h2>
                 <div id="product-details"></div>
             </div>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // 初始化 Lucide 图标
+        lucide.createIcons();
+        
+        // 由于界面内容是动态生成的，我们需要在 DOM 变化时重新初始化图标
+        const observer = new MutationObserver(() => {
+            lucide.createIcons();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    </script>
 </body>
 </html>

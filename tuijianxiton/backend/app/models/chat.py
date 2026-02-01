@@ -18,6 +18,8 @@ class ChatRoom(Base):
     customer = relationship("User", foreign_keys=[customer_id], back_populates="customer_chat_rooms")
     merchant = relationship("User", foreign_keys=[merchant_id], back_populates="merchant_chat_rooms")
     messages = relationship("ChatMessage", back_populates="chat_room", cascade="all, delete-orphan")
+    tags = relationship("ChatRoomTag", back_populates="chat_room", cascade="all, delete-orphan")
+    profile = relationship("ChatRoomProfile", back_populates="chat_room", uselist=False, cascade="all, delete-orphan")
 
 
 class ChatMessage(Base):

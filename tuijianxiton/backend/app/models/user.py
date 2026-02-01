@@ -20,3 +20,5 @@ class User(Base):
     merchant_chat_rooms = relationship("ChatRoom", foreign_keys="ChatRoom.merchant_id", back_populates="merchant")
     sent_messages = relationship("ChatMessage", foreign_keys="ChatMessage.sender_id", back_populates="sender")
     products = relationship("Product", foreign_keys="Product.merchant_id", back_populates="merchant")
+    tags = relationship("UserTag", back_populates="user", cascade="all, delete-orphan")
+    profile = relationship("UserProfile", back_populates="user", uselist=False, cascade="all, delete-orphan")
