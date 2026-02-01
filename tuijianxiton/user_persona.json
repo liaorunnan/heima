@@ -3,116 +3,109 @@
     "life_stage": {
       "value": "二胎宝妈",
       "score": 0.2,
-      "ts": 1769938753.629515,
+      "ts": 1769939094.654272,
       "is_instruction": false
     },
     "price_sensitivity": {
-      "value": "极致性价比",
+      "value": "high",
       "score": 0.2,
-      "ts": 1769938753.629515,
+      "ts": 1769939094.654272,
       "is_instruction": false
     },
-    "decision_style": {
-      "value": "纠结大师",
-      "score": 0.16000000000000003,
-      "ts": 1769938753.629515,
-      "is_instruction": false
-    },
-    "brand_tendency": {
-      "value": "成分党",
+    "bargaining_behavior": {
+      "value": "high",
       "score": 0.2,
-      "ts": 1769938753.629515,
-      "is_instruction": false
-    },
-    "promotion_response": {
-      "value": "砍价高手",
-      "score": 0.2,
-      "ts": 1769938753.629515,
-      "is_instruction": false
-    },
-    "after_sales_service": {
-      "value": "退货常客",
-      "score": 0.16000000000000003,
-      "ts": 1769938753.629515,
+      "ts": 1769939094.654272,
       "is_instruction": false
     },
     "logistics_preference": {
-      "value": "顺丰快递",
+      "value": "sf_express",
       "score": 0.2,
-      "ts": 1769938753.629515,
+      "ts": 1769939094.654272,
       "is_instruction": true
     },
-    "delivery_speed": {
-      "value": "加急",
-      "score": 0.16000000000000003,
-      "ts": 1769938753.629515,
+    "risk_aversion": {
+      "value": "high",
+      "score": 0.2,
+      "ts": 1769939094.654272,
       "is_instruction": false
     },
-    "language_preference": {
-      "value": "中文说明书",
+    "quality_conscious": {
+      "value": "high",
       "score": 0.2,
-      "ts": 1769938753.629515,
-      "is_instruction": true
+      "ts": 1769939094.654272,
+      "is_instruction": false
+    },
+    "family_caregiver": {
+      "value": "true",
+      "score": 0.2,
+      "ts": 1769939094.654272,
+      "is_instruction": false
     }
   },
   "category_intents": {
     "摄像头": {
-      "usage_scenario": {
-        "value": "母婴看护",
+      "use_case": {
+        "value": "baby_monitoring",
         "score": 1.5,
-        "ts": 1769938753.629515
+        "ts": 1769939094.654272
       },
-      "function_requirement": {
-        "value": "物理遮蔽",
+      "feature_requirement": {
+        "value": "physical_shutter",
         "score": 1.5,
-        "ts": 1769938753.629515
+        "ts": 1769939094.654272
       },
       "storage_preference": {
-        "value": "本地存储",
+        "value": "cloud_and_local",
         "score": 1.5,
-        "ts": 1769938753.629515
+        "ts": 1769939094.654272
       },
-      "security_requirement": {
-        "value": "金融级加密",
+      "privacy_concern": {
+        "value": "high",
         "score": 1.5,
-        "ts": 1769938753.629515
+        "ts": 1769939094.654272
       },
-      "price_comparison": {
-        "value": "价格偏高",
+      "image_quality_requirement": {
+        "value": "high",
         "score": 1.5,
-        "ts": 1769938753.629515
+        "ts": 1769939094.654272
+      },
+      "connectivity_concern": {
+        "value": "high",
+        "score": 1.5,
+        "ts": 1769939094.654272
       }
     },
     "恒温水壶": {
-      "material_requirement": {
-        "value": "316不锈钢",
+      "use_case": {
+        "value": "baby_feeding",
         "score": 1.5,
-        "ts": 1769938753.629515
+        "ts": 1769939094.654272
       },
-      "quality_requirement": {
-        "value": "无异味",
+      "material_concern": {
+        "value": "high",
         "score": 1.5,
-        "ts": 1769938753.629515
+        "ts": 1769939094.654272
       },
-      "usage_scenario": {
-        "value": "冲奶粉",
+      "odor_sensitivity": {
+        "value": "high",
         "score": 1.5,
-        "ts": 1769938753.629515
+        "ts": 1769939094.654272
       },
-      "function_requirement": {
-        "value": "除氯功能",
+      "heating_speed_requirement": {
+        "value": "fast",
         "score": 1.5,
-        "ts": 1769938753.629515
+        "ts": 1769939094.654272
       },
-      "power_requirement": {
-        "value": "1200W",
+      "feature_requirement": {
+        "value": "dechlorination",
         "score": 1.5,
-        "ts": 1769938753.629515
+        "ts": 1769939094.654272
       },
-      "user_friendliness": {
-        "value": "老人易用",
+      "ease_of_use_requirement": {
+        "value": "high",
         "score": 1.5,
-        "ts": 1769938753.629515
+        "ts": 1769939094.654272
       }
     }
   }
