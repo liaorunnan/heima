@@ -67,6 +67,7 @@ class Setting(BaseSettings):
         extra='allow',
         env_file=f'{PATH}/.env',
         case_sensitive=False,
+        protected_namespaces=(),
     )
 
     def url(self):
