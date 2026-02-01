@@ -1,27 +1,24 @@
 AI_TAG_PROMPT = """
 # Role
-你是一名资深的用户行为分析专家。你的任务是深度分析用户聊天记录，将其转化为结构化的**画像数据**和**购买意图**。
+你是一名资深的用户行为分析专家。你的任务是深度分析用户聊天记录，将其转化为结构化的**画像数据**、**购买意图**及**操作指令**。
 
 # Core Tasks
-1. **主体检测 (Subject Check)**: 
-   - **核心原则**: 只提取用户（User）的需求和偏好。
-   - **严禁事项**: 严禁将客服（Agent/Seller）陈述的产品卖点（如“我们是4K的”、“功率1200W”）当作用户的需求。
-   - **例外**: 仅当用户明确对该卖点表示确认或强调（如“我就要4K的”）时方可提取。
+1. **反向检查机制 (Hallucination Check)**: 
+   - **铁律**: 每生成一个标签，必须反向检查 `source_quote` 是否**直接支持**该标签。
+   - **严禁**: 严禁将谈论“价格”的句子挂在“分辨率”标签下；严禁将“选择疑问句”误读为“确定的偏好”。
 
-2. **颗粒度控制 (Granularity Control)**:
-   - **抽象化**: 对于通用心理特征（如价格敏感、风险厌恶、决策周期），输出标准化枚举值（high/low/long/short）。
-   - **具体化**: 对于产品的**具体硬件参数或硬指标**（如：316不锈钢、1200W、AES加密、顺丰快递），必须保留具体值，不要简化为 "high"。
+2. **用户视角原则 (User Perspective)**:
+   - **严禁**: 严禁提取客服或详情页的技术参数（如 1200W, AES, 4K）作为用户标签。
+   - **转换**: 必须将技术参数转化为**用户体验需求**（如：快、安全、清晰）。除非用户明确复述并要求了这些参数。
 
-3. **标签类型化 (Tag Typing)**:
-   - 每个标签必须标记 `type`：
-     - `requirement`: 硬需求（用户明确要求，用于过滤）。
-     - `concern`: 关注点（用户表现出担忧或兴趣，用于加权排序）。
-     - `inquiry`: 询问（用户确认功能，表示有兴趣但未定性）。
+3. **主体检测与威胁辨析 (Speaker & Action Check)**:
+   - 只提取用户的需求。当用户说“如果...我就退货”时，这代表用户“风险厌恶”或“关注质量”，**严禁**标记为“退货常客”。
 
-4. **标准化输出 (Standardization)**:
-   - `tag_code`: 英文标识。
-   - `value`: 中文（身份/参数）或 标准化英文（程度）。
-   - `category`: 中文品类名。
+4. **指令独立化 (Actionable Insights)**:
+   - 将“发顺丰”、“写贺卡”等即时操作指令提取到独立的 `instructions` 字段中。
+
+5. **颗粒度控制**:
+   - 通用心理特征用标准化枚举值（high/low）；具体的硬件硬指标（如 316不锈钢）保留原词。
 
 # Output Format (JSON)
 {{
@@ -32,11 +29,18 @@ AI_TAG_PROMPT = """
         "value": "标准化值",
         "type": "requirement/concern/inquiry",
         "confidence": "Tier S/A/B",
-        "is_instruction": false,
         "source_quote": "用户侧原文"
       }}
     ]
   }},
+  "instructions": [
+    {{
+      "type": "logistics/card/packaging",
+      "action": "动作说明",
+      "value": "具体取值",
+      "source_quote": "用户侧原文"
+    }}
+  ],
   "intents": [
     {{
       "category": "中文品类名",
@@ -44,7 +48,7 @@ AI_TAG_PROMPT = """
       "specific_tags": [
         {{
           "tag_code": "标签英文标识",
-          "value": "标准化值",
+          "value": "标准化值/原词",
           "type": "requirement/concern/inquiry",
           "source_quote": "用户侧原文"
         }}

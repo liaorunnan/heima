@@ -6,121 +6,101 @@
         "value": "high",
         "type": "concern",
         "confidence": "Tier S",
-        "is_instruction": false,
         "source_quote": "就是价格有点贵啊，499都能买个低端手机了。我看隔壁某米才卖299，你们这溢价太高了。能不能给个优惠券？或者便宜点？我们要养两个吞金兽，奶粉钱都快不够了，能省一点是一点。"
       },
       {
         "tag_code": "decision_style",
-        "value": "parameter_party",
+        "value": "纠结大师",
         "type": "concern",
         "confidence": "Tier S",
-        "is_instruction": false,
+        "source_quote": "那个哭声检测灵敏吗？我主要怕晚上睡太死听不见。云端安全吗？我看新闻说有的摄像头会被黑客破解，隐私泄露太可怕了。毕竟是放在卧室拍床上的，这个你们有加密吗？物理遮蔽有吗？就是我不想要它拍的时候能自动关上镜头。"
+      },
+      {
+        "tag_code": "decision_style",
+        "value": "参数党",
+        "type": "inquiry",
+        "confidence": "Tier S",
         "source_quote": "壶底是316不锈钢的还是304的？主要别有异味，之前买过一个煮水一股塑料味，吓得我直接扔了。给孩子入口的东西不敢马虎。"
       },
       {
         "tag_code": "decision_style",
-        "value": "conservative",
-        "type": "concern",
-        "confidence": "Tier A",
-        "is_instruction": false,
-        "source_quote": "毕竟是放在卧室拍床上的，这个你们有加密吗？云端安全吗？我看新闻说有的摄像头会被黑客破解，隐私泄露太可怕了。"
-      },
-      {
-        "tag_code": "promotion_response",
-        "value": "bargaining_expert",
+        "value": "保守主义",
         "type": "concern",
         "confidence": "Tier S",
-        "is_instruction": false,
-        "source_quote": "能不能给个优惠券？或者便宜点？才20？这也太少了，不够诚意啊。50吧，50我就直接拍了，不罗嗦。如果我摄像头和水壶一起买，能不能给我便宜100？我是真心想买，凑个单你们也省运费不是。"
-      },
-      {
-        "tag_code": "after_sales_service",
-        "value": "return_frequent_customer",
-        "type": "concern",
-        "confidence": "Tier S",
-        "is_instruction": false,
         "source_quote": "要是水壶有味道，或者摄像头连不上网，我可是要退货的啊。你们这个有运费险吗？"
       },
       {
-        "tag_code": "demographic_attributes",
-        "value": "parent_of_infants",
-        "type": "concern",
+        "tag_code": "promotion_response",
+        "value": "砍价高手",
+        "type": "requirement",
         "confidence": "Tier S",
-        "is_instruction": false,
-        "source_quote": "最近刚生完二胎，实在太累了，有时候宝宝哭都醒不过来。我们要养两个吞金兽，奶粉钱都快不够了，能省一点是一点。家里老人带孩子，怕他们不会用。"
+        "source_quote": "才20？这也太少了，不够诚意啊。50吧，50我就直接拍了，不罗嗦。如果我摄像头和水壶一起买，能不能给我便宜100？我是真心想买，凑个单你们也省运费不是。"
+      },
+      {
+        "tag_code": "after_sales_service",
+        "value": "物流焦虑",
+        "type": "requirement",
+        "confidence": "Tier S",
+        "source_quote": "一定要发顺丰啊。我家这边中通老是把快递扔驿站，根本不送上门，带着孩子不方便下去拿。大概几天能到？"
       },
       {
         "tag_code": "life_stage",
-        "value": "family_with_young_children",
-        "type": "concern",
+        "value": "有婴幼儿家庭",
+        "type": "requirement",
         "confidence": "Tier S",
-        "is_instruction": false,
         "source_quote": "最近刚生完二胎，实在太累了，有时候宝宝哭都醒不过来。我们要养两个吞金兽，奶粉钱都快不够了，能省一点是一点。家里老人带孩子，怕他们不会用。"
       },
       {
-        "tag_code": "lifestyle",
-        "value": "homebound_parent",
-        "type": "concern",
-        "confidence": "Tier A",
-        "is_instruction": false,
-        "source_quote": "我家这边中通老是把快递扔驿站，根本不送上门，带着孩子不方便下去拿。"
-      },
-      {
         "tag_code": "personality_traits",
-        "value": "risk_averse",
+        "value": "风险厌恶",
         "type": "concern",
         "confidence": "Tier S",
-        "is_instruction": false,
-        "source_quote": "毕竟是放在卧室拍床上的，这个你们有加密吗？云端安全吗？我看新闻说有的摄像头会被黑客破解，隐私泄露太可怕了。给孩子入口的东西不敢马虎。"
+        "source_quote": "要是水壶有味道，或者摄像头连不上网，我可是要退货的啊。"
       }
     ]
   },
+  "instructions": [
+    {
+      "type": "logistics",
+      "action": "指定快递",
+      "value": "顺丰标快",
+      "source_quote": "一定要发顺丰啊。"
+    },
+    {
+      "type": "packaging",
+      "action": "备注赠品",
+      "value": "支架和32G卡",
+      "source_quote": "别忘了送支架和那个32G卡。"
+    }
+  ],
   "intents": [
     {
-      "category": "智能摄像头",
+      "category": "摄像头",
       "action": "buy",
       "specific_tags": [
         {
-          "tag_code": "cry_detection_sensitivity",
-          "value": "high",
+          "tag_code": "function_requirement",
+          "value": "哭声检测灵敏",
           "type": "requirement",
           "source_quote": "那个哭声检测灵敏吗？我主要怕晚上睡太死听不见。"
         },
         {
-          "tag_code": "storage_type",
-          "value": "both_cloud_and_local",
+          "tag_code": "storage_requirement",
+          "value": "云端或本地",
           "type": "inquiry",
           "source_quote": "那这个视频是存云端还是本地卡？"
         },
         {
-          "tag_code": "encryption_security",
-          "value": "AES",
-          "type": "requirement",
-          "source_quote": "毕竟是放在卧室拍床上的，这个你们有加密吗？云端安全吗？我看新闻说有的摄像头会被黑客破解，隐私泄露太可怕了。"
+          "tag_code": "security_requirement",
+          "value": "隐私安全",
+          "type": "concern",
+          "source_quote": "云端安全吗？我看新闻说有的摄像头会被黑客破解，隐私泄露太可怕了。毕竟是放在卧室拍床上的，这个你们有加密吗？"
         },
         {
-          "tag_code": "physical_privacy_shutter",
-          "value": "yes",
+          "tag_code": "privacy_requirement",
+          "value": "物理遮蔽",
           "type": "requirement",
           "source_quote": "物理遮蔽有吗？就是我不想要它拍的时候能自动关上镜头。"
-        },
-        {
-          "tag_code": "resolution",
-          "value": "4K",
-          "type": "requirement",
-          "source_quote": "我看隔壁某米才卖299，你们这溢价太高了。"
-        },
-        {
-          "tag_code": "price",
-          "value": "499",
-          "type": "concern",
-          "source_quote": "就是价格有点贵啊，499都能买个低端手机了。"
-        },
-        {
-          "tag_code": "included_accessories",
-          "value": "32G卡",
-          "type": "requirement",
-          "source_quote": "别忘了送支架和那个32G卡。"
         }
       ]
     },
@@ -129,64 +109,34 @@
       "action": "buy",
       "specific_tags": [
         {
-          "tag_code": "material_bottom",
+          "tag_code": "material_requirement",
           "value": "316不锈钢",
           "type": "requirement",
           "source_quote": "壶底是316不锈钢的还是304的？"
         },
         {
-          "tag_code": "odor_free",
-          "value": "yes",
-          "type": "requirement",
+          "tag_code": "safety_requirement",
+          "value": "无异味",
+          "type": "concern",
           "source_quote": "主要别有异味，之前买过一个煮水一股塑料味，吓得我直接扔了。给孩子入口的东西不敢马虎。"
         },
         {
-          "tag_code": "price",
-          "value": "169",
-          "type": "concern",
-          "source_quote": "那个壶多少钱？199元，现在活动价169。"
-        },
-        {
-          "tag_code": "power",
-          "value": "1200W",
+          "tag_code": "function_requirement",
+          "value": "烧水快",
           "type": "inquiry",
           "source_quote": "那个水壶烧水快吗？"
         },
         {
-          "tag_code": "dechlorination_function",
-          "value": "yes",
+          "tag_code": "function_requirement",
+          "value": "除氯功能",
           "type": "inquiry",
           "source_quote": "有没有除氯功能？"
         },
         {
-          "tag_code": "manual_language",
-          "value": "中文",
+          "tag_code": "usability_requirement",
+          "value": "简单易用",
           "type": "requirement",
-          "source_quote": "说明书有中文的吧？家里老人带孩子，怕他们不会用。"
-        },
-        {
-          "tag_code": "ease_of_use",
-          "value": "simple",
-          "type": "concern",
-          "source_quote": "看着还行，只有两个按钮。老人应该能学会。"
-        }
-      ]
-    },
-    {
-      "category": "物流",
-      "action": "buy",
-      "specific_tags": [
-        {
-          "tag_code": "shipping_courier",
-          "value": "顺丰",
-          "type": "requirement",
-          "source_quote": "哦对，一定要发顺丰啊。我家这边中通老是把快递扔驿站，根本不送上门，带着孩子不方便下去拿。"
-        },
-        {
-          "tag_code": "delivery_time",
-          "value": "明天",
-          "type": "inquiry",
-          "source_quote": "大概几天能到？"
+          "source_quote": "说明书有中文的吧？家里老人带孩子，怕他们不会用。看着还行，只有两个按钮。老人应该能学会。"
         }
       ]
     }
