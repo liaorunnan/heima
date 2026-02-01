@@ -2,6 +2,7 @@
 import json
 import os
 import sys
+import time
 
 # 将项目根目录添加到 sys.path 以便导入 conf.settings
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -48,7 +49,9 @@ def run_tag_extraction():
                 extracted_tags = json.load(f)
         else:
             print("本地无缓存，调用 LLM 提取标签...")
+            start_time = time.time()
             result_json_str = extract_user_tags(chat_history_str, tag_library)
+            print(f"LLM 调用耗时: {time.time() - start_time:.2f} 秒")
             extracted_tags = json.loads(result_json_str)
             
             # 保存提取结果
@@ -58,6 +61,7 @@ def run_tag_extraction():
 
         print("\n--- 提取结果 ---")
         print(json.dumps(extracted_tags, indent=2, ensure_ascii=False))
+        
 
         # ==========================================
         # 6. 画像系统更新 (新增逻辑)
@@ -81,6 +85,7 @@ def run_tag_extraction():
         with open(persona_path, 'w', encoding='utf-8') as f:
             json.dump(final_persona, f, indent=2, ensure_ascii=False)
         print(f"\n画像已保存至: {persona_path}")
+        print(f"流程执行完毕，耗时: {time.time() - start_time:.2f} 秒")
 
     except Exception as e:
         print(f"流程执行过程中发生错误: {e}")

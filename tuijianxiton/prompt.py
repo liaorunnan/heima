@@ -50,6 +50,7 @@ AI_TAG_PROMPT = """
           "tag_code": "标签英文标识",
           "value": "标准化值/原词",
           "type": "requirement/concern/inquiry",
+          "confidence": "Tier S/A/B", 
           "source_quote": "用户侧原文"
         }}
       ]
