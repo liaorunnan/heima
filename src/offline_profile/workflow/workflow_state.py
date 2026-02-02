@@ -14,6 +14,7 @@ class OfflineProfileState(TypedDict, total=False):
     chat_data: Dict[str, Any]  # 处理后的聊天数据
     summaries: List[Dict[str, Any]]  # 对话摘要
     extracted_tags: List[Dict[str, Any]]  # 提取的标签
+    extracted_data: Dict[str, Any]  # 提取的结构化数据 (global_traits, intents, instructions)
     
     # 画像信息
     existing_profile: Dict[str, Any]  # 现有用户画像

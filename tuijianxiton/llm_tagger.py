@@ -1,12 +1,24 @@
-
-import openai
 import json
 from typing import List, Dict
+import openai
 from conf import settings
 from tuijianxiton.prompt import AI_TAG_PROMPT
 
 # 初始化 OpenAI 客户端
 client = openai.Client(base_url=settings.base_url, api_key=settings.api_key)
+
+def parse_llm_json(text: str) -> str:
+    """
+    清洗大模型返回的 JSON 字符串，去掉 Markdown 标记。
+    """
+    text = text.strip()
+    if text.startswith("```json"):
+        text = text[7:]
+    elif text.startswith("```"):
+        text = text[3:]
+    if text.endswith("```"):
+        text = text[:-3]
+    return text.strip()
 
 def extract_user_tags(chat_history: str, tag_library: List[Dict]) -> str:
     """
@@ -19,20 +31,25 @@ def extract_user_tags(chat_history: str, tag_library: List[Dict]) -> str:
     Returns:
         str: 大模型输出的 JSON 格式标签提取结果。
     """
-    # 使用 format 方法将标签库内容注入到 TAG_LIST 占位符中
-    # 将标签库转换为 JSON 字符串格式，确保中文不被转义
+    # 将标签库转换为 JSON 字符串格式
     tag_list_str = json.dumps(tag_library, ensure_ascii=False, indent=2)
     system_prompt = AI_TAG_PROMPT.format(TAG_LIST=tag_list_str)
 
     # 调用大模型
-    response = client.chat.completions.create(
-        model=settings.model_name,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": chat_history}
-        ],
-        temperature=0.0, # 设置为 0 以获得更确定的结果
-        response_format={"type": "json_object"} # 强制输出 JSON
-    )
-
-    return response.choices[0].message.content
+    try:
+        response = client.chat.completions.create(
+            model=settings.model_name,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": chat_history}
+            ],
+            temperature=0.0,
+            response_format={"type": "json_object"} # 强制输出 JSON
+        )
+        
+        content = response.choices[0].message.content
+        # 使用 parse_llm_json 进行清洗，确保 JSON 解析成功
+        return parse_llm_json(content)
+    except Exception as e:
+        print(f"提取标签失败: {e}")
+        return "{}"

@@ -38,6 +38,7 @@ def run_tag_extraction():
     
     # 4. 调用提取服务
     try:
+        start_time = time.time()
         # 在实际开发中，如果 extracted_tags.json 已经存在且最新，可以跳过 LLM 调用节省成本
         # 这里为了演示完整流程，每次都调用
         output_path = os.path.join(os.path.dirname(__file__), 'extracted_tags.json')
@@ -49,9 +50,9 @@ def run_tag_extraction():
                 extracted_tags = json.load(f)
         else:
             print("本地无缓存，调用 LLM 提取标签...")
-            start_time = time.time()
+            llm_start_time = time.time()
             result_json_str = extract_user_tags(chat_history_str, tag_library)
-            print(f"LLM 调用耗时: {time.time() - start_time:.2f} 秒")
+            print(f"LLM 调用耗时: {time.time() - llm_start_time:.2f} 秒")
             extracted_tags = json.loads(result_json_str)
             
             # 保存提取结果

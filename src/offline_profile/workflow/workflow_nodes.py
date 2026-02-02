@@ -10,11 +10,6 @@ from src.workflow.offline_profile.config1 import logger
 from src.workflow.offline_profile.workflow.workflow_state import OfflineProfileState
 
 
-
-
-
-
-
 def process_chat_data_node(state: OfflineProfileState) -> Dict[str, Any]:
     """数据处理节点
     
@@ -92,29 +87,25 @@ def generate_tags_node(state: OfflineProfileState) -> Dict[str, Any]:
         # 获取对话摘要
         summaries = state.get('summaries', [])
 
-        # summaries = [{'session_id': 'session_0', 'start_time': '2026-01-29 10:21:53', 'end_time': '2026-01-29 10:22:34', 'summary': '用户想了解适用于小型团队的基础版产品的价格。'}, {'session_id': 'session_1', 'start_time': '2026-01-29 11:16:31', 'end_time': '2026-01-29 11:18:09', 'summary': '用户询问了基础版的价格及包含的服务内容，得知基础版价格为每月199元，包括5个 用户许可。'}]
-        
-        
-
-        # standard_tags = [{'id': 10, 'name': 'lllllllllllllllllll', 'description': 'lllllllllllllllllll', 'parent': 'lllllllllllllllllll', 'alias': 'None'}, {'id': 9, 'name': '标签名标签名标签名标签 名标签名标签名标签名标签名标签名标签名标签名标签名', 'description': '标签名标签名标签名标签名标签名', 'parent': '标签名标签名标签名标签名标签名', 'alias': 'None'}, {'id': 8, 'name': '测试', 'description': '123456789', 'parent': 'test', 'alias': 'None'}, {'id': 7, 'name': 'test', 'description': '测试测试测试', 'parent': '测试', 'alias': 'None'}, {'id': 5, 'name': '标签3', 'description': '3', 'parent': '3', 'alias': 'None'}, {'id': 4, 'name': '标签2', 'description': '2', 'parent': '2', 'alias': 'None'}, {'id': 1, 'name': '标签1', 'description': '1', 'parent': '1', 'alias': 'None'},{'id': 11, 'name': '性别 - 男', 'description': '用户自述为男，或提及“我女朋友/老婆/兄弟”等具有明显男性画像的语义。', 'parent': None, 'alias': '男'}]
-
-        
         # 分析用户意图，提取标签
-        extracted_tags = analyze_user_intent(summaries, standard_tags=standard_tags,user_id=user_id)
+        extracted_data = analyze_user_intent(summaries, standard_tags=standard_tags, user_id=user_id)
         
         # 更新状态
         updated_state = {
-            'extracted_tags': extracted_tags,
+            'extracted_data': extracted_data,
             'status': 'processing'
         }
         
-        # 检查是否有标签
-        if not extracted_tags:
+        # 检查是否有标签数据
+        # extracted_data 包含 global_traits, intents, instructions 等 keys
+        has_data = any(v for k, v in extracted_data.items() if v)
+        
+        if not has_data:
             updated_state['status'] = 'no_tags'
-            updated_state['error_message'] = '没有提取到有效标签'
-            logger.info(f"[标签生成节点] 用户 {state['user_id']} 没有提取到有效标签")
+            updated_state['error_message'] = '没有提取到有效标签数据'
+            logger.info(f"[标签生成节点] 用户 {state['user_id']} 没有提取到有效标签数据")
         else:
-            logger.info(f"[标签生成节点] 成功为用户 {state['user_id']} 提取 {len(extracted_tags)} 个标签")
+            logger.info(f"[标签生成节点] 成功为用户 {state['user_id']} 提取标签数据")
         
         return updated_state
     
@@ -147,7 +138,7 @@ def fuse_profile_node(state: OfflineProfileState) -> Dict[str, Any]:
     try:
         # 获取用户 ID 和提取的标签
         user_id = state['user_id']
-        extracted_tags = state.get('extracted_tags', [])
+        extracted_data = state.get('extracted_data', {})
 
         
         # 加载现有画像
@@ -159,18 +150,23 @@ def fuse_profile_node(state: OfflineProfileState) -> Dict[str, Any]:
             logger.info(f"[画像融合节点] 加载用户 {user_id} 的现有画像")
         
         # 融合画像
-        new_profile = fuse_profiles(existing_profile, extracted_tags)
+        new_profile = fuse_profiles(existing_profile, extracted_data)
         
+        # 计算简单的统计信息
+        global_count = len(new_profile.get('global_traits', {}))
+        intent_count = sum(len(tags) for tags in new_profile.get('category_intents', {}).values())
+        total_count = global_count + intent_count
+
         # 更新状态
         updated_state = {
             'existing_profile': existing_profile,
             'new_profile': new_profile,
-            'tag_count': len(new_profile.get('tags', {})),
+            'tag_count': total_count,
             'updated_at': new_profile.get('updated_at'),
             'status': 'processing'
         }
         
-        logger.info(f"[画像融合节点] 成功为用户 {user_id} 融合画像，生成 {len(new_profile.get('tags', {}))} 个标签")
+        logger.info(f"[画像融合节点] 成功为用户 {user_id} 融合画像，生成 {total_count} 个标签点")
         return updated_state
     
     except Exception as e:
